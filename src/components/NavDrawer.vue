@@ -1,12 +1,10 @@
 <template>
-  <v-container>
-    <v-card>
+  <v-app>
+    <v-card height="400">
       <v-navigation-drawer
         v-model="drawer"
-        color="red"
-        expand-on-hover
         left
-        absolute
+        dark
         app
       >
         <v-list
@@ -18,15 +16,19 @@
             :key="key"
             link
           >
+            <v-list-item-icon>
+              <v-icon>
+                {{ item.icon }}
+              </v-icon>
+            </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-icon>{{ item.icon }}</v-list-item-icon>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
     </v-card>
-  </v-container>
+  </v-app>
 </template>
 
 <script lang="ts">

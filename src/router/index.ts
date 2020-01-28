@@ -9,8 +9,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Case File',
-    component: CaseFile
+    name: 'Home',
+    component: Home
   },
   {
     path: '/case-file',

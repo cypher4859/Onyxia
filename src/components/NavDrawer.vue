@@ -3,11 +3,11 @@
     <v-card>
       <v-navigation-drawer
         v-model="drawer"
-        :color="black"
+        color="red"
         expand-on-hover
         left
         absolute
-        dark
+        app
       >
         <v-list
           dense
@@ -30,7 +30,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
 
 @Component({
   name: 'NavDrawer'

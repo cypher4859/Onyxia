@@ -1,13 +1,15 @@
 <template>
   <v-app>
     <v-content>
+      <hello-world />
       <base-layout />
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue'
 import BaseLayout from './components/BaseLayout.vue'
 

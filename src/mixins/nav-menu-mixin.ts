@@ -1,9 +1,9 @@
 import IMenuItem from '@/types/IMenuItem'
 import { Component, Vue, Inject } from 'vue-property-decorator'
-import NetworkMonitorService from '@/services/network-monitor-service'
-import CaseFileService from '@/services/case-file-service'
-import AddonsService from '@/services/addons-service'
-import HomeDashboardService from '@/services/home-dashboard-service'
+import NetworkMonitorService from '@/services/implementations/network-monitor-service'
+import CaseFileService from '@/services/implementations/case-file-service'
+import AddonsService from '@/services/implementations/addons-service'
+import HomeDashboardService from '@/services/implementations/home-dashboard-service'
 
 @Component
 export default class extends Vue {
@@ -20,11 +20,11 @@ export default class extends Vue {
   // @Inject()
   private caseFileService: CaseFileService = new CaseFileService()
 
-    // @Inject()
-    private addonService: AddonsService = new AddonsService()
+  // @Inject()
+  private addonService: AddonsService = new AddonsService()
 
-    // @Inject()
-    private homeDashboardService: HomeDashboardService = new HomeDashboardService()
+  // @Inject()
+  private homeDashboardService: HomeDashboardService = new HomeDashboardService()
 
   private navMenuItems: IMenuItem[] = [
     this.homeDashboardService.defaultModel(),

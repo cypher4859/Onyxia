@@ -49,7 +49,6 @@ import IMenuItem from '../types/IMenuItem'
   },
   mixins: [navMenuMixin]
 })
-
 export default class NavDrawer extends Vue {
   private drawer: boolean = true
 }

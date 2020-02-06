@@ -1,6 +1,7 @@
 import IMenuItem from '@/types/IMenuItem'
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 
+@Component
 export default class extends Vue {
   private navMenuItems: IMenuItem[] = [
     { title: 'Home', icon: 'mdi-view-dashboard' },
@@ -8,6 +9,7 @@ export default class extends Vue {
   ]
 
   get menuItems () {
+    console.log(this.navMenuItems)
     return this.navMenuItems
   }
 }

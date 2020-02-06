@@ -11,7 +11,7 @@ export default class extends Vue {
     without knowing what icons, title, or otherwise?
     Thinking towards basically pulling the menu item object from
     the desired mixin and appending it to the navMenuItems.
-    It could be menu item model that gets inserted into the aray of items.
+    It could be menu item model that gets inserted into the aray of items
   */
 
   // @Inject()

@@ -39,7 +39,7 @@
 import Vue from 'vue'
 import { Component, Inject } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue'
-import navMenuMixin from '@/mixins/nav-menu-item-mixin'
+import navMenuMixin from '@/mixins/nav-menu-mixin'
 import IMenuItem from '../types/IMenuItem'
 
 @Component({

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <nav-drawer />
-  </div>
+  <div />
 </template>
 
 <script lang="ts">
@@ -10,10 +8,7 @@ import { Component } from 'vue-property-decorator'
 import NavDrawer from '@/components/NavDrawer.vue'
 
 @Component({
-  name: 'base-layout',
-  components: {
-    'nav-drawer': NavDrawer
-  }
+  name: 'base-layout'
 })
 
 export default class BaseLayout extends Vue {

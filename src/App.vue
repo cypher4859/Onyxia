@@ -1,8 +1,10 @@
 <template>
   <v-app>
-    <v-content>
-      <hello-world />
-      <base-layout />
+    <v-content
+      class="fill-height"
+      fluid
+    >
+      <nav-drawer />
     </v-content>
   </v-app>
 </template>
@@ -10,14 +12,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import HelloWorld from '@/components/HelloWorld.vue'
-import BaseLayout from './components/BaseLayout.vue'
+import NavDrawer from '@/components/NavDrawer.vue'
 
 @Component({
   name: 'app',
   components: {
-    'hello-world': HelloWorld,
-    'base-layout': BaseLayout
+    'nav-drawer': NavDrawer
   }
 })
 

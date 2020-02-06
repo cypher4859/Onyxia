@@ -9,7 +9,6 @@ export default class extends Vue {
   ]
 
   get menuItems () {
-    console.log(this.navMenuItems)
     return this.navMenuItems
   }
 }

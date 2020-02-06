@@ -31,6 +31,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+    <hello-world />
   </v-card>
 </template>
 

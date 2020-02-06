@@ -39,7 +39,7 @@
 import Vue from 'vue'
 import { Component, Inject } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue'
-import { navMenuItems } from '@/mixins/menu-item-mixin'
+import navMenuMixin from '@/mixins/nav-menu-item-mixin'
 import IMenuItem from '../types/IMenuItem'
 
 @Component({
@@ -47,11 +47,10 @@ import IMenuItem from '../types/IMenuItem'
   components: {
     'hello-world': HelloWorld
   },
-  mixins: []
+  mixins: [navMenuMixin]
 })
 
 export default class NavDrawer extends Vue {
   private drawer: boolean = true
-  private menuItems: IMenuItem[] = navMenuItems
 }
 </script>

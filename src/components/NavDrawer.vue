@@ -37,22 +37,21 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Inject } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue'
-import bioExample from './BioExample.vue'
+import { navMenuItems } from '@/mixins/menu-item-mixin'
+import IMenuItem from '../types/IMenuItem'
 
 @Component({
   name: 'NavDrawer',
   components: {
     'hello-world': HelloWorld
-  }
+  },
+  mixins: []
 })
 
 export default class NavDrawer extends Vue {
   private drawer: boolean = true
-  private menuItems: object[] = [
-    { title: 'Home', icon: 'mdi-view-dashboard' },
-    { title: 'Case File', icon: 'mdi-ballot' }
-  ]
+  private menuItems: IMenuItem[] = navMenuItems
 }
 </script>

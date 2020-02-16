@@ -39,7 +39,6 @@
 import Vue from 'vue'
 import { Component, Inject } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue'
-import navMenuMixin from '@/mixins/nav-menu-mixin'
 import IMenuItem from '../types/IMenuItem'
 import IHomeDashboardService from '../services/interfaces/IHomeDashboardService'
 import IAddonsService from '../services/interfaces/IAddonsService'

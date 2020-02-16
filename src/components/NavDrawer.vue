@@ -44,6 +44,10 @@ import IHomeDashboardService from '../services/interfaces/IHomeDashboardService'
 import IAddonsService from '../services/interfaces/IAddonsService'
 import ICaseFileService from '../services/interfaces/ICaseFileService'
 import INetworkMonitorService from '../services/interfaces/INetworkMonitorService'
+import NetworkMonitorService from '../services/implementations/NetworkMonitorService'
+import CaseFileService from '../services/implementations/CaseFileService'
+import AddonsService from '../services/implementations/AddonsService'
+import HomeDashboardService from '../services/implementations/HomeDashboardService'
 
 @Component({
   name: 'NavDrawer',

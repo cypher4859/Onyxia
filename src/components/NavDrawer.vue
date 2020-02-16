@@ -57,7 +57,6 @@ import TYPES from '@/InjectableTypes/types'
     'hello-world': HelloWorld
   }
 })
-@injectable()
 export default class NavDrawer extends Vue {
   private drawer: boolean = true
 

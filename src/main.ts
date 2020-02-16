@@ -3,6 +3,7 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import vuetify from '@/plugins/vuetify'
+import registerContainerServices from './app.container'
 
 // css
 require('@mdi/font/css/materialdesignicons.css')
@@ -10,7 +11,12 @@ require('vuetify/dist/vuetify.min.css')
 
 class AppSetup {
   constructor () {
+    this.loadDependencies()
     this.loadApp()
+  }
+
+  loadDependencies () {
+    registerContainerServices()
   }
 
   private loadApp (): void {

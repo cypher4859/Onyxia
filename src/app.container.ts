@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { container } from 'inversify-props'
 import IHomeDashboardService from '@/services/interfaces/IHomeDashboardService'
 import IAddonsService from './services/interfaces/IAddonsService'
@@ -10,8 +11,8 @@ import NetworkMonitorService from './services/implementations/NetworkMonitorServ
 import TYPES from '@/InjectableTypes/types'
 
 export default function registerContainerServices () {
-  // container.bind<IAddonsService>('IAddonsService').to(AddonsService)
+  container.bind<IAddonsService>('IAddonsService').to(AddonsService)
   // container.bind<ICaseFileService>('ICaseFileService').to(CaseFileService)
   // container.bind<IHomeDashboardService>('IHomeDashboardService').to(HomeDashboardService)
-  container.bind<INetworkMonitorService>(TYPES.INetworkMonitorService).to(NetworkMonitorService)
+  // container.bind<INetworkMonitorService>(TYPES.INetworkMonitorService).to(NetworkMonitorService)
 }

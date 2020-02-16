@@ -37,7 +37,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Inject } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
+import { inject, injectable } from 'inversify-props'
 import HelloWorld from '@/components/HelloWorld.vue'
 import IMenuItem from '../types/IMenuItem'
 import IHomeDashboardService from '../services/interfaces/IHomeDashboardService'
@@ -48,6 +49,7 @@ import NetworkMonitorService from '../services/implementations/NetworkMonitorSer
 import CaseFileService from '../services/implementations/CaseFileService'
 import AddonsService from '../services/implementations/AddonsService'
 import HomeDashboardService from '../services/implementations/HomeDashboardService'
+import TYPES from '@/InjectableTypes/types'
 
 @Component({
   name: 'NavDrawer',
@@ -55,17 +57,18 @@ import HomeDashboardService from '../services/implementations/HomeDashboardServi
     'hello-world': HelloWorld
   }
 })
+@injectable()
 export default class NavDrawer extends Vue {
   private drawer: boolean = true
+
+  @inject('IAddonsService')
+  public addonService!: IAddonsService
 
   // @Inject()
   private networkMonitorService: INetworkMonitorService = new NetworkMonitorService()
 
   // @Inject()
   private caseFileService: ICaseFileService = new CaseFileService()
-
-  // @Inject()
-  private addonService: IAddonsService = new AddonsService()
 
   // @Inject()
   private homeDashboardService: IHomeDashboardService = new HomeDashboardService()

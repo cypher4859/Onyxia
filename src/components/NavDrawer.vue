@@ -41,15 +41,41 @@ import { Component, Inject } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue'
 import navMenuMixin from '@/mixins/nav-menu-mixin'
 import IMenuItem from '../types/IMenuItem'
+import IHomeDashboardService from '../services/interfaces/IHomeDashboardService'
+import IAddonsService from '../services/interfaces/IAddonsService'
+import ICaseFileService from '../services/interfaces/ICaseFileService'
+import INetworkMonitorService from '../services/interfaces/INetworkMonitorService'
 
 @Component({
   name: 'NavDrawer',
   components: {
     'hello-world': HelloWorld
-  },
-  mixins: [navMenuMixin]
+  }
 })
 export default class NavDrawer extends Vue {
   private drawer: boolean = true
+
+  // @Inject()
+  private networkMonitorService: INetworkMonitorService = new NetworkMonitorService()
+
+  // @Inject()
+  private caseFileService: ICaseFileService = new CaseFileService()
+
+  // @Inject()
+  private addonService: IAddonsService = new AddonsService()
+
+  // @Inject()
+  private homeDashboardService: IHomeDashboardService = new HomeDashboardService()
+
+  private navMenuItems: IMenuItem[] = [
+    this.homeDashboardService.defaultModel(),
+    this.addonService.defaultModel(),
+    this.networkMonitorService.defaultModel(),
+    this.caseFileService.defaultModel()
+  ]
+
+  get menuItems () {
+    return this.navMenuItems
+  }
 }
 </script>

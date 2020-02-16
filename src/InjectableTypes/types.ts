@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 const TYPES = {
   INetworkMonitorService: Symbol.for('INetworkMonitorService'),
   IAddonsService: Symbol.for('IAddonsService'),

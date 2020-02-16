@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { Vue, Component } from 'vue-property-decorator'
 import IMenuItem from '@/types/IMenuItem'
 import { injectable } from 'inversify-props'

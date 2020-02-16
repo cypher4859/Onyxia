@@ -60,17 +60,17 @@ import TYPES from '@/InjectableTypes/types'
 export default class NavDrawer extends Vue {
   private drawer: boolean = true
 
-  @inject('IAddonsService')
+  @inject(TYPES.IAddonsService)
   public addonService!: IAddonsService
 
-  // @Inject()
-  private networkMonitorService: INetworkMonitorService = new NetworkMonitorService()
+  @inject(TYPES.INetworkMonitorService)
+  private networkMonitorService!: INetworkMonitorService
 
-  // @Inject()
-  private caseFileService: ICaseFileService = new CaseFileService()
+  @inject(TYPES.ICaseFileService)
+  private caseFileService!: ICaseFileService
 
-  // @Inject()
-  private homeDashboardService: IHomeDashboardService = new HomeDashboardService()
+  @inject(TYPES.IHomeDashboardService)
+  private homeDashboardService!: IHomeDashboardService
 
   private navMenuItems: IMenuItem[] = [
     this.homeDashboardService.defaultModel(),

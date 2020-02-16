@@ -6,7 +6,7 @@ import { injectable } from 'inversify-props'
 import MenuItemService from '@/services/implementations/MenuItemService'
 
 @injectable()
-export default class extends MenuItemService implements IService {
+export default class NetworkMonitorService extends MenuItemService implements IService {
   defaultModel () : IMenuItem {
     this.setMenuItemProperties('Network Monitor', 'mdi-lan')
     return this.getModel()

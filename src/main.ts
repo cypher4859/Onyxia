@@ -4,6 +4,7 @@ import router from '@/router'
 import store from '@/store'
 import vuetify from '@/plugins/vuetify'
 import registerContainerServices from './app.container'
+import 'reflect-metadata'
 
 // css
 require('@mdi/font/css/materialdesignicons.css')

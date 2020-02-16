@@ -15,8 +15,8 @@ import MenuItemService from '@/services/implementations/MenuItemService'
 export default function registerContainerServices () {
   container.options.skipBaseClassChecks = true
   container.bind<IMenuItemService>('IMenuItemService').to(MenuItemService)
-  container.bind<IAddonsService>('IAddonsService').to(AddonsService)
-  container.bind<ICaseFileService>('ICaseFileService').to(CaseFileService)
-  container.bind<IHomeDashboardService>('IHomeDashboardService').to(HomeDashboardService)
+  container.bind<IAddonsService>(TYPES.IAddonsService).to(AddonsService)
+  container.bind<ICaseFileService>(TYPES.ICaseFileService).to(CaseFileService)
+  container.bind<IHomeDashboardService>(TYPES.IHomeDashboardService).to(HomeDashboardService)
   container.bind<INetworkMonitorService>(TYPES.INetworkMonitorService).to(NetworkMonitorService)
 }

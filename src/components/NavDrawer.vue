@@ -30,8 +30,8 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <!-- <hello-world /> -->
     </v-navigation-drawer>
+    <hello-world />
   </v-card>
 </template>
 
@@ -45,17 +45,13 @@ import IHomeDashboardService from '../services/interfaces/IHomeDashboardService'
 import IAddonsService from '../services/interfaces/IAddonsService'
 import ICaseFileService from '../services/interfaces/ICaseFileService'
 import INetworkMonitorService from '../services/interfaces/INetworkMonitorService'
-import NetworkMonitorService from '../services/implementations/NetworkMonitorService'
-import CaseFileService from '../services/implementations/CaseFileService'
-import AddonsService from '../services/implementations/AddonsService'
-import HomeDashboardService from '../services/implementations/HomeDashboardService'
 import TYPES from '@/InjectableTypes/types'
 
 @Component({
-  name: 'NavDrawer'
-  // components: {
-  //   'hello-world': HelloWorld
-  // }
+  name: 'NavDrawer',
+  components: {
+    'hello-world': HelloWorld
+  }
 })
 export default class NavDrawer extends Vue {
   private drawer: boolean = true

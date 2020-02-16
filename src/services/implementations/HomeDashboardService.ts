@@ -1,12 +1,11 @@
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Model } from 'vue-property-decorator'
 import MenuItemMixin from '@/mixins/menu-item-mixin'
 import IMenuItem from '@/types/IMenuItem'
 import IService from '@/services/interfaces/IService'
 
-@Component
 export default class extends MenuItemMixin implements IService {
   defaultModel () : IMenuItem {
-    this.setMenuItemProperties('Network Monitor', 'mdi-lan')
+    this.setMenuItemProperties('Home', 'mdi-view-dashboard')
     return this.getModel()
   }
 }

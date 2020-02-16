@@ -19,11 +19,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { injectable } from 'inversify-props'
 
+@injectable()
 @Component({
   name: 'HelloWorld'
 })
-
 export default class HelloWorld extends Vue {
 }
 </script>

@@ -3,10 +3,9 @@ import MenuItemMixin from '@/mixins/menu-item-mixin'
 import IMenuItem from '@/types/IMenuItem'
 import IService from '@/services/interfaces/IService'
 
-@Component
 export default class extends MenuItemMixin implements IService {
   defaultModel () : IMenuItem {
-    this.setMenuItemProperties('Home', 'mdi-view-dashboard')
+    this.setMenuItemProperties('Case File', 'mdi-ballot')
     return this.getModel()
   }
 }

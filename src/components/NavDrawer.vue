@@ -30,15 +30,15 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <!-- <hello-world /> -->
     </v-navigation-drawer>
-    <hello-world />
   </v-card>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { inject, injectable } from 'inversify-props'
+import { inject } from 'inversify-props'
 import HelloWorld from '@/components/HelloWorld.vue'
 import IMenuItem from '../types/IMenuItem'
 import IHomeDashboardService from '../services/interfaces/IHomeDashboardService'
@@ -52,10 +52,10 @@ import HomeDashboardService from '../services/implementations/HomeDashboardServi
 import TYPES from '@/InjectableTypes/types'
 
 @Component({
-  name: 'NavDrawer',
-  components: {
-    'hello-world': HelloWorld
-  }
+  name: 'NavDrawer'
+  // components: {
+  //   'hello-world': HelloWorld
+  // }
 })
 export default class NavDrawer extends Vue {
   private drawer: boolean = true

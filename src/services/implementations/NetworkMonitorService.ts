@@ -8,7 +8,12 @@ import MenuItemService from '@/services/implementations/MenuItemService'
 @injectable()
 export default class NetworkMonitorService extends MenuItemService implements IService {
   defaultModel () : IMenuItem {
-    this.setMenuItemProperties('Network Monitor', 'mdi-lan')
+    const properties : IMenuItem = {
+      title: 'Network Monitor',
+      icon: 'mdi-lan',
+      path: '/net-monitor'
+    }
+    this.setMenuItemProperties(properties)
     return this.getModel()
   }
 }

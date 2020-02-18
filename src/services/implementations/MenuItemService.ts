@@ -8,12 +8,14 @@ import IMenuItemService from '@/services/interfaces/IMenuItemService'
 export default class MenuItemService extends Vue implements IMenuItemService {
   private model: IMenuItem = {
     title: '',
-    icon: ''
+    icon: '',
+    path: ''
   }
 
-  setMenuItemProperties (title: string, icon: string) : void {
-    this.model.title = title
-    this.model.icon = icon
+  setMenuItemProperties (properties: IMenuItem) : void {
+    this.model.title = properties.title
+    this.model.icon = properties.icon
+    this.model.path = properties.path
   }
 
   getModel () : IMenuItem {

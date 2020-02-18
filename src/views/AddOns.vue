@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-export default class NetworkMonitor extends Vue {
+export default class AddOns extends Vue {
 
 }
 </script>

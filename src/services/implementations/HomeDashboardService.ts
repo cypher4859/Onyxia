@@ -8,7 +8,12 @@ import { injectable } from 'inversify-props'
 @injectable()
 export default class extends MenuItemService implements IService {
   defaultModel () : IMenuItem {
-    this.setMenuItemProperties('Home', 'mdi-view-dashboard')
+    const properties : IMenuItem = {
+      title: 'Home',
+      icon: 'mdi-view-dashboard',
+      path: '/'
+    }
+    this.setMenuItemProperties(properties)
     return this.getModel()
   }
 }

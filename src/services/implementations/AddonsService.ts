@@ -8,7 +8,12 @@ import { injectable } from 'inversify-props'
 @injectable()
 export default class AddonsService extends MenuItemService implements IService {
   defaultModel () : IMenuItem {
-    this.setMenuItemProperties('Add Ons', 'mdi-view-grid-plus')
+    const properties : IMenuItem = {
+      title: 'Add Ons',
+      icon: 'mdi-view-grid-plus',
+      path: '/add-ons'
+    }
+    this.setMenuItemProperties(properties)
     return this.getModel()
   }
 }

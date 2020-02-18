@@ -18,6 +18,7 @@
         <v-list-item
           v-for="(item, key) in menuItems"
           :key="key"
+          :to="{path: item.path}"
           link
         >
           <v-list-item-icon>
@@ -40,11 +41,12 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
 import HelloWorld from '@/components/HelloWorld.vue'
-import IMenuItem from '../types/IMenuItem'
-import IHomeDashboardService from '../services/interfaces/IHomeDashboardService'
-import IAddonsService from '../services/interfaces/IAddonsService'
-import ICaseFileService from '../services/interfaces/ICaseFileService'
-import INetworkMonitorService from '../services/interfaces/INetworkMonitorService'
+import IMenuItem from '@/types/IMenuItem'
+import IHomeDashboardService from '@/services/interfaces/IHomeDashboardService'
+import IAddonsService from '@/services/interfaces/IAddonsService'
+import ICaseFileService from '@/services/interfaces/ICaseFileService'
+import INetworkMonitorService from '@/services/interfaces/INetworkMonitorService'
+import ICameraMonitorService from '@/services/interfaces/ICameraMonitorService'
 import TYPES from '@/InjectableTypes/types'
 
 @Component({

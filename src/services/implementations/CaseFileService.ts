@@ -8,7 +8,12 @@ import { injectable } from 'inversify-props'
 @injectable()
 export default class extends MenuItemService implements IService {
   defaultModel () : IMenuItem {
-    this.setMenuItemProperties('Case File', 'mdi-ballot')
+    const properties : IMenuItem = {
+      title: 'Case File',
+      icon: 'mdi-ballot',
+      path: '/case-file'
+    }
+    this.setMenuItemProperties(properties)
     return this.getModel()
   }
 }

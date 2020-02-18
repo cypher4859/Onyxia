@@ -1,4 +1,5 @@
 export default interface IMenuItem {
   title: string,
-  icon: string
+  icon: string,
+  path: string
 }

@@ -68,11 +68,15 @@ export default class NavDrawer extends Vue {
   @inject(TYPES.IHomeDashboardService)
   private homeDashboardService!: IHomeDashboardService
 
+  @inject(TYPES.ICameraMonitorService)
+  private cameraMonitorService!: ICameraMonitorService
+
   private navMenuItems: IMenuItem[] = [
     this.homeDashboardService.defaultModel(),
     this.addonService.defaultModel(),
     this.networkMonitorService.defaultModel(),
-    this.caseFileService.defaultModel()
+    this.caseFileService.defaultModel(),
+    this.cameraMonitorService.defaultModel()
   ]
 
   get menuItems () {

@@ -1,0 +1,11 @@
+$primary_nav_menu_text: #117A65;
+$primary_nav_menu_background: #17202A;
+
+$primary_nav_content_text: #117A65;
+$primary_nav_content_background: #212F3D;
+
+
+.primary-nav-menu{
+  background-color: $primary_nav_menu_background;
+  color: $primary_nav_menu_text;
+}

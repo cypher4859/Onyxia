@@ -1,11 +1,11 @@
-$primary_nav_menu_text: #117A65;
-$primary_nav_menu_background: #17202A;
+$primary_nav_menu_text: white;
+$secondary_nav_menu_text: #0097A7;
 
-$primary_nav_content_text: #117A65;
-$primary_nav_content_background: #212F3D;
-
-
-.primary-nav-menu{
-  background-color: $primary_nav_menu_background;
+.primary-nav-text{
   color: $primary_nav_menu_text;
+}
+
+.radial-gradient-background-nav{
+  background: rgb(0,0,0);
+  background: linear-gradient(310deg, rgba(0,0,0,1) 0%, rgba(61,61,61,1) 100%, rgba(0,0,0,1) 100%);
 }

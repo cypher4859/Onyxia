@@ -4,7 +4,7 @@
       v-model="drawer"
       app
       left
-      dark
+      class="radial-gradient-background-nav"
     >
       <v-list
         nav
@@ -21,13 +21,15 @@
           :to="{path: item.path}"
           link
         >
-          <v-list-item-icon>
-            <v-icon>
+          <v-list-item-icon class="primary-nav-text">
+            <v-icon class="primary-nav-text">
               {{ item.icon }}
             </v-icon>
           </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-content class="primary-nav-text">
+            <v-list-item-title class="subtitle-1">
+              {{ item.title }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

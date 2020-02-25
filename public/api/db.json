@@ -1,0 +1,33 @@
+{
+  "case-file": [
+    {
+      "id": 0,
+      "name": {
+        "full-name": "",
+        "first": "",
+        "middle": "",
+        "last": "",
+        "suffix": "",
+        "additional": ""
+      },
+      "date-of-birth": {
+        "month": "",
+        "day": "",
+        "year": ""
+      },
+      "social-security-number": "",
+      "age": "",
+      "address": {
+        "street-address": "",
+        "city": "",
+        "zip": "",
+        "state": "",
+        "country": ""
+      },
+      "phone-contact": "",
+      "current-workplace": "",
+      "previous-workplaces": [],
+      "family": []
+    }
+  ]
+}

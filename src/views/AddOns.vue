@@ -1,10 +1,21 @@
 <template>
-  <div />
+  <div>
+    <add-ons />
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-export default class AddOns extends Vue {
+import Component from 'vue-class-component'
+import AddOnsCard from '@/components/add-ons/AddOnsCard.vue'
+
+@Component({
+  name: 'AddonsView',
+  components: {
+    'add-ons': AddOnsCard
+  }
+})
+export default class AddOnsView extends Vue {
 
 }
 </script>

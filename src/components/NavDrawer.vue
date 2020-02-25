@@ -2,9 +2,12 @@
   <v-card>
     <v-navigation-drawer
       v-model="drawer"
+      permanent
+      expand-on-hover
       app
       left
       class="radial-gradient-background-nav"
+      mini-variant-width="60"
     >
       <v-list
         nav
@@ -18,7 +21,7 @@
         <v-list-item
           v-for="(item, key) in menuItems"
           :key="key"
-          :to="{path: item.path}"
+          :to="item.path"
           link
         >
           <v-list-item-icon class="primary-nav-text">
@@ -35,6 +38,13 @@
       </v-list>
     </v-navigation-drawer>
     <hello-world />
+    <v-content>
+      <v-container>
+        <v-fade-transition mode="out-in">
+          <router-view />
+        </v-fade-transition>
+      </v-container>
+    </v-content>
   </v-card>
 </template>
 

@@ -1,23 +1,21 @@
 <template>
   <v-card>
-    <v-btn @click="goBack">
-      <div class="primary-content-button-text">
-        Back
-      </div>
-    </v-btn>
+    <back-btn />
   </v-card>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import RouterBackButton from '@/components/utility/RouterBackButton.vue'
 
 @Component({
-  name: 'CaseFileCard'
-})
-export default class CaseFileCard extends Vue {
-  private goBack () {
-    this.$router.back()
+  name: 'CaseFileReportCard',
+  components: {
+    'back-btn': RouterBackButton
   }
+})
+export default class CaseFileReportCard extends Vue {
+
 }
 </script>

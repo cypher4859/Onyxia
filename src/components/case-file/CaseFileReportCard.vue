@@ -2,7 +2,7 @@
   <v-card>
     <v-btn @click="goBack">
       <div class="primary-content-button-text">
-        BACK
+        Back
       </div>
     </v-btn>
   </v-card>

@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-import CaseFile from '@/views/CaseFile.vue'
-import NetworkMonitor from '@/views/NetworkMonitor.vue'
-import AddOns from '@/views/AddOns.vue'
-import CameraMonitor from '@/views/CameraMonitor.vue'
+import Home from '@/views/HomeView.vue'
+import CaseFile from '@/views/CaseFileView.vue'
+import CaseFileReport from '@/views/CaseFileReportView.vue'
+import NetworkMonitor from '@/views/NetworkMonitorView.vue'
+import AddOns from '@/views/AddOnsView.vue'
+import CameraMonitor from '@/views/CameraMonitorView.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,11 @@ const routes = [
     path: '/case-file',
     name: 'Case File',
     component: CaseFile
+  },
+  {
+    path: '/case-file-report',
+    name: 'Case File Report',
+    component: CaseFileReport
   },
   {
     path: '/net-monitor',

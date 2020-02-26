@@ -1,6 +1,6 @@
 <template>
   <div>
-    <case-file />
+    <case-file-card :root-path="rootPath" />
   </div>
 </template>
 
@@ -12,10 +12,10 @@ import CaseFileCard from '@/components/case-file/CaseFileCard.vue'
 @Component({
   name: 'CaseFileView',
   components: {
-    'case-file': CaseFileCard
+    'case-file-card': CaseFileCard
   }
 })
 export default class CaseFileView extends Vue {
-
+  private rootPath: string = '/case-file'
 }
 </script>

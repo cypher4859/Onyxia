@@ -54,7 +54,7 @@
         v-model="showIsEditableSnackbar"
         top
         left
-        timeout="1800"
+        :timeout="1800"
       >
         <span color="success">
           {{ snackBarMessage() }}

@@ -3,11 +3,11 @@
     <v-navigation-drawer
       v-model="drawer"
       permanent
-      expand-on-hover
       app
       left
       class="radial-gradient-background-nav"
-      mini-variant-width="60"
+      mini-variant
+      mini-variant-width="80"
     >
       <v-list
         nav
@@ -24,16 +24,28 @@
           :to="item.path"
           link
         >
-          <v-list-item-icon class="primary-nav-text">
-            <v-icon class="primary-nav-text">
-              {{ item.icon }}
-            </v-icon>
-          </v-list-item-icon>
-          <v-list-item-content class="primary-nav-text">
+          <v-tooltip
+            right
+            color="black"
+            close-delay="0"
+          >
+            <template v-slot:activator="{ on }">
+              <v-list-item-icon
+                v-on="on"
+              >
+                <v-icon>
+                  {{ item.icon }}
+                </v-icon>
+              </v-list-item-icon>
+              <v-list-item-content />
+            </template>
+            <span>{{ item.title }}</span>
+          </v-tooltip>
+          <!-- <v-list-item-content class="primary-nav-text">
             <v-list-item-title class="subtitle-1">
               {{ item.title }}
             </v-list-item-title>
-          </v-list-item-content>
+          </v-list-item-content> -->
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

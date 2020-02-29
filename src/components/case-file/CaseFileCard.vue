@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-btn
-      :to="caseFileReportPath"
+      :to="{ path: caseFileReportPath }"
     >
       <div class="primary-content-button-text">
         Read Case File

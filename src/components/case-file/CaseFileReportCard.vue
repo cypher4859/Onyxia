@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import RouterBackButton from '@/components/utility/RouterBackButton.vue'
+import RouterBackButton from '@/components/utility/BackButton.vue'
 
 @Component({
   name: 'CaseFileReportCard',

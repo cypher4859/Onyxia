@@ -79,7 +79,7 @@ import EditButton from '@/components/utility/EditButton.vue'
 })
 export default class CaseFileReportCard extends Vue {
   private model! : IPersonOfInterest
-  public isEditable : boolean = false
+  private isEditable : boolean = false
 
   created () {
     this.loadCaseFileData()

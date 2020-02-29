@@ -15,6 +15,7 @@
       <v-row>
         <v-col>
           <v-expansion-panels
+            v-model="showAllExpansionPanels"
             popout
             multiple
           >
@@ -91,6 +92,7 @@ export default class CaseFileReportCard extends Vue {
   private model! : IPersonOfInterest
   private isEditable : boolean = false
   private showIsEditableSnackbar : boolean = false
+  private showAllExpansionPanels : number[] = [0, 1, 2]
 
   created () {
     this.loadCaseFileData()

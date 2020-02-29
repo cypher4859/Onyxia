@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ reportModel }}
     <v-row>
       <v-col
         cols="8"
@@ -16,7 +15,6 @@
           success
           :readonly="!isEditableFlag"
         />
-        {{ printIsEditable }}
       </v-col>
       <v-col
         cols="8"

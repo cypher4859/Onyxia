@@ -1,7 +1,17 @@
 <template>
   <v-card>
-    <back-btn />
     <v-container>
+      <v-row dense>
+        <v-col
+          cols="12"
+          md="1"
+        >
+          <back-btn />
+        </v-col>
+        <v-col>
+          <edit-btn @toggleIsEditable="toggleIsEditableFlag()" />
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <v-expansion-panels
@@ -11,21 +21,30 @@
             <v-expansion-panel>
               <v-expansion-panel-header>Identity</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <report-identity :report-model="model.identity" />
+                <report-identity
+                  :is-editable-flag="isEditable"
+                  :report-model="model.identity"
+                />
               </v-expansion-panel-content>
             </v-expansion-panel>
 
             <v-expansion-panel>
               <v-expansion-panel-header>Location</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <report-location :report-model="model.location" />
+                <report-location
+                  :is-editable-flag="isEditable"
+                  :report-model="model.location"
+                />
               </v-expansion-panel-content>
             </v-expansion-panel>
 
             <v-expansion-panel>
               <v-expansion-panel-header>References</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <report-references :report-model="model.references" />
+                <report-references
+                  :is-editable-flag="isEditable"
+                  :report-model="model.references"
+                />
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -46,11 +65,13 @@ import ICaseFileService from '../../services/interfaces/ICaseFileService'
 import IPersonOfInterest from '@/types/IPersonOfInterest'
 import { inject } from 'inversify-props'
 import TYPES from '@/InjectableTypes/types'
+import EditButton from '@/components/utility/EditButton.vue'
 
 @Component({
   name: 'CaseFileReportCard',
   components: {
     'back-btn': RouterBackButton,
+    'edit-btn': EditButton,
     'report-identity': CaseFileReportIdentityCard,
     'report-references': CaseFileReportReferencesCard,
     'report-location': CaseFileReportLocationCard
@@ -58,6 +79,7 @@ import TYPES from '@/InjectableTypes/types'
 })
 export default class CaseFileReportCard extends Vue {
   private model! : IPersonOfInterest
+  public isEditable : boolean = false
 
   created () {
     this.loadCaseFileData()
@@ -68,6 +90,10 @@ export default class CaseFileReportCard extends Vue {
 
   public loadCaseFileData () {
     this.model = this.caseFileService.getCaseFileData()
+  }
+
+  public toggleIsEditableFlag () : void {
+    this.isEditable = !this.isEditable
   }
 }
 </script>

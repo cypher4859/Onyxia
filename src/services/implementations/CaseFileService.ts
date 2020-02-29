@@ -16,4 +16,42 @@ export default class extends MenuItemService implements IService {
     this.setMenuItemProperties(properties)
     return this.getModel()
   }
+
+  getCaseFileData () : object {
+    return {
+      'id': 0,
+      'identity': {
+        'name': {
+          'full-name': '',
+          'first': '',
+          'middle': '',
+          'last': '',
+          'suffix': '',
+          'additional': ''
+        },
+        'date-of-birth': {
+          'month': '',
+          'day': '',
+          'year': ''
+        },
+        'social-security-number': '',
+        'age': ''
+      },
+      'location': {
+        'address': {
+          'street-address': '',
+          'city': '',
+          'zip': '',
+          'state': '',
+          'country': ''
+        }
+      },
+      'references': {
+        'phone-contact': '',
+        'current-workplace': '',
+        'previous-workplaces': [],
+        'family': []
+      }
+    }
+  }
 }

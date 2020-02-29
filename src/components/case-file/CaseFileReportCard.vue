@@ -50,6 +50,16 @@
           </v-expansion-panels>
         </v-col>
       </v-row>
+      <v-snackbar
+        v-model="showIsEditableSnackbar"
+        top
+        left
+        timeout="1800"
+      >
+        <span color="success">
+          {{ snackBarMessage() }}
+        </span>
+      </v-snackbar>
     </v-container>
   </v-card>
 </template>
@@ -80,6 +90,7 @@ import EditButton from '@/components/utility/EditButton.vue'
 export default class CaseFileReportCard extends Vue {
   private model! : IPersonOfInterest
   private isEditable : boolean = false
+  private showIsEditableSnackbar : boolean = false
 
   created () {
     this.loadCaseFileData()
@@ -94,6 +105,11 @@ export default class CaseFileReportCard extends Vue {
 
   public toggleIsEditableFlag () : void {
     this.isEditable = !this.isEditable
+    this.showIsEditableSnackbar = true
+  }
+
+  private snackBarMessage () : string {
+    return !this.isEditable ? 'Edit Mode:   OFF' : 'Edit Mode:   ON'
   }
 }
 </script>

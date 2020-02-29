@@ -7,14 +7,15 @@
         offset="1"
       >
         <v-text-field
-          v-model="reportModel['full-name']"
+          v-model="reportModel['name']['full-name']"
           label="Full Name"
           color="success"
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
+        {{ printIsEditable }}
       </v-col>
       <v-col
         cols="8"
@@ -28,7 +29,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
     </v-row>
@@ -45,7 +46,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
       <v-col
@@ -60,7 +61,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
       <v-col
@@ -75,7 +76,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
     </v-row>
@@ -92,7 +93,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
       <v-col
@@ -106,7 +107,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
       <v-col
@@ -120,7 +121,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
       <v-col
@@ -134,7 +135,7 @@
           outlined
           shaped
           success
-          :readonly="isEditable"
+          :readonly="!isEditableFlag"
         />
       </v-col>
     </v-row>
@@ -147,11 +148,14 @@ import Component from 'vue-class-component'
 import IIdentity from '@/types/IIdentity'
 import CaseFileReportBaseDataCard from './CaseFileReportBaseDataCard.vue'
 import { Prop } from 'vue-property-decorator'
+import EditButton from '@/components/utility/EditButton.vue'
 
 @Component({
-  name: 'CaseFileReportIdentityCard'
+  name: 'CaseFileReportIdentityCard',
+  components: {
+    'edit-btn': EditButton
+  }
 })
 export default class CaseFileReportIdentityCard extends CaseFileReportBaseDataCard {
-  private isEditable: boolean = false
 }
 </script>

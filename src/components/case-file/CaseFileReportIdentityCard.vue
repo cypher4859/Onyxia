@@ -7,7 +7,7 @@
         offset="1"
       >
         <v-text-field
-          v-model="reportModel['name']['full-name']"
+          v-model="reportModel['full-name']"
           label="Full Name"
           color="success"
           outlined

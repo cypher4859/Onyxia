@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "api:server": "json-server public/api/db.json --routes public/api/routes.json"
   },
   "dependencies": {
     "@mdi/font": "^4.9.95",

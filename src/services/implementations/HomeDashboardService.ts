@@ -6,7 +6,7 @@ import IService from '@/services/interfaces/IService'
 import { injectable } from 'inversify-props'
 
 @injectable()
-export default class extends MenuItemService implements IService {
+export default class HomeDashboardService extends MenuItemService implements IService {
   defaultModel () : IMenuItem {
     const properties : IMenuItem = {
       title: 'Home',

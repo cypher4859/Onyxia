@@ -1,5 +1,6 @@
 $primary_nav_menu_text: white;
-$secondary_nav_menu_text: #0097A7;
+$secondary_nav_menu_text: #00C853;
+$tertiary_nav_menu_text: #76FF03;
 
 .primary-nav-text{
   color: $primary_nav_menu_text;
@@ -8,4 +9,8 @@ $secondary_nav_menu_text: #0097A7;
 .radial-gradient-background-nav{
   background: rgb(0,0,0);
   background: linear-gradient(310deg, rgba(0,0,0,1) 0%, rgba(61,61,61,1) 100%, rgba(0,0,0,1) 100%);
+}
+
+.primary-content-button-text{
+  color: $secondary_nav_menu_text;
 }

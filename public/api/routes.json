@@ -1,0 +1,4 @@
+{
+  "/case-file": "/case-file",
+  "/case-file/:q": "/case-file"
+}

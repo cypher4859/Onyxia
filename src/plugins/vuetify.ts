@@ -9,7 +9,8 @@ export default new Vuetify({
     themes: {
       dark: {
         primary: '#212F3D',
-        secondary: '#17202A'
+        secondary: '#17202A',
+        success: '#00C853'
       }
     }
   }

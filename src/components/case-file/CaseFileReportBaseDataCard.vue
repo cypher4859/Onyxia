@@ -13,6 +13,7 @@ import { Prop } from 'vue-property-decorator'
   name: 'CaseFileReportBaseDataCard'
 })
 export default class CaseFileReportBaseDataCard extends Vue {
-  @Prop(String) readonly reportModel! : IPersonOfInterest
+  @Prop(Object) readonly reportModel! : IPersonOfInterest
+  @Prop(Boolean) isEditableFlag! : boolean
 }
 </script>

@@ -5,7 +5,7 @@ import CaseFile from '@/components/case-file/CaseFileView.vue'
 import CaseFileReport from '@/components/case-file/CaseFileReportView.vue'
 import NetworkMonitor from '@/components/network-monitor/NetworkMonitorView.vue'
 import AddOns from '@/views/AddOnsView.vue'
-import CameraMonitor from '@/views/CameraMonitorView.vue'
+import CameraMonitor from '@/components/camera-monitor/CameraMonitorView.vue'
 
 Vue.use(VueRouter)
 

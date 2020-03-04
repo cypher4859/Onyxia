@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/components/home-dashboard/HomeView.vue'
 import CaseFile from '@/components/case-file/CaseFileView.vue'
 import CaseFileReport from '@/components/case-file/CaseFileReportView.vue'
-import NetworkMonitor from '@/views/NetworkMonitorView.vue'
+import NetworkMonitor from '@/components/network-monitor/NetworkMonitorView.vue'
 import AddOns from '@/views/AddOnsView.vue'
 import CameraMonitor from '@/views/CameraMonitorView.vue'
 

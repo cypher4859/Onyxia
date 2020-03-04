@@ -38,8 +38,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import IReferences from '@/types/IReferences'
-import CaseFileReportBaseDataCard from '@/components/case-file/CaseFileReportBaseDataCard.vue'
+import IReferences from '../types/IReferences'
+import CaseFileReportBaseDataCard from './CaseFileReportDataBaseCard.vue'
 
 @Component({
   name: 'CaseFileReportReferencesCard'

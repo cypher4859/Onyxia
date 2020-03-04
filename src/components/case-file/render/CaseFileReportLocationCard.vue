@@ -82,8 +82,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import ILocation from '@/types/ILocation'
-import CaseFileReportBaseDataCard from './CaseFileReportBaseDataCard.vue'
+import ILocation from '../types/ILocation'
+import CaseFileReportBaseDataCard from './CaseFileReportDataBaseCard.vue'
 
 @Component({
   name: 'CaseFileReportLocationCard'

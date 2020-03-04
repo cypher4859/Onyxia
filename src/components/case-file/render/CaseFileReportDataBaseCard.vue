@@ -5,8 +5,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import ILocation from '@/types/ILocation'
-import IPersonOfInterest from '@/types/IPersonOfInterest'
+import ILocation from '../types/ILocation'
+import IPersonOfInterest from '../types/IPersonOfInterest'
 import { Prop } from 'vue-property-decorator'
 
 @Component({

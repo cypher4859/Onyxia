@@ -145,10 +145,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import IIdentity from '@/types/IIdentity'
-import CaseFileReportBaseDataCard from './CaseFileReportBaseDataCard.vue'
-import { Prop } from 'vue-property-decorator'
+import IIdentity from '../types/IIdentity'
+import CaseFileReportBaseDataCard from './CaseFileReportDataBaseCard.vue'
 import EditButton from '@/components/utility/EditButton.vue'
+import { Prop } from 'vue-property-decorator'
 
 @Component({
   name: 'CaseFileReportIdentityCard',

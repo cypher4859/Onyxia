@@ -16,6 +16,6 @@ import CameraMonitorCard from './render/CameraMonitorCard.vue'
   }
 })
 export default class CameraMonitorView extends Vue {
-
+  //
 }
 </script>

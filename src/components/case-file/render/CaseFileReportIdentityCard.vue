@@ -15,7 +15,7 @@
           success
           :readonly="!isEditableFlag"
         />
-        {{ printIsEditable }}
+        <!-- {{ printIsEditable }} -->
       </v-col>
       <v-col
         cols="8"

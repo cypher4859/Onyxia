@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/HomeView.vue'
+import Home from '@/components/home-dashboard/HomeView.vue'
 import CaseFile from '@/components/case-file/CaseFileView.vue'
 import CaseFileReport from '@/components/case-file/CaseFileReportView.vue'
 import NetworkMonitor from '@/views/NetworkMonitorView.vue'

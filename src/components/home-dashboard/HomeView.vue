@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import HomeDashboardCard from '@/components/home-dashboard/HomeDashboardCard.vue'
+import HomeDashboardCard from './render/HomeDashboardCard.vue'
 
 @Component({
   name: 'HomeView',

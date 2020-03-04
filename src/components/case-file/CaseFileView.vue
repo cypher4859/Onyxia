@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import CaseFileCard from '@/components/case-file/CaseFileCard.vue'
+import CaseFileCard from './render/CaseFileCard.vue'
 
 @Component({
   name: 'CaseFileView',

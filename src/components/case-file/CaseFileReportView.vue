@@ -8,7 +8,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import CaseFileReportCard from '@/components/case-file/CaseFileReportCard.vue'
+import CaseFileReportCard from './render/CaseFileReportCard.vue'
 
 @Component({
   name: 'CaseFileReportView',

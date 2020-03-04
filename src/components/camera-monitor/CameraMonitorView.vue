@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import CameraMonitorCard from '@/components/camera-monitor/CameraMonitorCard.vue'
+import CameraMonitorCard from './render/CameraMonitorCard.vue'
 
 @Component({
   name: 'CameraMonitorView',

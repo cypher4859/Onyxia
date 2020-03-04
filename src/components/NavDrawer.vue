@@ -68,9 +68,9 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import IMenuItem from '@/types/IMenuItem'
 import IHomeDashboardService from '@/components/home-dashboard/services/IHomeDashboardService'
 import IAddonsService from '@/services/interfaces/IAddonsService'
-import ICaseFileService from './case-file/services/ICaseFileService'
-import INetworkMonitorService from './network-monitor/services/INetworkMonitorService'
-import ICameraMonitorService from '@/services/interfaces/ICameraMonitorService'
+import ICaseFileService from '@/components/case-file/services/ICaseFileService'
+import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
+import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
 import TYPES from '@/InjectableTypes/types'
 
 @Component({

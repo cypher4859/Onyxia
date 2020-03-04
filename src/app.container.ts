@@ -4,7 +4,7 @@ import IHomeDashboardService from '@/components/home-dashboard/services/IHomeDas
 import IAddonsService from '@/services/interfaces/IAddonsService'
 import ICaseFileService from '@/components/case-file/services/ICaseFileService'
 import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
-import ICameraMonitorService from '@/services/interfaces/ICameraMonitorService'
+import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
 import AddonsService from '@/services/implementations/AddonsService'
 import CaseFileService from '@/components/case-file/services/CaseFileService'
 import HomeDashboardService from '@/components/home-dashboard/services/HomeDashboardService'
@@ -12,7 +12,7 @@ import NetworkMonitorService from '@/components/network-monitor/services/Network
 import TYPES from '@/InjectableTypes/types'
 import IMenuItemService from '@/services/interfaces/IMenuItemService'
 import MenuItemService from '@/services/implementations/MenuItemService'
-import CameraMonitorService from '@/services/implementations/CameraMonitorService'
+import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
 
 export default function registerContainerServices () {
   container.options.skipBaseClassChecks = true

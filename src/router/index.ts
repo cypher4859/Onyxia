@@ -4,7 +4,7 @@ import Home from '@/components/home-dashboard/HomeView.vue'
 import CaseFile from '@/components/case-file/CaseFileView.vue'
 import CaseFileReport from '@/components/case-file/CaseFileReportView.vue'
 import NetworkMonitor from '@/components/network-monitor/NetworkMonitorView.vue'
-import AddOns from '@/views/AddOnsView.vue'
+import AddOns from '@/components/add-on-manager/AddOnsView.vue'
 import CameraMonitor from '@/components/camera-monitor/CameraMonitorView.vue'
 
 Vue.use(VueRouter)

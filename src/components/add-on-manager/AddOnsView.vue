@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import AddOnsCard from '@/components/add-on-manager/AddOnsCard.vue'
+import AddOnsCard from '@/components/add-on-manager/render/AddOnsCard.vue'
 
 @Component({
   name: 'AddonsView',

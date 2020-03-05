@@ -67,7 +67,7 @@ import { inject } from 'inversify-props'
 import HelloWorld from '@/components/HelloWorld.vue'
 import IMenuItem from '@/types/IMenuItem'
 import IHomeDashboardService from '@/components/home-dashboard/services/IHomeDashboardService'
-import IAddonsService from '@/services/interfaces/IAddonsService'
+import IAddonsService from '@/components/add-on-manager/services/IAddonsService'
 import ICaseFileService from '@/components/case-file/services/ICaseFileService'
 import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
 import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
@@ -85,28 +85,16 @@ export default class NavDrawer extends Vue {
   @inject(TYPES.IAddonsService)
   public addonService!: IAddonsService
 
-  @inject(TYPES.INetworkMonitorService)
-  private networkMonitorService!: INetworkMonitorService
-
-  @inject(TYPES.ICaseFileService)
-  private caseFileService!: ICaseFileService
-
   @inject(TYPES.IHomeDashboardService)
   private homeDashboardService!: IHomeDashboardService
 
-  @inject(TYPES.ICameraMonitorService)
-  private cameraMonitorService!: ICameraMonitorService
-
   private navMenuItems: IMenuItem[] = [
     this.homeDashboardService.defaultModel(),
-    this.addonService.defaultModel(),
-    this.networkMonitorService.defaultModel(),
-    this.caseFileService.defaultModel(),
-    this.cameraMonitorService.defaultModel()
+    this.addonService.defaultModel()
   ]
 
   get menuItems () {
-    return this.navMenuItems
+    return this.navMenuItems.concat(this.addonService.getEnabledAddons())
   }
 }
 </script>

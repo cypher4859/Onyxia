@@ -1,16 +1,20 @@
 import 'reflect-metadata'
-import { Vue, Component, Model } from 'vue-property-decorator'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import IMenuItem from '@/types/IMenuItem'
-import IService from '@/services/interfaces/IService'
 import ICaseFileService from '@/components/case-file/services/ICaseFileService'
 import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
 import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
-import { injectable, inject } from 'inversify-props'
 import TYPES from '@/InjectableTypes/types'
+import IAddonsService from './IAddonsService'
+import AddonStore from '@/components/add-on-manager/state-management/AddonStore'
+import IAddon from '@/components/add-on-manager/types/IAddonStore'
+import { injectable, inject } from 'inversify-props'
+import { getModule } from 'vuex-module-decorators'
+
+const addonStore = getModule(AddonStore)
 
 @injectable()
-export default class AddonsService extends MenuItemService implements IService {
+export default class AddonsService extends MenuItemService implements IAddonsService {
   @inject(TYPES.INetworkMonitorService)
   private networkMonitorService!: INetworkMonitorService
 
@@ -43,5 +47,9 @@ export default class AddonsService extends MenuItemService implements IService {
   public enableAddon (addOnModel: IMenuItem) : void {
     // This will need to stick the addon into the store
     this.enabledAddons.push(addOnModel)
+  }
+
+  public getRegisteredAddons () {
+    return addonStore.getRegisteredAddonComponents
   }
 }

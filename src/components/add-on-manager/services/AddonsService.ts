@@ -1,34 +1,21 @@
 import 'reflect-metadata'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import IMenuItem from '@/types/IMenuItem'
-import ICaseFileService from '@/components/case-file/services/ICaseFileService'
-import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
-import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
-import TYPES from '@/InjectableTypes/types'
 import IAddonsService from './IAddonsService'
 import AddonStore from '@/components/add-on-manager/state-management/AddonStore'
-import IAddon from '@/components/add-on-manager/types/IAddonStore'
-import { injectable, inject } from 'inversify-props'
+import { injectable } from 'inversify-props'
 import { getModule } from 'vuex-module-decorators'
 
 const addonStore = getModule(AddonStore)
+type AddonProperty = 'name' | 'model'
 
 @injectable()
 export default class AddonsService extends MenuItemService implements IAddonsService {
-  @inject(TYPES.INetworkMonitorService)
-  private networkMonitorService!: INetworkMonitorService
-
-  @inject(TYPES.ICaseFileService)
-  private caseFileService!: ICaseFileService
-
-  @inject(TYPES.ICameraMonitorService)
-  private cameraMonitorService!: ICameraMonitorService
-
-  private enabledAddons : IMenuItem[] = [
-    this.networkMonitorService.defaultModel(),
-    this.caseFileService.defaultModel(),
-    this.cameraMonitorService.defaultModel()
-  ]
+  // private enabledAddons : IMenuItem[] = [
+  //   this.networkMonitorService.defaultModel(),
+  //   this.caseFileService.defaultModel(),
+  //   this.cameraMonitorService.defaultModel()
+  // ]
 
   defaultModel () : IMenuItem {
     const properties : IMenuItem = {
@@ -41,15 +28,26 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
   }
 
   public getEnabledAddons () : IMenuItem[] {
-    return this.enabledAddons
+    return this.getRegisteredAddonsProperty('model')
   }
 
-  public enableAddon (addOnModel: IMenuItem) : void {
-    // This will need to stick the addon into the store
-    this.enabledAddons.push(addOnModel)
+  public getRegisteredAddonsProperty (property: AddonProperty) : any {
+    const registeredAddons = this.getRegisteredAddons()
+    const filteredRegisteredAddons = registeredAddons.map((addon) => {
+      if (this.hasKey(addon, property)) {
+        return addon[property]
+      }
+    })
   }
 
   public getRegisteredAddons () {
     return addonStore.getRegisteredAddonComponents
+  }
+
+  // `keyof any` is short for "string | number | symbol"
+  // since an object key can be any of those types, our key can too
+  // in TS 3.0+, putting just "string" raises an error
+  public hasKey<O> (obj: O, key: keyof any): key is keyof O {
+    return key in obj
   }
 }

@@ -44,7 +44,7 @@ export default class AddOnsCard extends Vue {
 
   beforeMount () {
     this.installedAddons = this.addonManagerService.getRegisteredAddons()
-    this.installedAddonsNames = this.installedAddons.map(addon => addon.name)
+    this.installedAddonsNames = this.addonManagerService.getRegisteredAddonsProperty('name')
   }
 }
 </script>

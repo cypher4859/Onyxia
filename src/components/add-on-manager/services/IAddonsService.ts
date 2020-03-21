@@ -1,10 +1,10 @@
 import IService from '@/services/interfaces/IService'
 import IMenuItem from '@/types/IMenuItem'
 import IAddon from '../types/IAddon'
+import { IAddonProperty } from '@/components/add-on-manager/types/IAddonPropertyType'
 
 export default interface IAddonsService extends IService {
-    getEnabledAddons(): IMenuItem[],
-    enableAddon(addOnModel: IMenuItem): void,
-    getRegisteredAddons(): IAddon[]
-
+    getRegisteredAddons() : IAddon[]
+    getEnabledAddons() : IMenuItem[]
+    getRegisteredAddonsProperty(property: IAddonProperty) : any
 }

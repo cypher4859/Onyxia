@@ -7,8 +7,8 @@
         sm="6"
       >
         <v-select
-          v-model="someAddons"
-          :items="installedAddons"
+          v-model="addons"
+          :items="installedAddonsNames"
           label="Enabled Addons"
           multiple
           chips
@@ -25,13 +25,26 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import IMenuItem from '@/types/IMenuItem'
+import IAddonsService from '@/components/add-on-manager/services/IAddonsService'
+import TYPES from '@/InjectableTypes/types'
+import { inject } from 'inversify-props'
+import IAddon from '../types/IAddon'
 
 @Component({
   name: 'AddOnsCard'
 })
 export default class AddOnsCard extends Vue {
   // It will need to grab the possible addons from the store
-  private someAddons : string[] = []
-  private installedAddons : string[] = ['camera-monitor', 'network-monitor', 'case-file']
+  private addons : string[] = []
+  private installedAddons! : object[]
+  private installedAddonsNames! : object[]
+
+  @inject(TYPES.IAddonsService)
+  private addonManagerService!: IAddonsService
+
+  beforeMount () {
+    this.installedAddons = this.addonManagerService.getRegisteredAddons()
+    this.installedAddonsNames = this.installedAddons.map(addon => addon.name)
+  }
 }
 </script>

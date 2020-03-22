@@ -1,11 +1,16 @@
 import 'reflect-metadata'
-const TYPES = {
-  IMenuItemService: Symbol.for('IMenuItemService'),
-  INetworkMonitorService: Symbol.for('INetworkMonitorService'),
-  IAddonsService: Symbol.for('IAddonsService'),
-  IHomeDashboardService: Symbol.for('IHomeDashboardService'),
-  ICaseFileService: Symbol.for('ICaseFileService'),
-  ICameraMonitorService: Symbol.for('ICameraMonitorService')
+
+interface IRegistryTypes {
+  [name: string]: symbol;
+}
+
+const TYPES : IRegistryTypes = {
+  IMenuItemService: Symbol('IMenuItemService'),
+  INetworkMonitorService: Symbol('INetworkMonitorService'),
+  IAddonsService: Symbol('IAddonsService'),
+  IHomeDashboardService: Symbol('IHomeDashboardService'),
+  ICaseFileService: Symbol('ICaseFileService'),
+  ICameraMonitorService: Symbol('ICameraMonitorService')
 }
 
 export default TYPES

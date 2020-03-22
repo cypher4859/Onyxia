@@ -6,8 +6,8 @@ import AddonStore from '@/components/add-on-manager/state-management/AddonStore'
 import { injectable } from 'inversify-props'
 import { getModule } from 'vuex-module-decorators'
 
-const addonStore = getModule(AddonStore)
 type AddonProperty = 'name' | 'model'
+const addonStore = getModule(AddonStore)
 
 @injectable()
 export default class AddonsService extends MenuItemService implements IAddonsService {
@@ -38,6 +38,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
         return addon[property]
       }
     })
+    return filteredRegisteredAddons
   }
 
   public getRegisteredAddons () {

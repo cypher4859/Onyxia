@@ -18,7 +18,7 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   private cameraMonitorService: ICameraMonitorService = new CameraMonitorService()
 
   // @inject(TYPES.ICaseFileService)
-  private caseFileService: ICaseFileService = new CaseFileService()
+  public caseFileService: ICaseFileService = new CaseFileService()
 
   // @inject(TYPES.INetworkMonitorService)
   private networkMonitorService: INetworkMonitorService = new NetworkMonitorService()

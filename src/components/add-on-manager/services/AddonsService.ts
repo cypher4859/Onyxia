@@ -3,10 +3,11 @@ import MenuItemService from '@/services/implementations/MenuItemService'
 import IMenuItem from '@/types/IMenuItem'
 import IAddonsService from './IAddonsService'
 import AddonStore from '@/components/add-on-manager/state-management/AddonStore'
+import IAddon from '@/components/add-on-manager/types/IAddon'
 import { injectable } from 'inversify-props'
 import { getModule } from 'vuex-module-decorators'
+import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataTypes'
 
-type AddonProperty = 'name' | 'model'
 const addonStore = getModule(AddonStore)
 
 @injectable()
@@ -21,22 +22,29 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return this.getModel()
   }
 
-  public getEnabledAddons () : IMenuItem[] {
-    return this.getRegisteredAddonsProperty('model')
+  public setEnabledAddonComponents (enabledComponents: string[]) {
+    addonStore.setOnOffRegisteredAddonComponents(enabledComponents)
   }
 
-  public getRegisteredAddonsProperty (property: AddonProperty) : any {
-    const registeredAddons = this.getRegisteredAddons()
-    const filteredRegisteredAddons = registeredAddons.map((addon) => {
+  public getEnabledAddonModels () : IMenuItem[] {
+    return this.getEnabledAddonsProperty('model')
+  }
+
+  public getEnabledAddonNames () : IMenuItem[] {
+    return this.getEnabledAddonsProperty('name')
+  }
+
+  public getEnabledAddonsProperty (property: IAddonProperty) : any {
+    const enabledAddons = this.getEnabledAddons()
+    return enabledAddons.map((addon) => {
       if (this.hasKey(addon, property)) {
         return addon[property]
       }
     })
-    return filteredRegisteredAddons
   }
 
-  public getRegisteredAddons () {
-    return addonStore.getRegisteredAddonComponents
+  public getEnabledAddons () : IAddon[] {
+    return addonStore.getRegisteredAddonComponents.filter((addon) => addon.enabled === true)
   }
 
   // `keyof any` is short for "string | number | symbol"

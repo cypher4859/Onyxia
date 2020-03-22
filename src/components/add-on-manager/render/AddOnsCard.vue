@@ -7,7 +7,7 @@
         sm="6"
       >
         <v-select
-          v-model="addons"
+          v-model="enabledAddons"
           :items="installedAddonsNames"
           label="Enabled Addons"
           multiple
@@ -35,16 +35,20 @@ import IAddon from '../types/IAddon'
 })
 export default class AddOnsCard extends Vue {
   // It will need to grab the possible addons from the store
-  private addons : string[] = []
-  private installedAddons! : object[]
-  private installedAddonsNames! : object[]
+  private enabledAddons : string[] = []
+  private installedAddons! : IMenuItem[]
+  private installedAddonsNames! : string[]
 
   @inject(TYPES.IAddonsService)
   private addonManagerService!: IAddonsService
 
   beforeMount () {
-    this.installedAddons = this.addonManagerService.getRegisteredAddons()
-    this.installedAddonsNames = this.addonManagerService.getRegisteredAddonsProperty('name')
+    this.installedAddons = this.addonManagerService.getEnabledAddonModels()
+    this.installedAddonsNames = this.addonManagerService.getEnabledAddonModels().map((addonModel: IMenuItem) => addonModel.title)
+  }
+
+  public enableAndDisabledAddons () {
+    this.addonManagerService.setEnabledAddonComponents(this.enabledAddons)
   }
 }
 </script>

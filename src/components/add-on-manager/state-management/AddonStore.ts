@@ -8,17 +8,20 @@ import IAddonStore from '@/components/add-on-manager/types/IAddonStore'
 import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
 import { inject } from 'inversify-props'
 import { Module, VuexModule } from 'vuex-module-decorators'
+import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
+import CaseFileService from '@/components/case-file/services/CaseFileService'
+import NetworkMonitorService from '@/components/network-monitor/services/NetworkMonitorService'
 
 @Module({ dynamic: true, store, name: 'AddonStore' })
 export default class AddonStore extends VuexModule implements IAddonStore {
-  @inject(TYPES.ICameraMonitorService)
-  private cameraMonitorService!: ICameraMonitorService
+  // @inject(TYPES.ICameraMonitorService)
+  private cameraMonitorService: ICameraMonitorService = new CameraMonitorService()
 
-  @inject(TYPES.ICaseFileService)
-  private caseFileService!: ICaseFileService
+  // @inject(TYPES.ICaseFileService)
+  private caseFileService: ICaseFileService = new CaseFileService()
 
-  @inject(TYPES.INetworkMonitorService)
-  private networkMonitorService!: INetworkMonitorService
+  // @inject(TYPES.INetworkMonitorService)
+  private networkMonitorService: INetworkMonitorService = new NetworkMonitorService()
 
   // list of all implemented components
   public registeredAddonComponents : IAddon[] = [

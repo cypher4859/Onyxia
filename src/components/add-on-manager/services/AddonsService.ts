@@ -11,12 +11,6 @@ const addonStore = getModule(AddonStore)
 
 @injectable()
 export default class AddonsService extends MenuItemService implements IAddonsService {
-  // private enabledAddons : IMenuItem[] = [
-  //   this.networkMonitorService.defaultModel(),
-  //   this.caseFileService.defaultModel(),
-  //   this.cameraMonitorService.defaultModel()
-  // ]
-
   defaultModel () : IMenuItem {
     const properties : IMenuItem = {
       title: 'Add Ons',

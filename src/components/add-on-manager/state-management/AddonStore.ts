@@ -28,17 +28,14 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   /// THE NAME IS REDUNDANT! Remove
   public registeredAddonComponents : IAddon[] = [
     {
-      name: 'Camera Monitor',
       model: this.cameraMonitorService.defaultModel(),
       enabled: false
     },
     {
-      name: 'Case File',
       model: this.caseFileService.defaultModel(),
       enabled: false
     },
     {
-      name: 'Network Monitor',
       model: this.networkMonitorService.defaultModel(),
       enabled: false
     }
@@ -52,7 +49,7 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   public changeEnabledStateOfRegisteredAddonComponents (componentsToBeEnabled: string[]) : void {
     const registeredAddonComponents = this.registeredAddonComponents
     componentsToBeEnabled.forEach((componentToEnable: string) => {
-      const componentsThatShouldBeEnabled = registeredAddonComponents.filter((addon: IAddon) => addon.name === componentToEnable)
+      const componentsThatShouldBeEnabled = registeredAddonComponents.filter((addon: IAddon) => addon.model.title === componentToEnable)
       if (componentsThatShouldBeEnabled.length > 1) {
         console.error('ERROR! The store contains +1 addons by the same name; we are trying to enable more than one addon...')
       } else {
@@ -61,7 +58,7 @@ export default class AddonStore extends VuexModule implements IAddonStore {
     })
 
     registeredAddonComponents.forEach((addonComponent: IAddon) => {
-      if (componentsToBeEnabled.indexOf(addonComponent.name) === -1) {
+      if (componentsToBeEnabled.indexOf(addonComponent.model.title) === -1) {
         addonComponent.enabled = false
       }
     })

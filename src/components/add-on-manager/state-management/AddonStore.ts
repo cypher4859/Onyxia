@@ -30,17 +30,17 @@ export default class AddonStore extends VuexModule implements IAddonStore {
     {
       name: 'Camera Monitor',
       model: this.cameraMonitorService.defaultModel(),
-      enabled: true
+      enabled: false
     },
     {
       name: 'Case File',
       model: this.caseFileService.defaultModel(),
-      enabled: true
+      enabled: false
     },
     {
       name: 'Network Monitor',
       model: this.networkMonitorService.defaultModel(),
-      enabled: true
+      enabled: false
     }
   ]
 
@@ -49,15 +49,21 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   @Mutation
-  public onOrOffRegisteredAddonComponent (addonName: IAddonProperty, onOffSwitch: boolean) : void {
-    const addonsToDisable = this.getRegisteredAddonComponents.filter((addon: IAddon) => addon.enabled === !onOffSwitch)
-    addonsToDisable.forEach((addon: IAddon) => {
-      addon.enabled = onOffSwitch
+  public changeEnabledStateOfRegisteredAddonComponents (componentsToBeEnabled: string[]) : void {
+    const registeredAddonComponents = this.registeredAddonComponents
+    componentsToBeEnabled.forEach((componentToEnable: string) => {
+      const componentsThatShouldBeEnabled = registeredAddonComponents.filter((addon: IAddon) => addon.name === componentToEnable)
+      if (componentsThatShouldBeEnabled.length > 1) {
+        console.error('ERROR! The store contains +1 addons by the same name; we are trying to enable more than one addon...')
+      } else {
+        componentsThatShouldBeEnabled[0].enabled = true
+      }
     })
-  }
 
-  @Action
-  public setOnOffRegisteredAddonComponents (enabledComponents: string[]) {
-    
+    registeredAddonComponents.forEach((addonComponent: IAddon) => {
+      if (componentsToBeEnabled.indexOf(addonComponent.name) === -1) {
+        addonComponent.enabled = false
+      }
+    })
   }
 }

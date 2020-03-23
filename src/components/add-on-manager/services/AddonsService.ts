@@ -22,17 +22,17 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return this.getModel()
   }
 
-  public enableAddons (enabledComponents: string[], installedComponents: string[]) {
+  public enableAddons (enabledComponents: string[]) {
     // here we should forEach on the components to change on/off state
     addonStore.changeEnabledStateOfRegisteredAddonComponents(enabledComponents)
   }
 
-  public getRegisteredInstalledAddonsModels () : IMenuItem[] {
-    return this.getRegisteredInstalledAddonsProperty('model')
+  public getRegisteredAddonsModels () : IMenuItem[] {
+    return this.getRegisteredAddonsProperty('model')
   }
 
-  public getRegisteredInstalledAddonsProperty (property: IAddonProperty) : any {
-    const addons = this.getRegisteredInstalledAddons()
+  public getRegisteredAddonsProperty (property: IAddonProperty) : any {
+    const addons = this.getRegisteredAddons()
     return addons.map((addon) => {
       if (this.hasKey(addon, property)) {
         return addon[property]
@@ -48,7 +48,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return this.getEnabledAddons().map((addon: IAddon) => addon.model)
   }
 
-  public getRegisteredInstalledAddons () : IAddon[] {
+  public getRegisteredAddons () : IAddon[] {
     return addonStore.getRegisteredAddonComponents
   }
 

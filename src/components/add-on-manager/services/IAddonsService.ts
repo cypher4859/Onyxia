@@ -4,11 +4,11 @@ import IAddon from '@/components/add-on-manager/types/IAddon'
 import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataTypes'
 
 export default interface IAddonsService extends IService {
-    enableAddons(enabledComponents: string[], installedComponents: string[]) : void
+    enableAddons(enabledComponents: string[]) : void
     getEnabledAddons() : IAddon[]
     getEnabledAddonsModels() : IMenuItem[]
-    getRegisteredInstalledAddonsModels() : IMenuItem[]
-    getRegisteredInstalledAddonsProperty(property: IAddonProperty) : any
-    getRegisteredInstalledAddons() : IAddon[]
+    getRegisteredAddonsModels() : IMenuItem[]
+    getRegisteredAddonsProperty(property: IAddonProperty) : any
+    getRegisteredAddons() : IAddon[]
 
 }

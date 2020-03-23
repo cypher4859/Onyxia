@@ -8,7 +8,7 @@
       >
         <v-select
           v-model="enabledAddons"
-          :items="installedAddonsNames"
+          :items="installedAddons"
           label="Enabled Addons"
           multiple
           chips
@@ -23,7 +23,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Prop } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import IMenuItem from '@/types/IMenuItem'
 import IAddonsService from '@/components/add-on-manager/services/IAddonsService'
 import TYPES from '@/InjectableTypes/types'
@@ -36,19 +36,19 @@ import IAddon from '../types/IAddon'
 export default class AddOnsCard extends Vue {
   // It will need to grab the possible addons from the store
   private enabledAddons : string[] = []
-  private installedAddons! : IMenuItem[]
-  private installedAddonsNames! : string[]
+  private installedAddons! : string[]
 
   @inject(TYPES.IAddonsService)
   private addonManagerService!: IAddonsService
 
   beforeMount () {
-    this.installedAddons = this.addonManagerService.getEnabledAddonModels()
-    this.installedAddonsNames = this.addonManagerService.getEnabledAddonModels().map((addonModel: IMenuItem) => addonModel.title)
+    this.enabledAddons = this.addonManagerService.getEnabledAddonsModels().map((addonModel: IMenuItem) => addonModel.title)
+    this.installedAddons = this.addonManagerService.getRegisteredInstalledAddonsModels().map((addonModel: IMenuItem) => addonModel.title)
   }
 
+  @Watch('enabledAddons', { immediate: false, deep: false })
   public enableAndDisabledAddons () {
-    this.addonManagerService.setEnabledAddonComponents(this.enabledAddons)
+    this.addonManagerService.enableAddons(this.enabledAddons, this.installedAddons)
   }
 }
 </script>

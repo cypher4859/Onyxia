@@ -1,63 +1,65 @@
 <template>
-  <v-card>
-    <v-navigation-drawer
-      v-model="drawer"
-      permanent
-      app
-      left
-      class="radial-gradient-background-nav"
-      mini-variant
-      mini-variant-width="80"
-    >
-      <v-list
-        nav
+  <v-container>
+    <v-card>
+      <v-navigation-drawer
+        v-model="drawer"
+        permanent
+        app
+        left
+        class="radial-gradient-background-nav"
+        mini-variant
+        mini-variant-width="80"
       >
-        <v-list-item>
-          <v-list-item-avatar>
-            <img src="@/assets/blackmesa_logo.png">
-          </v-list-item-avatar>
-        </v-list-item>
-
-        <v-list-item
-          v-for="(item, key) in menuItems"
-          :key="key"
-          :to="item.path"
-          link
+        <v-list
+          nav
         >
-          <v-tooltip
-            right
-            color="black"
-            close-delay="0"
+          <v-list-item>
+            <v-list-item-avatar>
+              <img src="@/assets/blackmesa_logo.png">
+            </v-list-item-avatar>
+          </v-list-item>
+
+          <v-list-item
+            v-for="(item, key) in menuItems"
+            :key="key"
+            :to="item.path"
+            link
           >
-            <template v-slot:activator="{ on }">
-              <v-list-item-icon
-                v-on="on"
-              >
-                <v-icon>
-                  {{ item.icon }}
-                </v-icon>
-              </v-list-item-icon>
-              <v-list-item-content />
-            </template>
-            <span>{{ item.title }}</span>
-          </v-tooltip>
+            <v-tooltip
+              right
+              color="black"
+              close-delay="0"
+            >
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon
+                  v-on="on"
+                >
+                  <v-icon>
+                    {{ item.icon }}
+                  </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content />
+              </template>
+              <span>{{ item.title }}</span>
+            </v-tooltip>
           <!-- <v-list-item-content class="primary-nav-text">
             <v-list-item-title class="subtitle-1">
               {{ item.title }}
             </v-list-item-title>
           </v-list-item-content> -->
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <hello-world />
-    <v-content>
-      <v-container>
-        <v-fade-transition mode="out-in">
-          <router-view />
-        </v-fade-transition>
-      </v-container>
-    </v-content>
-  </v-card>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      <hello-world />
+      <v-content>
+        <v-container>
+          <v-fade-transition mode="out-in">
+            <router-view />
+          </v-fade-transition>
+        </v-container>
+      </v-content>
+    </v-card>
+  </v-container>
 </template>
 
 <script lang="ts">

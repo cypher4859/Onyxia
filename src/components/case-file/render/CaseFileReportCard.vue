@@ -1,68 +1,69 @@
 <template>
-  <v-card>
-    <v-container>
-      <v-row dense>
-        <v-col
-          cols="12"
-          md="1"
-        >
-          <back-btn />
-        </v-col>
-        <v-col>
-          <edit-btn @toggleIsEditable="toggleIsEditableFlag()" />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-expansion-panels
-            v-model="showAllExpansionPanels"
-            popout
-            multiple
-          >
-            <v-expansion-panel>
-              <v-expansion-panel-header>Identity</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <report-identity
-                  :is-editable-flag="isEditable"
-                  :report-model="model.identity"
-                />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-
-            <v-expansion-panel>
-              <v-expansion-panel-header>Location</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <report-location
-                  :is-editable-flag="isEditable"
-                  :report-model="model.location"
-                />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-
-            <v-expansion-panel>
-              <v-expansion-panel-header>References</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <report-references
-                  :is-editable-flag="isEditable"
-                  :report-model="model.references"
-                />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-        </v-col>
-      </v-row>
-      <v-snackbar
-        v-model="showIsEditableSnackbar"
-        top
-        left
-        :timeout="1800"
+  <v-container>
+    <v-row dense>
+      <v-col
+        cols="12"
+        md="1"
       >
-        <span color="success">
-          {{ snackBarMessage() }}
-        </span>
-      </v-snackbar>
-    </v-container>
-  </v-card>
+        <back-btn />
+      </v-col>
+      <v-col>
+        <edit-btn @toggleIsEditable="toggleIsEditableFlag()" />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col
+        cols="12"
+        sm="9"
+      >
+        <v-expansion-panels
+          v-model="showAllExpansionPanels"
+          popout
+          multiple
+        >
+          <v-expansion-panel>
+            <v-expansion-panel-header>Identity</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <report-identity
+                :is-editable-flag="isEditable"
+                :report-model="model.identity"
+              />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+
+          <v-expansion-panel>
+            <v-expansion-panel-header>Location</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <report-location
+                :is-editable-flag="isEditable"
+                :report-model="model.location"
+              />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+
+          <v-expansion-panel>
+            <v-expansion-panel-header>References</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <report-references
+                :is-editable-flag="isEditable"
+                :report-model="model.references"
+              />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-col>
+    </v-row>
+    <v-snackbar
+      v-model="showIsEditableSnackbar"
+      top
+      left
+      :timeout="1800"
+    >
+      <span color="success">
+        {{ snackBarMessage() }}
+      </span>
+    </v-snackbar>
+  </v-container>
 </template>
 
 <script lang="ts">

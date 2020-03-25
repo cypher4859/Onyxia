@@ -146,16 +146,16 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import IIdentity from '../types/IIdentity'
-import CaseFileReportBaseDataCard from './CaseFileReportDataBaseCard.vue'
+import CaseFileReportCardBaseData from './CaseFileReportCardBaseData.vue'
 import EditButton from '@/components/utility/EditButton.vue'
 import { Prop } from 'vue-property-decorator'
 
 @Component({
-  name: 'CaseFileReportIdentityCard',
+  name: 'CaseFileReportCardIdentity',
   components: {
     'edit-btn': EditButton
   }
 })
-export default class CaseFileReportIdentityCard extends CaseFileReportBaseDataCard {
+export default class CaseFileReportCardIdentity extends CaseFileReportCardBaseData {
 }
 </script>

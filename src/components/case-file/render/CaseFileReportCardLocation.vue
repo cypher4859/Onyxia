@@ -83,11 +83,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import ILocation from '../types/ILocation'
-import CaseFileReportBaseDataCard from './CaseFileReportDataBaseCard.vue'
+import CaseFileReportCardBaseData from './CaseFileReportCardBaseData.vue'
 
 @Component({
-  name: 'CaseFileReportLocationCard'
+  name: 'CaseFileReportCardLocation'
 })
-export default class CaseFileReportLocationCard extends CaseFileReportBaseDataCard {
+export default class CaseFileReportCardLocation extends CaseFileReportCardBaseData {
 }
 </script>

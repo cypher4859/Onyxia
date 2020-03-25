@@ -10,9 +10,9 @@ import IPersonOfInterest from '../types/IPersonOfInterest'
 import { Prop } from 'vue-property-decorator'
 
 @Component({
-  name: 'CaseFileReportBaseDataCard'
+  name: 'CaseFileReportCardBaseData'
 })
-export default class CaseFileReportBaseDataCard extends Vue {
+export default class CaseFileReportCardBaseData extends Vue {
   @Prop(Object) readonly reportModel! : IPersonOfInterest
   @Prop(Boolean) isEditableFlag! : boolean
 }

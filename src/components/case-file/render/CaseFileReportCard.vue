@@ -70,9 +70,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import RouterBackButton from '@/components/utility/BackButton.vue'
-import CaseFileReportIdentityCard from './CaseFileReportIdentityCard.vue'
-import CaseFileReportReferencesCard from './CaseFileReportReferences.vue'
-import CaseFileReportLocationCard from './CaseFileReportLocationCard.vue'
+import CaseFileReportCardIdentity from './CaseFileReportCardIdentity.vue'
+import CaseFileReportCardReferencesCard from './CaseFileReportCardReferences.vue'
+import CaseFileReportCardLocation from './CaseFileReportCardLocation.vue'
 import ICaseFileService from '../services/ICaseFileService'
 import IPersonOfInterest from '../types/IPersonOfInterest'
 import TYPES from '@/InjectableTypes/types'
@@ -84,9 +84,9 @@ import { inject } from 'inversify-props'
   components: {
     'back-btn': RouterBackButton,
     'edit-btn': EditButton,
-    'report-identity': CaseFileReportIdentityCard,
-    'report-references': CaseFileReportReferencesCard,
-    'report-location': CaseFileReportLocationCard
+    'report-identity': CaseFileReportCardIdentity,
+    'report-references': CaseFileReportCardReferencesCard,
+    'report-location': CaseFileReportCardLocation
   }
 })
 export default class CaseFileReportCard extends Vue {

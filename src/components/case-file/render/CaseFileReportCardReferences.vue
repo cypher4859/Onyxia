@@ -39,11 +39,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import IReferences from '../types/IReferences'
-import CaseFileReportBaseDataCard from './CaseFileReportDataBaseCard.vue'
+import CaseFileReportCardBaseData from './CaseFileReportCardBaseData.vue'
 
 @Component({
-  name: 'CaseFileReportReferencesCard'
+  name: 'CaseFileReportCardReferences'
 })
-export default class CaseFileReportReferencesCard extends CaseFileReportBaseDataCard {
+export default class CaseFileReportCardReferences extends CaseFileReportCardBaseData {
 }
 </script>

@@ -7,9 +7,12 @@ import AddonStore from '@/components/add-on-manager/state-management/AddonStore'
 Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
+  key: 'LocalStorageAddonStore',
   storage: window.sessionStorage,
-  supportCircular: true
-  // reducer: (state) => ({ navigation: state.navigation }), // only save navigation module
+  supportCircular: true,
+  reducer: (state: any) => ({
+    myAddonStore: state.AddonStore
+  }) // only save navigation module
   // filter: (mutation) => mutation.type == 'addNavItem'
 })
 

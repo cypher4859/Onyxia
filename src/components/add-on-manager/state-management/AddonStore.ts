@@ -45,9 +45,36 @@ export default class AddonStore extends VuexModule implements IAddonStore {
     return this.registeredAddonComponents
   }
 
+  get getEnabledAddonComponents () : IAddon[] {
+    return this.getRegisteredAddonComponents.filter((addon) => addon.enabled === true)
+  }
+
+  get getRegisteredAddonComponentsTitles () : string[] {
+    return this.getRegisteredAddonComponents.map((addon) => addon.model.title)
+  }
+
+  @Mutation
+  public enableTheseAddons (addonsToEnable: string[]) : void {
+    this.registeredAddonComponents.forEach((component) => {
+      if (addonsToEnable.indexOf(component.model.title) > -1) {
+        component.enabled = true
+      }
+    })
+  }
+
+  @Mutation
+  public disableTheseAddons (addonsToDisable: string[]) : void {
+    this.registeredAddonComponents.forEach((component) => {
+      if (addonsToDisable.indexOf(component.model.title) > -1) {
+        component.enabled = false
+      }
+    })
+  }
+
   @Mutation
   public changeEnabledStateOfRegisteredAddonComponents (componentsToBeEnabled: string[]) : void {
-    const registeredAddonComponents = this.registeredAddonComponents
+    const registeredAddonComponents = this.getRegisteredAddonComponents
+
     componentsToBeEnabled.forEach((componentToEnable: string) => {
       const componentsThatShouldBeEnabled = registeredAddonComponents.filter((addon: IAddon) => addon.model.title === componentToEnable)
       if (componentsThatShouldBeEnabled.length > 1) {

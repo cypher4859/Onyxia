@@ -22,9 +22,21 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return this.getModel()
   }
 
-  public enableAddons (enabledComponents: string[]) {
-    // here we should forEach on the components to change on/off state
-    addonStore.changeEnabledStateOfRegisteredAddonComponents(enabledComponents)
+  public syncEnableDisableAddons (componentsToEnable: string[]) : void {
+    const allRegisteredComponentsTitles = addonStore.getRegisteredAddonComponentsTitles
+    const componentsToDisable = this.getTheComponentsToDisable(componentsToEnable, allRegisteredComponentsTitles)
+
+    addonStore.enableTheseAddons(componentsToEnable)
+    addonStore.disableTheseAddons(componentsToDisable)
+  }
+
+  public getTheComponentsToDisable (componentsToEnable: string[], allRegisteredComponents: string[]) : string[] {
+    // get difference between the components that should be enabled and the registered
+    return allRegisteredComponents.filter((component: string) => componentsToEnable.indexOf(component) === -1)
+  }
+
+  public getRegisteredAddonsTitles () : string[] {
+    return this.getRegisteredAddonsModels().map((addonModel: IMenuItem) => addonModel.title)
   }
 
   public getRegisteredAddonsModels () : IMenuItem[] {
@@ -41,11 +53,15 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
   }
 
   public getEnabledAddons () : IAddon[] {
-    return addonStore.getRegisteredAddonComponents.filter((addon) => addon.enabled === true)
+    return addonStore.getEnabledAddonComponents
   }
 
-  public getEnabledAddonsModels () : IMenuItem[] {
+  public getEnabledAddonsModelsForRender () : IMenuItem[] {
     return this.getEnabledAddons().map((addon: IAddon) => addon.model)
+  }
+
+  public getEnabledAddonsTitles () : string[] {
+    return this.getEnabledAddonsModelsForRender().map((addonModel: IMenuItem) => addonModel.title)
   }
 
   public getRegisteredAddons () : IAddon[] {

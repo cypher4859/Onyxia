@@ -1,34 +1,36 @@
 <template>
-  <v-container>
-    <v-card
-      class="ml-n12 mx-auto"
-      height="200"
-      elevation="18"
-    >
-      <v-col
-        cols="12"
-        sm="12"
+  <div>
+    <v-container>
+      <v-card
+        class="ml-n12 mx-auto"
+        height="200"
+        elevation="18"
       >
-        <p>Add Ons</p>
-        <v-row>
-          <v-col
-            cols="12"
-            sm="6"
-          >
-            <v-select
-              v-model="enabledAddons"
-              :items="registeredAddons"
-              label="Enabled Addons"
-              deletable-chips
-              multiple
-              chips
-              hint="Select which addons should be enabled"
-            />
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-card>
-  </v-container>
+        <v-col
+          cols="12"
+          sm="12"
+        >
+          <p>Add Ons</p>
+          <v-row>
+            <v-col
+              cols="12"
+              sm="6"
+            >
+              <v-select
+                v-model="enabledAddons"
+                :items="registeredAddons"
+                label="Enabled Addons"
+                deletable-chips
+                multiple
+                chips
+                hint="Select which addons should be enabled"
+              />
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-card>
+    </v-container>
+  </div>
 </template>
 
 <script lang="ts">

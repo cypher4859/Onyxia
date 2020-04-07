@@ -49,7 +49,7 @@ import IAddon from '../types/IAddon'
 export default class AddOnsCard extends Vue {
   // It will need to grab the possible addons from the store
   private enabledAddonsTitles : string[] = []
-  private registeredAddonsTitles : string[] = []
+  private registeredAddonsTitles! : string[]
 
   @inject(TYPES.IAddonsService)
   private addonManagerService!: IAddonsService

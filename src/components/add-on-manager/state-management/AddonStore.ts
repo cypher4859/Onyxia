@@ -41,12 +41,19 @@ export default class AddonStore extends VuexModule implements IAddonStore {
     }
   ]
 
+  public enabledAddonComponents : IAddon[] = []
+
+  public addonIsNotCurrentlyEnabled (addon: IAddon) : boolean {
+    return this.enabledAddonComponents.indexOf(addon) === -1
+  }
+
   get getRegisteredAddonComponents () : IAddon[] {
     return this.registeredAddonComponents
   }
 
   get getEnabledAddonComponents () : IAddon[] {
-    return this.getRegisteredAddonComponents.filter((addon) => addon.enabled === true)
+    // return this.getRegisteredAddonComponents.filter((addon) => addon.enabled === true)
+    return this.enabledAddonComponents
   }
 
   get getRegisteredAddonComponentsTitles () : string[] {
@@ -55,39 +62,28 @@ export default class AddonStore extends VuexModule implements IAddonStore {
 
   @Mutation
   public enableTheseAddons (addonsToEnable: string[]) : void {
-    this.registeredAddonComponents.forEach((component) => {
-      if (addonsToEnable.indexOf(component.model.title) > -1) {
-        component.enabled = true
-      }
-    })
+    if (addonsToEnable.length) {
+      this.registeredAddonComponents.forEach((component) => {
+        if (this.enabledAddonComponents.indexOf(component) === -1 && addonsToEnable.indexOf(component.model.title) > -1) {
+          component.enabled = true
+          this.enabledAddonComponents.push(component)
+        }
+      })
+    }
   }
 
   @Mutation
   public disableTheseAddons (addonsToDisable: string[]) : void {
-    this.registeredAddonComponents.forEach((component) => {
-      if (addonsToDisable.indexOf(component.model.title) > -1) {
-        component.enabled = false
-      }
-    })
-  }
-
-  @Mutation
-  public changeEnabledStateOfRegisteredAddonComponents (componentsToBeEnabled: string[]) : void {
-    const registeredAddonComponents = this.getRegisteredAddonComponents
-
-    componentsToBeEnabled.forEach((componentToEnable: string) => {
-      const componentsThatShouldBeEnabled = registeredAddonComponents.filter((addon: IAddon) => addon.model.title === componentToEnable)
-      if (componentsThatShouldBeEnabled.length > 1) {
-        console.error('ERROR! The store contains +1 addons by the same name; we are trying to enable more than one addon...')
-      } else {
-        componentsThatShouldBeEnabled[0].enabled = true
-      }
-    })
-
-    registeredAddonComponents.forEach((addonComponent: IAddon) => {
-      if (componentsToBeEnabled.indexOf(addonComponent.model.title) === -1) {
-        addonComponent.enabled = false
-      }
-    })
+    if (addonsToDisable.length) {
+      this.registeredAddonComponents.forEach((component) => {
+        if (addonsToDisable.indexOf(component.model.title) > -1) {
+          component.enabled = false
+          const indexOfComponentToDisable = this.enabledAddonComponents.indexOf(component)
+          if (indexOfComponentToDisable > -1) {
+            this.enabledAddonComponents.splice(indexOfComponentToDisable, 1)
+          }
+        }
+      })
+    }
   }
 }

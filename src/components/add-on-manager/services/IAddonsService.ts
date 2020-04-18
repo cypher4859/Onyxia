@@ -5,12 +5,14 @@ import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataType
 
 export default interface IAddonsService extends IService {
     syncEnableDisableAddons(componentsToEnable: string[]) : void
-    getTheComponentsToDisable(componentsToEnable: string[], allRegisteredComponents: string[]) : string[]
+    saveAddonsToLocalStorage() : void
+    retrieveAddonComponentsFromLocalStorage() : void
+    computeTheComponentsToDisable(componentsToEnable: string[], allRegisteredComponents: string[]) : string[]
     getRegisteredAddonsTitles() : string[]
     getRegisteredAddonsModels() : IMenuItem[]
     getRegisteredAddonsProperty(property: IAddonProperty) : any
-    getEnabledAddons() : IAddon[]
+    getEnabledAddonsFromStore() : IAddon[]
     getEnabledAddonsModelsForRender() : IMenuItem[]
     getEnabledAddonsTitles() : string[]
-    getRegisteredAddons() : IAddon[]
+    getRegisteredAddonsFromStore() : IAddon[]
 }

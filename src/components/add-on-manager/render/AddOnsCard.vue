@@ -27,6 +27,17 @@
               />
             </v-col>
           </v-row>
+          <v-row>
+            <v-col>
+              <v-btn
+                @click="saveAddons()"
+              >
+                <div class="primary-content-button-text">
+                  Save
+                </div>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </v-card>
     </v-container>
@@ -55,14 +66,18 @@ export default class AddOnsCard extends Vue {
   private addonManagerService!: IAddonsService
 
   created () {
+    // this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
     this.enabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles()
     this.registeredAddonsTitles = this.addonManagerService.getRegisteredAddonsTitles()
   }
 
   @Watch('enabledAddonsTitles', { immediate: false, deep: false })
-  public syncAddonsTitlesWithEnabledDisabledAddons () {
-    // this.addonManagerService.enableAddons(this.enabledAddonsTitles)
+  public syncAddonsTitlesWithEnabledDisabledAddons () : void {
     this.addonManagerService.syncEnableDisableAddons(this.enabledAddonsTitles)
+  }
+
+  public saveAddons () : void {
+    this.addonManagerService.saveAddonsToLocalStorage()
   }
 }
 </script>

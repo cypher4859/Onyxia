@@ -12,6 +12,9 @@ import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataType
 import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
 import CaseFileService from '@/components/case-file/services/CaseFileService'
 import NetworkMonitorService from '@/components/network-monitor/services/NetworkMonitorService'
+import { cloneDeep, remove, findIndex } from 'lodash'
+
+const localStorageAddonKey: string = 'localAddons'
 
 @Module({ dynamic: true, store, name: 'AddonStore' })
 export default class AddonStore extends VuexModule implements IAddonStore {
@@ -43,8 +46,17 @@ export default class AddonStore extends VuexModule implements IAddonStore {
 
   public enabledAddonComponents : IAddon[] = []
 
-  public addonIsNotCurrentlyEnabled (addon: IAddon) : boolean {
-    return this.enabledAddonComponents.indexOf(addon) === -1
+  // public getAddonComponent (requestedAddonTitle: string) : IAddon | undefined {
+  //   this.getRegisteredAddonComponents.forEach((addon: IAddon) => {
+  //     if (addon.model.title === requestedAddonTitle) {
+  //       return addon
+  //     }
+  //   })
+  //   return undefined
+  // }
+
+  get getRegisteredAddonComponentsTitles () : string[] {
+    return this.getRegisteredAddonComponents.map((addon) => addon.model.title)
   }
 
   get getRegisteredAddonComponents () : IAddon[] {
@@ -52,38 +64,61 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   get getEnabledAddonComponents () : IAddon[] {
-    // return this.getRegisteredAddonComponents.filter((addon) => addon.enabled === true)
     return this.enabledAddonComponents
   }
 
-  get getRegisteredAddonComponentsTitles () : string[] {
-    return this.getRegisteredAddonComponents.map((addon) => addon.model.title)
+  get getEnabledAddonComponentsTitles () : string[] {
+    return this.getEnabledAddonComponents.map((addon) => addon.model.title)
+  }
+
+  @Action
+  public storeTheseAddons () {
+    localStorage.setItem(localStorageAddonKey, JSON.stringify(this.enabledAddonComponents))
+  }
+
+  @Action({ commit: 'loadLocalStorageAddons' })
+  public retrieveAddonsFromLocalStorage () {
+    if (localStorage.length && localStorage.getItem(localStorageAddonKey) !== null) {
+      const localStorageAddons: IAddon[] = JSON.parse(localStorage.getItem(localStorageAddonKey)!)
+      return localStorageAddons
+    }
+  }
+
+  @Action({ commit: 'enableAddon' })
+  public enableAddonInStore (addonToEnable: string) {
+    return addonToEnable
+  }
+
+  @Action({ commit: 'disableAddon' })
+  public disableAddonInStore (addonToDisable: string) {
+    return addonToDisable
   }
 
   @Mutation
-  public enableTheseAddons (addonsToEnable: string[]) : void {
-    if (addonsToEnable.length) {
-      this.registeredAddonComponents.forEach((component) => {
-        if (this.enabledAddonComponents.indexOf(component) === -1 && addonsToEnable.indexOf(component.model.title) > -1) {
-          component.enabled = true
-          this.enabledAddonComponents.push(component)
-        }
-      })
+  public loadLocalStorageAddons (localStorageAddons: IAddon[]) {
+    if (localStorageAddons !== this.enabledAddonComponents) {
+      this.enabledAddonComponents = cloneDeep(localStorageAddons)
     }
   }
 
   @Mutation
-  public disableTheseAddons (addonsToDisable: string[]) : void {
-    if (addonsToDisable.length) {
-      this.registeredAddonComponents.forEach((component) => {
-        if (addonsToDisable.indexOf(component.model.title) > -1) {
-          component.enabled = false
-          const indexOfComponentToDisable = this.enabledAddonComponents.indexOf(component)
-          if (indexOfComponentToDisable > -1) {
-            this.enabledAddonComponents.splice(indexOfComponentToDisable, 1)
-          }
-        }
-      })
-    }
+  public enableAddon (requestedAddon: IAddon) : void {
+    requestedAddon.enabled = true
+    this.enabledAddonComponents.push(requestedAddon)
+  }
+
+  @Mutation
+  public disableAddon (requestedAddon: IAddon) : void {
+    const addonIndexToDisable: number = findIndex(this.registeredAddonComponents, (registeredAddon: IAddon) => {
+      return requestedAddon.model.title === registeredAddon.model.title
+    })
+
+    this.registeredAddonComponents[addonIndexToDisable].enabled = false
+
+    remove(this.enabledAddonComponents, (enabledAddon: IAddon) => {
+      // Are there instances in which the Addons will be different in any way??
+      // Such as, they're the same in all ways except difference in enabled property
+      return requestedAddon.model.title === enabledAddon.model.title
+    })
   }
 }

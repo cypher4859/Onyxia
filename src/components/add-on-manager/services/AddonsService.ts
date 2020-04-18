@@ -7,6 +7,7 @@ import IAddon from '@/components/add-on-manager/types/IAddon'
 import { injectable } from 'inversify-props'
 import { getModule } from 'vuex-module-decorators'
 import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataTypes'
+import { forEach, find } from 'lodash'
 
 const addonStore = getModule(AddonStore)
 
@@ -22,17 +23,63 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return this.getModel()
   }
 
-  public syncEnableDisableAddons (componentsToEnable: string[]) : void {
-    const allRegisteredComponentsTitles = addonStore.getRegisteredAddonComponentsTitles
-    const componentsToDisable = this.getTheComponentsToDisable(componentsToEnable, allRegisteredComponentsTitles)
-
-    addonStore.enableTheseAddons(componentsToEnable)
-    addonStore.disableTheseAddons(componentsToDisable)
+  private isAddonRegistered (requestedAddonTitle: string) : boolean {
+    return addonStore.getRegisteredAddonComponentsTitles.includes(requestedAddonTitle)
   }
 
-  public getTheComponentsToDisable (componentsToEnable: string[], allRegisteredComponents: string[]) : string[] {
+  private isAddonInListOfEnabledAddons (requestedAddonTitle: string) : boolean {
+    return addonStore.getEnabledAddonComponentsTitles.includes(requestedAddonTitle)
+  }
+
+  public syncEnableDisableAddons (componentsToEnable: string[]) : void {
+    const componentsToDisable = this.computeTheComponentsToDisable(componentsToEnable)
+
+    if (componentsToEnable.length) {
+      forEach(componentsToEnable, (addonTitle: string) => {
+        if (this.isAddonRegistered(addonTitle) && !this.isAddonInListOfEnabledAddons(addonTitle)) {
+          const addonComponent: IAddon | undefined = this.getAddonComponentFromTitle(addonTitle)
+          if (addonComponent !== undefined) {
+            addonStore.enableAddon(addonComponent)
+          }
+        }
+      })
+    }
+
+    if (componentsToDisable.length) {
+      forEach(componentsToDisable, (addonTitle: string) => {
+        if (this.isAddonRegistered(addonTitle) && this.isAddonInListOfEnabledAddons(addonTitle)) {
+          const addonComponent: IAddon | undefined = this.getAddonComponentFromTitle(addonTitle)
+          if (addonComponent !== undefined) {
+            addonStore.disableAddon(addonComponent)
+          }
+        }
+      })
+    }
+  }
+
+  public getAddonComponentFromTitle (requestedAddonTitle: string) : IAddon | undefined {
+    const allRegisteredComponents: IAddon[] = addonStore.getRegisteredAddonComponents
+    return find(allRegisteredComponents, (registeredComponent: IAddon) => {
+      return registeredComponent.model.title === requestedAddonTitle
+    })
+  }
+
+  public saveAddonsToLocalStorage () : void {
+    addonStore.storeTheseAddons()
+  }
+
+  public retrieveAddonComponentsFromLocalStorage () : void {
+    addonStore.retrieveAddonsFromLocalStorage()
+  }
+
+  public computeTheComponentsToDisable (listOfComponentsToEnable: string[]) : string[] {
     // get difference between the components that should be enabled and the registered
-    return allRegisteredComponents.filter((component: string) => componentsToEnable.indexOf(component) === -1)
+    const allRegisteredComponentsTitles = addonStore.getRegisteredAddonComponentsTitles
+    return allRegisteredComponentsTitles.filter((componentTitle: string) => listOfComponentsToEnable.includes(componentTitle) === false)
+  }
+
+  public getRegisteredAddonsFromStore () : IAddon[] {
+    return addonStore.getRegisteredAddonComponents
   }
 
   public getRegisteredAddonsTitles () : string[] {
@@ -44,7 +91,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
   }
 
   public getRegisteredAddonsProperty (property: IAddonProperty) : any {
-    const addons = this.getRegisteredAddons()
+    const addons = this.getRegisteredAddonsFromStore()
     return addons.map((addon) => {
       if (this.hasKey(addon, property)) {
         return addon[property]
@@ -52,20 +99,16 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     })
   }
 
-  public getEnabledAddons () : IAddon[] {
+  public getEnabledAddonsFromStore () : IAddon[] {
     return addonStore.getEnabledAddonComponents
   }
 
   public getEnabledAddonsModelsForRender () : IMenuItem[] {
-    return this.getEnabledAddons().map((addon: IAddon) => addon.model)
+    return addonStore.enabledAddonComponents.map((addon: IAddon) => addon.model)
   }
 
   public getEnabledAddonsTitles () : string[] {
     return this.getEnabledAddonsModelsForRender().map((addonModel: IMenuItem) => addonModel.title)
-  }
-
-  public getRegisteredAddons () : IAddon[] {
-    return addonStore.getRegisteredAddonComponents
   }
 
   // `keyof any` is short for "string | number | symbol"

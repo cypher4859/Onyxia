@@ -17,7 +17,7 @@
               sm="6"
             >
               <v-select
-                v-model="enabledAddonsTitles"
+                v-model="selectedEnabledAddonsTitles"
                 :items="registeredAddonsTitles"
                 label="Enabled Addons"
                 deletable-chips
@@ -58,22 +58,21 @@ import IAddon from '../types/IAddon'
   name: 'AddOnsCard'
 })
 export default class AddOnsCard extends Vue {
-  // It will need to grab the possible addons from the store
-  private enabledAddonsTitles : string[] = []
-  private registeredAddonsTitles! : string[]
-
   @inject(TYPES.IAddonsService)
   private addonManagerService!: IAddonsService
 
+  // It will need to grab the possible addons from the store
+  private selectedEnabledAddonsTitles : string[] = []
+  private registeredAddonsTitles : string[] = this.addonManagerService.getRegisteredAddonsTitles
+
   created () {
-    // this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
-    this.enabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles()
-    this.registeredAddonsTitles = this.addonManagerService.getRegisteredAddonsTitles()
+    this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
+    this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles()
   }
 
-  @Watch('enabledAddonsTitles', { immediate: false, deep: false })
+  @Watch('selectedEnabledAddonsTitles', { immediate: false, deep: false })
   public syncAddonsTitlesWithEnabledDisabledAddons () : void {
-    this.addonManagerService.syncEnableDisableAddons(this.enabledAddonsTitles)
+    this.addonManagerService.syncEnableDisableAddons(this.selectedEnabledAddonsTitles)
   }
 
   public saveAddons () : void {

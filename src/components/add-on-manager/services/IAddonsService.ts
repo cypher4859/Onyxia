@@ -8,7 +8,7 @@ export default interface IAddonsService extends IService {
     saveAddonsToLocalStorage() : void
     retrieveAddonComponentsFromLocalStorage() : void
     computeTheComponentsToDisable(componentsToEnable: string[], allRegisteredComponents: string[]) : string[]
-    getRegisteredAddonsTitles() : string[]
+    getRegisteredAddonsTitles : string[]
     getRegisteredAddonsModels() : IMenuItem[]
     getRegisteredAddonsProperty(property: IAddonProperty) : any
     getEnabledAddonsFromStore() : IAddon[]

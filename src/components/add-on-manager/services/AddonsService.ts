@@ -82,7 +82,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return addonStore.getRegisteredAddonComponents
   }
 
-  public getRegisteredAddonsTitles () : string[] {
+  get getRegisteredAddonsTitles () : string[] {
     return this.getRegisteredAddonsModels().map((addonModel: IMenuItem) => addonModel.title)
   }
 
@@ -104,7 +104,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
   }
 
   public getEnabledAddonsModelsForRender () : IMenuItem[] {
-    return addonStore.enabledAddonComponents.map((addon: IAddon) => addon.model)
+    return addonStore.getEnabledAddonComponentsModels
   }
 
   public getEnabledAddonsTitles () : string[] {

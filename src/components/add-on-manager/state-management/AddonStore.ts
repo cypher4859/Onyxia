@@ -12,7 +12,8 @@ import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataType
 import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
 import CaseFileService from '@/components/case-file/services/CaseFileService'
 import NetworkMonitorService from '@/components/network-monitor/services/NetworkMonitorService'
-import { cloneDeep, remove, findIndex } from 'lodash'
+import { cloneDeep, find, forEach } from 'lodash'
+import IMenuItem from '@/types/IMenuItem'
 
 const localStorageAddonKey: string = 'localAddons'
 
@@ -46,15 +47,6 @@ export default class AddonStore extends VuexModule implements IAddonStore {
 
   public enabledAddonComponents : IAddon[] = []
 
-  // public getAddonComponent (requestedAddonTitle: string) : IAddon | undefined {
-  //   this.getRegisteredAddonComponents.forEach((addon: IAddon) => {
-  //     if (addon.model.title === requestedAddonTitle) {
-  //       return addon
-  //     }
-  //   })
-  //   return undefined
-  // }
-
   get getRegisteredAddonComponentsTitles () : string[] {
     return this.getRegisteredAddonComponents.map((addon) => addon.model.title)
   }
@@ -64,7 +56,11 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   get getEnabledAddonComponents () : IAddon[] {
-    return this.enabledAddonComponents
+    return this.getRegisteredAddonComponents.filter((addon: IAddon) => addon.enabled === true)
+  }
+
+  get getEnabledAddonComponentsModels () : IMenuItem[] {
+    return this.getEnabledAddonComponents.map((addon) => addon.model)
   }
 
   get getEnabledAddonComponentsTitles () : string[] {
@@ -73,7 +69,7 @@ export default class AddonStore extends VuexModule implements IAddonStore {
 
   @Action
   public storeTheseAddons () {
-    localStorage.setItem(localStorageAddonKey, JSON.stringify(this.enabledAddonComponents))
+    localStorage.setItem(localStorageAddonKey, JSON.stringify(this.getRegisteredAddonComponents))
   }
 
   @Action({ commit: 'loadLocalStorageAddons' })
@@ -95,30 +91,26 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   @Mutation
-  public loadLocalStorageAddons (localStorageAddons: IAddon[]) {
-    if (localStorageAddons !== this.enabledAddonComponents) {
-      this.enabledAddonComponents = cloneDeep(localStorageAddons)
+  public loadLocalStorageAddons (localStorageAddonsComponents: IAddon[]) {
+    if (localStorageAddonsComponents !== this.getEnabledAddonComponents) {
+      this.registeredAddonComponents = cloneDeep(localStorageAddonsComponents)
     }
   }
 
   @Mutation
   public enableAddon (requestedAddon: IAddon) : void {
+    // only addons that are registered will be enabled
     requestedAddon.enabled = true
-    this.enabledAddonComponents.push(requestedAddon)
   }
 
   @Mutation
   public disableAddon (requestedAddon: IAddon) : void {
-    const addonIndexToDisable: number = findIndex(this.registeredAddonComponents, (registeredAddon: IAddon) => {
+    const addonToDisable: IAddon | undefined = find(this.registeredAddonComponents, (registeredAddon: IAddon) => {
       return requestedAddon.model.title === registeredAddon.model.title
     })
 
-    this.registeredAddonComponents[addonIndexToDisable].enabled = false
-
-    remove(this.enabledAddonComponents, (enabledAddon: IAddon) => {
-      // Are there instances in which the Addons will be different in any way??
-      // Such as, they're the same in all ways except difference in enabled property
-      return requestedAddon.model.title === enabledAddon.model.title
-    })
+    if (addonToDisable) {
+      addonToDisable.enabled = false
+    }
   }
 }

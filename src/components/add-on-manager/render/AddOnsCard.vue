@@ -36,6 +36,10 @@
           </v-btn>
         </v-col>
       </v-card>
+      <addons-saved-alert
+        :snack-bar-message="addonsSavedToStorageAlert"
+        :show-snackbar="addonsSavedAlert"
+      />
     </v-container>
   </div>
 </template>
@@ -48,10 +52,14 @@ import IMenuItem from '@/types/IMenuItem'
 import IAddonsService from '@/components/add-on-manager/services/IAddonsService'
 import TYPES from '@/InjectableTypes/types'
 import { inject } from 'inversify-props'
-import IAddon from '../types/IAddon'
+import IAddon from '@/components/add-on-manager/types/IAddon'
+import SystemSnackbarAlert from '@/components/utility/SystemSnackbarAlert.vue'
 
 @Component({
-  name: 'AddOnsCard'
+  name: 'AddOnsCard',
+  components: {
+    'addons-saved-alert': SystemSnackbarAlert
+  }
 })
 export default class AddOnsCard extends Vue {
   @inject(TYPES.IAddonsService)
@@ -60,6 +68,8 @@ export default class AddOnsCard extends Vue {
   // It will need to grab the possible addons from the store
   private selectedEnabledAddonsTitles : string[] = []
   private registeredAddonsTitles : string[] = this.addonManagerService.getRegisteredAddonsTitles
+  private addonsSavedToStorageAlert : string = 'Addons Saved!'
+  private showAlertAddonsSaved : boolean = false
 
   created () {
     this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
@@ -72,7 +82,16 @@ export default class AddOnsCard extends Vue {
   }
 
   public saveAddons () : void {
+    this.toggleAddonsSavedAlert()
     this.addonManagerService.saveAddonsToLocalStorage()
+  }
+
+  get addonsSavedAlert () : boolean {
+    return this.showAlertAddonsSaved
+  }
+
+  private toggleAddonsSavedAlert () : void {
+    this.showAlertAddonsSaved = !this.showAlertAddonsSaved
   }
 }
 </script>

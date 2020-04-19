@@ -55,7 +55,7 @@
     </v-row>
     <snackbar-alert
       :snack-bar-message="snackBarMessage()"
-      :show-is-editable-snackbar="showIsEditableSnackbar"
+      :show-snackbar="showIsEditableSnackbar"
     />
   </v-container>
 </template>

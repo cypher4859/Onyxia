@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-snackbar
-      v-model="showIsEditableSnackbar"
+      v-model="showSnackbar"
       top
       left
       :timeout="1800"
@@ -23,6 +23,6 @@ import { Prop } from 'vue-property-decorator'
 })
 export default class SystemSnackbarAlert extends Vue {
   @Prop(String) readonly snackBarMessage!: string
-  @Prop(Boolean) readonly showIsEditableSnackbar!: boolean
+  @Prop(Boolean) readonly showSnackbar!: boolean
 }
 </script>

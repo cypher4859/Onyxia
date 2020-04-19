@@ -19,7 +19,7 @@ const localStorageAddonKey: string = 'localAddons'
 
 @Module({ dynamic: true, store, name: 'AddonStore' })
 export default class AddonStore extends VuexModule implements IAddonStore {
-  @inject(TYPES.ICameraMonitorService)
+  // @inject(TYPES.ICameraMonitorService)
   private cameraMonitorService: ICameraMonitorService = new CameraMonitorService()
 
   // @inject(TYPES.ICaseFileService)

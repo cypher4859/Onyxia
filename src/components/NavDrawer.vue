@@ -42,11 +42,6 @@
               </template>
               <span>{{ item.title }}</span>
             </v-tooltip>
-          <!-- <v-list-item-content class="primary-nav-text">
-            <v-list-item-title class="subtitle-1">
-              {{ item.title }}
-            </v-list-item-title>
-          </v-list-item-content> -->
           </v-list-item>
         </v-list>
       </v-navigation-drawer>

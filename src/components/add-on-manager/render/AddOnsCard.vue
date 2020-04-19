@@ -27,17 +27,13 @@
               />
             </v-col>
           </v-row>
-          <v-row>
-            <v-col>
-              <v-btn
-                @click="saveAddons()"
-              >
-                <div class="primary-content-button-text">
-                  Save
-                </div>
-              </v-btn>
-            </v-col>
-          </v-row>
+          <v-btn
+            @click="saveAddons()"
+          >
+            <div class="primary-content-button-text">
+              Save
+            </div>
+          </v-btn>
         </v-col>
       </v-card>
     </v-container>

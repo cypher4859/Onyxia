@@ -68,7 +68,7 @@ import ICaseFileService from '@/components/case-file/services/ICaseFileService'
 import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
 import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
 import TYPES from '@/InjectableTypes/types'
-import AddonStore from '@/components/add-on-manager/state-management/AddonStore'
+import { concat } from 'lodash'
 import { Component } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
 
@@ -93,7 +93,7 @@ export default class NavDrawer extends Vue {
   ]
 
   get menuItems () : IMenuItem[] {
-    return this.navMenuItems.concat(this.enabledAddons)
+    return concat(this.navMenuItems, this.enabledAddons)
   }
 
   get enabledAddons () : IMenuItem[] {

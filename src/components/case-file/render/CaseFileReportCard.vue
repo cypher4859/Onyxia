@@ -53,16 +53,10 @@
         </v-expansion-panels>
       </v-col>
     </v-row>
-    <v-snackbar
-      v-model="showIsEditableSnackbar"
-      top
-      left
-      :timeout="1800"
-    >
-      <span color="success">
-        {{ snackBarMessage() }}
-      </span>
-    </v-snackbar>
+    <snackbar-alert
+      :snack-bar-message="snackBarMessage()"
+      :show-snackbar="showIsEditableSnackbar"
+    />
   </v-container>
 </template>
 
@@ -77,6 +71,7 @@ import ICaseFileService from '../services/ICaseFileService'
 import IPersonOfInterest from '../types/IPersonOfInterest'
 import TYPES from '@/InjectableTypes/types'
 import EditButton from '@/components/utility/EditButton.vue'
+import SnackbarAlert from '@/components/utility/SystemSnackbarAlert.vue'
 import { inject } from 'inversify-props'
 
 @Component({
@@ -84,6 +79,7 @@ import { inject } from 'inversify-props'
   components: {
     'back-btn': RouterBackButton,
     'edit-btn': EditButton,
+    'snackbar-alert': SnackbarAlert,
     'report-identity': CaseFileReportCardIdentity,
     'report-references': CaseFileReportCardReferencesCard,
     'report-location': CaseFileReportCardLocation

@@ -64,14 +64,14 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import RouterBackButton from '@/components/utility/BackButton.vue'
+import TYPES from '@/InjectableTypes/types'
+import EditButton from '@/components/utility/EditButton.vue'
+import SnackbarAlert from '@/components/utility/SystemSnackbarAlert.vue'
 import CaseFileReportCardIdentity from './CaseFileReportCardIdentity.vue'
 import CaseFileReportCardReferencesCard from './CaseFileReportCardReferences.vue'
 import CaseFileReportCardLocation from './CaseFileReportCardLocation.vue'
 import ICaseFileService from '../services/ICaseFileService'
 import IPersonOfInterest from '../types/IPersonOfInterest'
-import TYPES from '@/InjectableTypes/types'
-import EditButton from '@/components/utility/EditButton.vue'
-import SnackbarAlert from '@/components/utility/SystemSnackbarAlert.vue'
 import { inject } from 'inversify-props'
 
 @Component({

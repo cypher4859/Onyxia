@@ -145,9 +145,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import EditButton from '@/components/utility/EditButton.vue'
 import IIdentity from '../types/IIdentity'
 import CaseFileReportCardBaseData from './CaseFileReportCardBaseData.vue'
-import EditButton from '@/components/utility/EditButton.vue'
 import { Prop } from 'vue-property-decorator'
 
 @Component({

@@ -2,11 +2,11 @@ import 'reflect-metadata'
 import { Vue, Component, Model } from 'vue-property-decorator'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import IMenuItem from '@/types/IMenuItem'
-import IService from '@/services/interfaces/IService'
+import ICaseFileService from './ICaseFileService'
 import { injectable } from 'inversify-props'
 
 @injectable()
-export default class extends MenuItemService implements IService {
+export default class extends MenuItemService implements ICaseFileService {
   defaultModel () : IMenuItem {
     const properties : IMenuItem = {
       title: 'Case File',

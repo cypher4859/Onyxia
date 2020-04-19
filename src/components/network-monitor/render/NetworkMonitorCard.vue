@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <p>Camera Monitor</p>
+    <p>Network Monitor</p>
   </v-card>
 </template>
 

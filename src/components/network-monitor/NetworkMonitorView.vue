@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import NetworkMonitorCard from '@/components/network-monitor/render/NetworkMonitorCard.vue'
+import NetworkMonitorCard from './render/NetworkMonitorCard.vue'
 
 @Component({
   name: 'NetworkMonitorView',

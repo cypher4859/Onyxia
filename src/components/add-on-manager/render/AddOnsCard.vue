@@ -47,13 +47,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Prop, Watch } from 'vue-property-decorator'
 import IMenuItem from '@/types/IMenuItem'
-import IAddonsService from '@/components/add-on-manager/services/IAddonsService'
 import TYPES from '@/InjectableTypes/types'
-import { inject } from 'inversify-props'
-import IAddon from '@/components/add-on-manager/types/IAddon'
 import SystemSnackbarAlert from '@/components/utility/SystemSnackbarAlert.vue'
+import IAddonsService from '../services/IAddonsService'
+import IAddon from '../types/IAddon'
+import { Prop, Watch } from 'vue-property-decorator'
+import { inject } from 'inversify-props'
 
 @Component({
   name: 'AddOnsCard',

@@ -1,7 +1,7 @@
 import IService from '@/services/interfaces/IService'
 import IMenuItem from '@/types/IMenuItem'
-import IAddon from '@/components/add-on-manager/types/IAddon'
-import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataTypes'
+import IAddon from '../types/IAddon'
+import { IAddonProperty } from '../types/IAddonDataTypes'
 
 export default interface IAddonsService extends IService {
     syncEnableDisableAddons(componentsToEnable: string[]) : void

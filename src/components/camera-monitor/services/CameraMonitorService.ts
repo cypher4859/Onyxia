@@ -1,12 +1,12 @@
 import 'reflect-metadata'
-import { Vue, Component } from 'vue-property-decorator'
 import IMenuItem from '@/types/IMenuItem'
-import IService from '@/services/interfaces/IService'
-import { injectable } from 'inversify-props'
 import MenuItemService from '@/services/implementations/MenuItemService'
+import { Vue, Component } from 'vue-property-decorator'
+import { injectable } from 'inversify-props'
+import ICameraMonitorService from './ICameraMonitorService'
 
 @injectable()
-export default class CameraMonitorService extends MenuItemService implements IService {
+export default class CameraMonitorService extends MenuItemService implements ICameraMonitorService {
   defaultModel () : IMenuItem {
     const properties : IMenuItem = {
       title: 'Camera Monitor',

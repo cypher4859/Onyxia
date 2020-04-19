@@ -1,4 +1,4 @@
-import IAddon from '@/components/add-on-manager/types/IAddon'
+import IAddon from '../types/IAddon'
 
 export default interface IAddonStore {
   registeredAddonComponents: IAddon[]

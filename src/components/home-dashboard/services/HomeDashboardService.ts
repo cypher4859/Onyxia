@@ -2,11 +2,11 @@ import 'reflect-metadata'
 import { Vue, Component, Model } from 'vue-property-decorator'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import IMenuItem from '@/types/IMenuItem'
-import IService from '@/services/interfaces/IService'
+import IHomeDashboardService from './IHomeDashboardService'
 import { injectable } from 'inversify-props'
 
 @injectable()
-export default class HomeDashboardService extends MenuItemService implements IService {
+export default class HomeDashboardService extends MenuItemService implements IHomeDashboardService {
   defaultModel () : IMenuItem {
     const properties : IMenuItem = {
       title: 'Home',

@@ -42,11 +42,6 @@
               </template>
               <span>{{ item.title }}</span>
             </v-tooltip>
-          <!-- <v-list-item-content class="primary-nav-text">
-            <v-list-item-title class="subtitle-1">
-              {{ item.title }}
-            </v-list-item-title>
-          </v-list-item-content> -->
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
@@ -73,6 +68,7 @@ import ICaseFileService from '@/components/case-file/services/ICaseFileService'
 import INetworkMonitorService from '@/components/network-monitor/services/INetworkMonitorService'
 import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
 import TYPES from '@/InjectableTypes/types'
+import { concat } from 'lodash'
 import { Component } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
 
@@ -96,8 +92,12 @@ export default class NavDrawer extends Vue {
     this.addonService.defaultModel()
   ]
 
-  get menuItems () {
-    return this.navMenuItems.concat(this.addonService.getEnabledAddonsModels())
+  get menuItems () : IMenuItem[] {
+    return concat(this.navMenuItems, this.enabledAddons)
+  }
+
+  get enabledAddons () : IMenuItem[] {
+    return this.addonService.getEnabledAddonsModelsForRender()
   }
 }
 </script>

@@ -17,14 +17,25 @@
               sm="6"
             >
               <v-select
-                v-model="enabledAddons"
-                :items="registeredAddons"
+                v-model="selectedEnabledAddonsTitles"
+                :items="registeredAddonsTitles"
                 label="Enabled Addons"
                 deletable-chips
                 multiple
                 chips
                 hint="Select which addons should be enabled"
               />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn
+                @click="saveAddons()"
+              >
+                <div class="primary-content-button-text">
+                  Save
+                </div>
+              </v-btn>
             </v-col>
           </v-row>
         </v-col>
@@ -47,21 +58,25 @@ import IAddon from '../types/IAddon'
   name: 'AddOnsCard'
 })
 export default class AddOnsCard extends Vue {
-  // It will need to grab the possible addons from the store
-  private enabledAddons : string[] = []
-  private registeredAddons! : string[]
-
   @inject(TYPES.IAddonsService)
   private addonManagerService!: IAddonsService
 
-  beforeMount () {
-    this.enabledAddons = this.addonManagerService.getEnabledAddonsModels().map((addonModel: IMenuItem) => addonModel.title)
-    this.registeredAddons = this.addonManagerService.getRegisteredAddonsModels().map((addonModel: IMenuItem) => addonModel.title)
+  // It will need to grab the possible addons from the store
+  private selectedEnabledAddonsTitles : string[] = []
+  private registeredAddonsTitles : string[] = this.addonManagerService.getRegisteredAddonsTitles
+
+  created () {
+    this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
+    this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles()
   }
 
-  @Watch('enabledAddons', { immediate: false, deep: false })
-  public enableAndDisabledAddons () {
-    this.addonManagerService.enableAddons(this.enabledAddons)
+  @Watch('selectedEnabledAddonsTitles', { immediate: false, deep: false })
+  public syncAddonsTitlesWithEnabledDisabledAddons () : void {
+    this.addonManagerService.syncEnableDisableAddons(this.selectedEnabledAddonsTitles)
+  }
+
+  public saveAddons () : void {
+    this.addonManagerService.saveAddonsToLocalStorage()
   }
 }
 </script>

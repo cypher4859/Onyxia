@@ -1,16 +1,15 @@
 import 'reflect-metadata'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VuexPersistence from 'vuex-persist'
+import VuexPersist from 'vuex-persist'
 import AddonStore from '@/components/add-on-manager/state-management/AddonStore'
 
 Vue.use(Vuex)
 
-const vuexLocal = new VuexPersistence({
-  storage: window.sessionStorage,
+const vuexLocal = new VuexPersist({
+  key: 'LocalStorageAddonStore',
+  storage: window.localStorage,
   supportCircular: true
-  // reducer: (state) => ({ navigation: state.navigation }), // only save navigation module
-  // filter: (mutation) => mutation.type == 'addNavItem'
 })
 
 export default new Vuex.Store({
@@ -21,6 +20,5 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-  },
-  plugins: [vuexLocal.plugin]
+  }
 })

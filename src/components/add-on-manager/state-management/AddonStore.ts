@@ -12,6 +12,10 @@ import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataType
 import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
 import CaseFileService from '@/components/case-file/services/CaseFileService'
 import NetworkMonitorService from '@/components/network-monitor/services/NetworkMonitorService'
+import { cloneDeep, find, forEach } from 'lodash'
+import IMenuItem from '@/types/IMenuItem'
+
+const localStorageAddonKey: string = 'localAddons'
 
 @Module({ dynamic: true, store, name: 'AddonStore' })
 export default class AddonStore extends VuexModule implements IAddonStore {
@@ -41,26 +45,72 @@ export default class AddonStore extends VuexModule implements IAddonStore {
     }
   ]
 
+  public enabledAddonComponents : IAddon[] = []
+
+  get getRegisteredAddonComponentsTitles () : string[] {
+    return this.getRegisteredAddonComponents.map((addon) => addon.model.title)
+  }
+
   get getRegisteredAddonComponents () : IAddon[] {
     return this.registeredAddonComponents
   }
 
+  get getEnabledAddonComponents () : IAddon[] {
+    return this.getRegisteredAddonComponents.filter((addon: IAddon) => addon.enabled === true)
+  }
+
+  get getEnabledAddonComponentsModels () : IMenuItem[] {
+    return this.getEnabledAddonComponents.map((addon) => addon.model)
+  }
+
+  get getEnabledAddonComponentsTitles () : string[] {
+    return this.getEnabledAddonComponents.map((addon) => addon.model.title)
+  }
+
+  @Action
+  public storeTheseAddons () {
+    localStorage.setItem(localStorageAddonKey, JSON.stringify(this.getRegisteredAddonComponents))
+  }
+
+  @Action({ commit: 'loadLocalStorageAddons' })
+  public retrieveAddonsFromLocalStorage () {
+    if (localStorage.length && localStorage.getItem(localStorageAddonKey) !== null) {
+      const localStorageAddons: IAddon[] = JSON.parse(localStorage.getItem(localStorageAddonKey)!)
+      return localStorageAddons
+    }
+  }
+
+  @Action({ commit: 'enableAddon' })
+  public enableAddonInStore (addonToEnable: string) {
+    return addonToEnable
+  }
+
+  @Action({ commit: 'disableAddon' })
+  public disableAddonInStore (addonToDisable: string) {
+    return addonToDisable
+  }
+
   @Mutation
-  public changeEnabledStateOfRegisteredAddonComponents (componentsToBeEnabled: string[]) : void {
-    const registeredAddonComponents = this.registeredAddonComponents
-    componentsToBeEnabled.forEach((componentToEnable: string) => {
-      const componentsThatShouldBeEnabled = registeredAddonComponents.filter((addon: IAddon) => addon.model.title === componentToEnable)
-      if (componentsThatShouldBeEnabled.length > 1) {
-        console.error('ERROR! The store contains +1 addons by the same name; we are trying to enable more than one addon...')
-      } else {
-        componentsThatShouldBeEnabled[0].enabled = true
-      }
+  public loadLocalStorageAddons (localStorageAddonsComponents: IAddon[]) {
+    if (localStorageAddonsComponents !== this.getEnabledAddonComponents) {
+      this.registeredAddonComponents = cloneDeep(localStorageAddonsComponents)
+    }
+  }
+
+  @Mutation
+  public enableAddon (requestedAddon: IAddon) : void {
+    // only addons that are registered will be enabled
+    requestedAddon.enabled = true
+  }
+
+  @Mutation
+  public disableAddon (requestedAddon: IAddon) : void {
+    const addonToDisable: IAddon | undefined = find(this.registeredAddonComponents, (registeredAddon: IAddon) => {
+      return requestedAddon.model.title === registeredAddon.model.title
     })
 
-    registeredAddonComponents.forEach((addonComponent: IAddon) => {
-      if (componentsToBeEnabled.indexOf(addonComponent.model.title) === -1) {
-        addonComponent.enabled = false
-      }
-    })
+    if (addonToDisable) {
+      addonToDisable.enabled = false
+    }
   }
 }

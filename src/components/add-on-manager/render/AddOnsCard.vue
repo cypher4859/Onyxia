@@ -28,13 +28,13 @@
             </v-col>
           </v-row>
           <div>
-          <v-btn
-            @click="saveAddons()"
-          >
-            <div class="primary-content-button-text">
-              Save
-            </div>
-          </v-btn>
+            <v-btn
+              @click="saveAddons()"
+            >
+              <div class="primary-content-button-text">
+                Save
+              </div>
+            </v-btn>
             &nbsp;
             <v-btn
               @click="clearAllAddons()"
@@ -93,12 +93,6 @@ export default class AddOnsCard extends Vue {
   @Watch('selectedEnabledAddonsTitles', { immediate: false, deep: false })
   public syncAddonsTitlesWithEnabledDisabledAddons () : void {
     this.addonManagerService.syncEnableDisableAddons(this.selectedEnabledAddonsTitles)
-  }
-
-  public getDefaults () {
-    return this.addonManagerService.retrieveAddonComponentsFromLocalStorage().then(() => {
-      this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles()
-    })
   }
 
   public clearAllAddons () : void {

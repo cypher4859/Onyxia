@@ -68,7 +68,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     addonStore.storeTheseAddons()
   }
 
-  public retrieveAddonComponentsFromLocalStorage () : void {
+  public async retrieveAddonComponentsFromLocalStorage () : Promise<void> {
     addonStore.retrieveAddonsFromLocalStorage()
   }
 

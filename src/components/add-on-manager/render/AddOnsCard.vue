@@ -71,13 +71,16 @@ export default class AddOnsCard extends Vue {
   private addonsSavedToStorageAlert : string = 'Addons Saved!'
   private showAlertAddonsSaved : boolean = false
 
-  async beforeMount () : Promise<void> {
-    Promise.all([
-      this.getDefaults()
-    ]).then()
+  async created () {
+    this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
+    await new Promise(resolve => {
+      setTimeout(resolve, 1000)
+    }).then(() => {
+      this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles
+    })
   }
 
-  @Watch('selectedEnabledAddonsTitles', { immediate: true, deep: false })
+  @Watch('selectedEnabledAddonsTitles', { immediate: false, deep: false })
   public syncAddonsTitlesWithEnabledDisabledAddons () : void {
     this.addonManagerService.syncEnableDisableAddons(this.selectedEnabledAddonsTitles)
   }

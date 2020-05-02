@@ -13,6 +13,6 @@ export default interface IAddonsService extends IService {
     getRegisteredAddonsProperty(property: IAddonProperty) : any
     getEnabledAddonsFromStore() : IAddon[]
     getEnabledAddonsModelsForRender() : IMenuItem[]
-    getEnabledAddonsTitles() : string[]
+    getEnabledAddonsTitles : string[]
     getRegisteredAddonsFromStore() : IAddon[]
 }

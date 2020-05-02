@@ -107,7 +107,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return addonStore.getEnabledAddonComponentsModels
   }
 
-  public getEnabledAddonsTitles () : string[] {
+  get getEnabledAddonsTitles () : string[] {
     return this.getEnabledAddonsModelsForRender().map((addonModel: IMenuItem) => addonModel.title)
   }
 

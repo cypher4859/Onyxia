@@ -27,6 +27,7 @@
               />
             </v-col>
           </v-row>
+          <div>
           <v-btn
             @click="saveAddons()"
           >
@@ -34,6 +35,15 @@
               Save
             </div>
           </v-btn>
+            &nbsp;
+            <v-btn
+              @click="clearAllAddons()"
+            >
+              <div class="primary-content-button-text">
+                Clear
+              </div>
+            </v-btn>
+          </div>
         </v-col>
       </v-card>
       <addons-saved-alert
@@ -89,6 +99,10 @@ export default class AddOnsCard extends Vue {
     return this.addonManagerService.retrieveAddonComponentsFromLocalStorage().then(() => {
       this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles()
     })
+  }
+
+  public clearAllAddons () : void {
+    this.selectedEnabledAddonsTitles = []
   }
 
   public saveAddons () : void {

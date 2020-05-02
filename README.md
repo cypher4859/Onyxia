@@ -1,4 +1,5 @@
-# black-cypher
+# Obsidia Framework
+This is a modular framework for robust VueJS typescript addons that perform a variety of functions. The goal that should be achieved by this framework is to allow users to plug in their own reusable components into the framework with relatively little effort. This assumes that the component is built in a well structured way adhering to some basic guidelines and with very little coupling between the component and external addon.
 
 ## Project setup
 ```

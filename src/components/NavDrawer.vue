@@ -85,8 +85,7 @@ export default class NavDrawer extends Vue {
   private homeDashboardService!: IHomeDashboardService
 
   private navMenuItems: IMenuItem[] = [
-    this.homeDashboardService.defaultModel(),
-    this.addonService.defaultModel()
+    this.homeDashboardService.defaultModel()
   ]
 
   get menuItems () : IMenuItem[] {

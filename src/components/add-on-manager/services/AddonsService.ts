@@ -68,7 +68,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     addonStore.storeTheseAddons()
   }
 
-  public retrieveAddonComponentsFromLocalStorage () : void {
+  public async retrieveAddonComponentsFromLocalStorage () : Promise<void> {
     addonStore.retrieveAddonsFromLocalStorage()
   }
 
@@ -107,7 +107,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return addonStore.getEnabledAddonComponentsModels
   }
 
-  public getEnabledAddonsTitles () : string[] {
+  get getEnabledAddonsTitles () : string[] {
     return this.getEnabledAddonsModelsForRender().map((addonModel: IMenuItem) => addonModel.title)
   }
 

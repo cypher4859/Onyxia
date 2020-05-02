@@ -27,13 +27,23 @@
               />
             </v-col>
           </v-row>
-          <v-btn
-            @click="saveAddons()"
-          >
-            <div class="primary-content-button-text">
-              Save
-            </div>
-          </v-btn>
+          <div>
+            <v-btn
+              @click="saveAddons()"
+            >
+              <div class="primary-content-button-text">
+                Save
+              </div>
+            </v-btn>
+            &nbsp;
+            <v-btn
+              @click="clearAllAddons()"
+            >
+              <div class="primary-content-button-text">
+                Clear
+              </div>
+            </v-btn>
+          </div>
         </v-col>
       </v-card>
       <addons-saved-alert
@@ -71,14 +81,22 @@ export default class AddOnsCard extends Vue {
   private addonsSavedToStorageAlert : string = 'Addons Saved!'
   private showAlertAddonsSaved : boolean = false
 
-  created () {
+  async created () {
     this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
-    this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles()
+    await new Promise(resolve => {
+      setTimeout(resolve, 1000)
+    }).then(() => {
+      this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles
+    })
   }
 
   @Watch('selectedEnabledAddonsTitles', { immediate: false, deep: false })
   public syncAddonsTitlesWithEnabledDisabledAddons () : void {
     this.addonManagerService.syncEnableDisableAddons(this.selectedEnabledAddonsTitles)
+  }
+
+  public clearAllAddons () : void {
+    this.selectedEnabledAddonsTitles = []
   }
 
   public saveAddons () : void {

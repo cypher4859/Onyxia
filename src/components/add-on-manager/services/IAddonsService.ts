@@ -6,7 +6,7 @@ import { IAddonProperty } from '@/components/add-on-manager/types/IAddonDataType
 export default interface IAddonsService extends IService {
     syncEnableDisableAddons(componentsToEnable: string[]) : void
     saveAddonsToLocalStorage() : void
-    retrieveAddonComponentsFromLocalStorage() : void
+    retrieveAddonComponentsFromLocalStorage() : Promise<void>
     computeTheComponentsToDisable(componentsToEnable: string[], allRegisteredComponents: string[]) : string[]
     getRegisteredAddonsTitles : string[]
     getRegisteredAddonsModels() : IMenuItem[]

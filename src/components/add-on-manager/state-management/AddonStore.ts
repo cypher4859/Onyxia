@@ -68,12 +68,12 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   @Action
-  public storeTheseAddons () {
+  public async storeTheseAddons () {
     localStorage.setItem(localStorageAddonKey, JSON.stringify(this.getRegisteredAddonComponents))
   }
 
   @Action({ commit: 'loadLocalStorageAddons' })
-  public retrieveAddonsFromLocalStorage () {
+  public async retrieveAddonsFromLocalStorage () {
     if (localStorage.length && localStorage.getItem(localStorageAddonKey) !== null) {
       const localStorageAddons: IAddon[] = JSON.parse(localStorage.getItem(localStorageAddonKey)!)
       return localStorageAddons
@@ -81,12 +81,12 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   @Action({ commit: 'enableAddon' })
-  public enableAddonInStore (addonToEnable: string) {
+  public async enableAddonInStore (addonToEnable: string) {
     return addonToEnable
   }
 
   @Action({ commit: 'disableAddon' })
-  public disableAddonInStore (addonToDisable: string) {
+  public async disableAddonInStore (addonToDisable: string) {
     return addonToDisable
   }
 

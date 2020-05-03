@@ -10,6 +10,7 @@ const TYPES : IRegistryTypes = {
   IAddonsService: Symbol('IAddonsService'),
   IHomeDashboardService: Symbol('IHomeDashboardService'),
   ICaseFileService: Symbol('ICaseFileService'),
+  ICaseFileInfoService: Symbol('ICaseFileInfoService'),
   ICameraMonitorService: Symbol('ICameraMonitorService')
 }
 

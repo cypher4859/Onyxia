@@ -7,6 +7,8 @@ import INetworkMonitorService from '@/components/network-monitor/services/INetwo
 import ICameraMonitorService from '@/components/camera-monitor/services/ICameraMonitorService'
 import AddonsService from '@/components/add-on-manager/services/AddonsService'
 import CaseFileService from '@/components/case-file/services/CaseFileService'
+import ICaseFileInfoService from '@/components/case-file/services/ICaseFileInfoService'
+import CaseFileInfoService from '@/components/case-file/services/CaseFileInfoService'
 import HomeDashboardService from '@/components/home-dashboard/services/HomeDashboardService'
 import NetworkMonitorService from '@/components/network-monitor/services/NetworkMonitorService'
 import TYPES from '@/InjectableTypes/types'
@@ -22,4 +24,5 @@ export default function registerContainerServices () {
   container.bind<IHomeDashboardService>(TYPES.IHomeDashboardService).to(HomeDashboardService)
   container.bind<INetworkMonitorService>(TYPES.INetworkMonitorService).to(NetworkMonitorService)
   container.bind<ICameraMonitorService>(TYPES.ICameraMonitorService).to(CameraMonitorService)
+  container.bind<ICaseFileInfoService>(TYPES.ICaseFileInfoService).to(CaseFileInfoService)
 }

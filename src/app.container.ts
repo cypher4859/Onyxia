@@ -15,6 +15,8 @@ import TYPES from '@/InjectableTypes/types'
 import IMenuItemService from '@/services/interfaces/IMenuItemService'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
+import ISettingsGlobalService from '@/components/home-dashboard copy/services/ISettingsGlobalService'
+import SettingsGlobalService from '@/components/home-dashboard copy/services/SettingsGlobalService'
 
 export default function registerContainerServices () {
   container.options.skipBaseClassChecks = true
@@ -25,4 +27,5 @@ export default function registerContainerServices () {
   container.bind<INetworkMonitorService>(TYPES.INetworkMonitorService).to(NetworkMonitorService)
   container.bind<ICameraMonitorService>(TYPES.ICameraMonitorService).to(CameraMonitorService)
   container.bind<ICaseFileInfoService>(TYPES.ICaseFileInfoService).to(CaseFileInfoService)
+  container.bind<ISettingsGlobalService>(TYPES.ISettingsGlobalService).to(SettingsGlobalService)
 }

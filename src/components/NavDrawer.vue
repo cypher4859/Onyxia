@@ -98,7 +98,7 @@ export default class NavDrawer extends Vue {
   }
 
   get enabledAddons () : IMenuItem[] {
-    return this.addonService.getEnabledAddonsModelsForRender()
+    return this.addonService.getEnabledAddonsMenuItemForRender()
   }
 }
 </script>

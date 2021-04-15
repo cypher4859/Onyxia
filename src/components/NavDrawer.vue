@@ -68,6 +68,7 @@ import TYPES from '@/InjectableTypes/types'
 import { concat } from 'lodash'
 import { Component } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
+import ISettingsGlobalService from './home-dashboard copy/services/ISettingsGlobalService'
 
 @Component({
   name: 'NavDrawer',
@@ -84,8 +85,12 @@ export default class NavDrawer extends Vue {
   @inject(TYPES.IHomeDashboardService)
   private homeDashboardService!: IHomeDashboardService
 
+  @inject(TYPES.ISettingsGlobalService)
+  private settingsGlobalService!: ISettingsGlobalService
+
   private navMenuItems: IMenuItem[] = [
-    this.homeDashboardService.defaultModel()
+    this.homeDashboardService.defaultModel(),
+    this.settingsGlobalService.defaultModel()
   ]
 
   get menuItems () : IMenuItem[] {

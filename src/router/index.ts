@@ -39,6 +39,11 @@ const routes = [
     path: '/camera-monitor',
     name: 'Camera Monitor',
     component: CameraMonitor
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: AddOns
   }
 ]
 

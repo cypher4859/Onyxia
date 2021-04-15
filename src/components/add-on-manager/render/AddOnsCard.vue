@@ -10,13 +10,18 @@
           cols="12"
           sm="12"
         >
-          <p>Add Ons</p>
+          <v-subheader>Add Ons</v-subheader>
           <v-row>
             <v-col
-              cols="12"
-              sm="6"
+              v-for="(index, key) in registeredAddons"
+              :key="key"
             >
-              <v-select
+              <v-checkbox
+                v-model="index.enabled"
+                :label="index.model.title"
+                color="success"
+              />
+              <!-- <v-select
                 v-model="selectedEnabledAddonsTitles"
                 :items="registeredAddonsTitles"
                 label="Enabled Addons"
@@ -24,7 +29,7 @@
                 multiple
                 chips
                 hint="Select which addons should be enabled"
-              />
+              /> -->
             </v-col>
           </v-row>
           <div>
@@ -77,7 +82,7 @@ export default class AddOnsCard extends Vue {
 
   // It will need to grab the possible addons from the store
   private selectedEnabledAddonsTitles : string[] = []
-  private registeredAddonsTitles : string[] = this.addonManagerService.getRegisteredAddonsTitles
+  private registeredAddons : IAddon[] = this.addonManagerService.getRegisteredAddonsFromStore()
   private addonsSavedToStorageAlert : string = 'Addons Saved!'
   private showAlertAddonsSaved : boolean = false
 

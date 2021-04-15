@@ -59,7 +59,7 @@ export default class AddonStore extends VuexModule implements IAddonStore {
     return this.getRegisteredAddonComponents.filter((addon: IAddon) => addon.enabled === true)
   }
 
-  get getEnabledAddonComponentsModels () : IMenuItem[] {
+  get getEnabledAddonComponentsMenuItem () : IMenuItem[] {
     return this.getEnabledAddonComponents.map((addon) => addon.model)
   }
 

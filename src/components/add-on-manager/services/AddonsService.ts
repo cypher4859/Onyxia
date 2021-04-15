@@ -103,12 +103,12 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return addonStore.getEnabledAddonComponents
   }
 
-  public getEnabledAddonsModelsForRender () : IMenuItem[] {
-    return addonStore.getEnabledAddonComponentsModels
+  public getEnabledAddonsMenuItemForRender () : IMenuItem[] {
+    return addonStore.getEnabledAddonComponentsMenuItem
   }
 
   get getEnabledAddonsTitles () : string[] {
-    return this.getEnabledAddonsModelsForRender().map((addonModel: IMenuItem) => addonModel.title)
+    return this.getEnabledAddonsMenuItemForRender().map((addonMenuItem: IMenuItem) => addonMenuItem.title)
   }
 
   // `keyof any` is short for "string | number | symbol"

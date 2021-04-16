@@ -22,8 +22,7 @@
           <v-list-item
             v-for="(item, key) in menuItems"
             :key="key"
-            :to="item.path"
-            link
+            @click="gotoPath(item)"
           >
             <v-tooltip
               right
@@ -49,7 +48,7 @@
       <v-content>
         <v-container>
           <v-fade-transition mode="out-in">
-            <router-view />
+            <router-view :key="$route.fullPath" />
           </v-fade-transition>
         </v-container>
       </v-content>
@@ -92,6 +91,10 @@ export default class NavDrawer extends Vue {
     this.homeDashboardService.defaultModel(),
     this.settingsGlobalService.defaultModel()
   ]
+
+  private gotoPath (path: string) {
+    this.$router.push(path)
+  }
 
   get menuItems () : IMenuItem[] {
     return concat(this.navMenuItems, this.enabledAddons)

@@ -87,6 +87,10 @@ export default class NavDrawer extends Vue {
   @inject(TYPES.ISettingsGlobalService)
   private settingsGlobalService!: ISettingsGlobalService
 
+  mounted () {
+    this.settingsGlobalService.initializeSettings()
+  }
+
   private navMenuItems: IMenuItem[] = [
     this.homeDashboardService.defaultModel(),
     this.settingsGlobalService.defaultModel()
@@ -101,7 +105,7 @@ export default class NavDrawer extends Vue {
   }
 
   get enabledAddons () : IMenuItem[] {
-    return this.addonService.getEnabledAddonsMenuItemForRender()
+    return this.addonService.getEnabledAddonsMenuItemForRender
   }
 }
 </script>

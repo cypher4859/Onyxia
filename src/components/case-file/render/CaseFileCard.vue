@@ -26,6 +26,5 @@ export default class CaseFileCard extends Vue {
   public caseFileInfoService!: ICaseFileInfoService
 
   private caseFileModel: ICaseFileInfoModel = this.caseFileInfoService.getDefaultModel()
-  private caseFileReportPath: string = '/case-file-report'
 }
 </script>

@@ -11,19 +11,16 @@
             />
           </v-col>
           <v-col>
-            <v-toolbar-title>James R. Watts</v-toolbar-title>
+            <v-toolbar-title>{{ model.fullName }}</v-toolbar-title>
           </v-col>
           <v-spacer />
           <v-col>
-            <div>{{ model.age }}</div>
+            <div>{{ model.age }} yrs</div>
             <div>{{ model.height }}</div>
             <div>{{ model.weight }}</div>
           </v-col>
           <v-col>
-            <div>{{ model.lastLocation }}</div>
-            <div>{{ model.phone }}</div>
-            <div>{{ model.email }}</div>
-            <div>{{ model.relationship }}</div>
+            <div>{{ model.streetAddress }} {{ model.city }} {{ model.state }}</div>
           </v-col>
           <v-spacer />
           <v-btn icon>
@@ -32,7 +29,7 @@
           <v-btn
             icon
             color="success"
-            :to="{ path: caseFileReportPath, params: { targetPerson: model }}"
+            :to="{ path: '/case-file-report', params: { model: model }}"
           >
             <v-icon>mdi-export</v-icon>
           </v-btn>
@@ -45,32 +42,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
-import ICaseFileInfoService from '../services/ICaseFileInfoService'
-import { inject } from 'inversify-props'
-import TYPES from '@/InjectableTypes/types'
 import { Prop } from 'vue-property-decorator'
+import IPersonOfInterest from '../types/IPersonOfInterest'
+import caseFileExampleData from '../testCaseFileData'
+import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 
 @Component({
   name: 'CaseFileInfoBar'
 })
 export default class CaseFileInfoBar extends Vue {
-  @Prop(Object) readonly model!: ICaseFileInfoModel
-  private caseFileReportPath: string = '/case-file-report'
-
-  mounted () {
-    this.setDefaults()
-  }
-
-  public setDefaults () {
-    this.model.age = '44'
-    this.model.name = 'James R. Watts'
-    this.model.height = '6\'4'
-    this.model.weight = '180lbs'
-    this.model.lastLocation = 'Salt Lake City, UT'
-    this.model.phone = '304-442-4328'
-    this.model.email = 'someAlias@someemail.com'
-    this.model.relationship = 'Friend'
-  }
+  @Prop(Object) model!: ICaseFileInfoModel
 }
 </script>

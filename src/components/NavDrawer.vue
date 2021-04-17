@@ -22,7 +22,7 @@
           <v-list-item
             v-for="(item, key) in menuItems"
             :key="key"
-            @click="gotoPath(item)"
+            @click="gotoPath(item.path)"
           >
             <v-tooltip
               right
@@ -65,9 +65,10 @@ import IHomeDashboardService from '@/components/home-dashboard/services/IHomeDas
 import IAddonsService from '@/components/add-on-manager/services/IAddonsService'
 import TYPES from '@/InjectableTypes/types'
 import { concat } from 'lodash'
-import { Component } from 'vue-property-decorator'
+import { Component, Mixins } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
 import ISettingsGlobalService from './home-dashboard copy/services/ISettingsGlobalService'
+import RouteMixin from '@/mixins/route-mixin'
 
 @Component({
   name: 'NavDrawer',
@@ -75,7 +76,7 @@ import ISettingsGlobalService from './home-dashboard copy/services/ISettingsGlob
     'hello-world': HelloWorld
   }
 })
-export default class NavDrawer extends Vue {
+export default class NavDrawer extends Mixins(RouteMixin) {
   private drawer: boolean = true
 
   @inject(TYPES.IAddonsService)
@@ -95,10 +96,6 @@ export default class NavDrawer extends Vue {
     this.homeDashboardService.defaultModel(),
     this.settingsGlobalService.defaultModel()
   ]
-
-  private gotoPath (path: string) {
-    this.$router.push(path)
-  }
 
   get menuItems () : IMenuItem[] {
     return concat(this.navMenuItems, this.enabledAddons)

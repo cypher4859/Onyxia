@@ -11,48 +11,227 @@
         <edit-btn @toggleIsEditable="toggleIsEditableFlag()" />
       </v-col>
     </v-row>
-    <v-row>
-      <v-col
-        cols="12"
-        sm="9"
-      >
-        <v-expansion-panels
-          v-model="showAllExpansionPanels"
-          popout
-          multiple
-        >
-          <v-expansion-panel>
-            <v-expansion-panel-header>Identity</v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <report-identity
-                :is-editable-flag="isEditable"
-                :report-model="model.identity"
+    <v-card
+      class="d-flex justify-center align-center"
+      elevation="19"
+    >
+      <v-container>
+        <div>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="model.fullName"
+                label="Full Name"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
               />
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>Location</v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <report-location
-                :is-editable-flag="isEditable"
-                :report-model="model.location"
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.socialSecurityNumber"
+                label="Social Security Number"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
               />
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>References</v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <report-references
-                :is-editable-flag="isEditable"
-                :report-model="model.references"
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="model.month"
+                label="Month"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
               />
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
-      </v-col>
-    </v-row>
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.day"
+                label="Day"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.year"
+                label="Year"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="model.first"
+                label="First Name"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.middle"
+                label="Middle Name"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.last"
+                label="Last Name"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.additional"
+                label="Additional Names"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="model.streetAddress"
+                label="Street Address"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.city"
+                label="City"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.zip"
+                label="Zip"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="model.state"
+                label="State"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="model.country"
+                label="Country"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+          </v-row>
+        </div>
+        <div>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="model.phones[0]"
+                label="Phone Number"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col>
+            <!-- <v-col>
+              <v-text-field
+                v-model="model['current-workplace']"
+                label="Current Workplace"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col> -->
+            <!-- <v-col>
+              <v-text-field
+                v-model="model['previous-workplaces']"
+                label="Previous Workplaces"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col> -->
+            <!-- <v-col>
+              <v-text-field
+                v-model="model['family']"
+                label="Family Members"
+                color="success"
+                outlined
+                shaped
+                success
+                :readonly="!isEditable"
+              />
+            </v-col> -->
+          </v-row>
+        </div>
+      </v-container>
+    </v-card>
     <snackbar-alert
       :snack-bar-message="snackBarMessage()"
       :show-snackbar="showIsEditableSnackbar"
@@ -64,15 +243,14 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import RouterBackButton from '@/components/utility/BackButton.vue'
-import TYPES from '@/InjectableTypes/types'
 import EditButton from '@/components/utility/EditButton.vue'
 import SnackbarAlert from '@/components/utility/SystemSnackbarAlert.vue'
 import CaseFileReportCardIdentity from './CaseFileReportCardIdentity.vue'
 import CaseFileReportCardReferencesCard from './CaseFileReportCardReferences.vue'
 import CaseFileReportCardLocation from './CaseFileReportCardLocation.vue'
-import ICaseFileService from '../services/ICaseFileService'
 import IPersonOfInterest from '../types/IPersonOfInterest'
-import { inject } from 'inversify-props'
+import { Prop } from 'vue-property-decorator'
+import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 
 @Component({
   name: 'CaseFileReportCard',
@@ -86,21 +264,10 @@ import { inject } from 'inversify-props'
   }
 })
 export default class CaseFileReportCard extends Vue {
-  private model! : IPersonOfInterest
   private isEditable : boolean = false
   private showIsEditableSnackbar : boolean = false
-  private showAllExpansionPanels : number[] = [0, 1, 2]
 
-  created () {
-    this.loadCaseFileData()
-  }
-
-  @inject(TYPES.ICaseFileService)
-  private caseFileService!: ICaseFileService
-
-  public loadCaseFileData () {
-    this.model = this.caseFileService.getCaseFileData()
-  }
+  @Prop(Object) model!: ICaseFileInfoModel
 
   public toggleIsEditableFlag () : void {
     this.isEditable = !this.isEditable

@@ -11,6 +11,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '*',
+    name: 'Not Found',
+    component: Home
+  },
+  {
     path: '/',
     name: 'Home',
     component: Home
@@ -48,6 +53,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

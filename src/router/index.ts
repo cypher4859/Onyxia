@@ -28,7 +28,8 @@ const routes = [
   {
     path: '/case-file-report',
     name: 'Case File Report',
-    component: CaseFileReport
+    component: CaseFileReport,
+    props: true
   },
   {
     path: '/net-monitor',

@@ -21,15 +21,6 @@
                 :label="index.model.title"
                 color="success"
               />
-              <!-- <v-select
-                v-model="selectedEnabledAddonsTitles"
-                :items="registeredAddonsTitles"
-                label="Enabled Addons"
-                deletable-chips
-                multiple
-                chips
-                hint="Select which addons should be enabled"
-              /> -->
             </v-col>
           </v-row>
           <div>

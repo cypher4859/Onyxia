@@ -44,7 +44,6 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <hello-world />
       <v-content>
         <v-container>
           <v-fade-transition mode="out-in">

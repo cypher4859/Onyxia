@@ -88,7 +88,6 @@ export default class AddOnsCard extends Vue {
 
   mounted () {
     this.selectedEnabledAddonsTitles = this.addonService.getEnabledAddonsTitles
-    // this.initializeAddonSelectionWithLocalStorage()
   }
 
   @Watch('selectedEnabledAddonsTitles', { immediate: true, deep: false })
@@ -103,9 +102,6 @@ export default class AddOnsCard extends Vue {
       })
     })
   }
-
-  // private initializeAddonSelectionWithLocalStorage () {
-  // }
 
   public clearAllAddons () : void {
     this.selectedEnabledAddonsTitles = []

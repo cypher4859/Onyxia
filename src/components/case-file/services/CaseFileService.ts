@@ -3,6 +3,7 @@ import { Vue, Component, Model } from 'vue-property-decorator'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import IMenuItem from '@/types/IMenuItem'
 import ICaseFileService from './ICaseFileService'
+import caseFileExampleData from '../testCaseFileData'
 import { injectable } from 'inversify-props'
 
 @injectable()
@@ -18,40 +19,6 @@ export default class extends MenuItemService implements ICaseFileService {
   }
 
   getCaseFileData () : object {
-    return {
-      'id': 0,
-      'identity': {
-        'name': {
-          'full-name': '',
-          'first': '',
-          'middle': '',
-          'last': '',
-          'suffix': '',
-          'additional': ''
-        },
-        'date-of-birth': {
-          'month': '',
-          'day': '',
-          'year': ''
-        },
-        'social-security-number': '',
-        'age': ''
-      },
-      'location': {
-        'address': {
-          'street-address': '',
-          'city': '',
-          'zip': '',
-          'state': '',
-          'country': ''
-        }
-      },
-      'references': {
-        'phone-contact': '',
-        'current-workplace': '',
-        'previous-workplaces': [],
-        'family': []
-      }
-    }
+    return caseFileExampleData
   }
 }

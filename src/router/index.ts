@@ -11,6 +11,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '*',
+    name: 'Not Found',
+    component: Home
+  },
+  {
     path: '/',
     name: 'Home',
     component: Home
@@ -39,6 +44,11 @@ const routes = [
     path: '/camera-monitor',
     name: 'Camera Monitor',
     component: CameraMonitor
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: AddOns
   }
 ]
 

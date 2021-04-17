@@ -10,20 +10,16 @@
           cols="12"
           sm="12"
         >
-          <p>Add Ons</p>
+          <v-subheader>Add Ons</v-subheader>
           <v-row>
             <v-col
-              cols="12"
-              sm="6"
+              v-for="(index, key) in registeredAddons"
+              :key="key"
             >
-              <v-select
-                v-model="selectedEnabledAddonsTitles"
-                :items="registeredAddonsTitles"
-                label="Enabled Addons"
-                deletable-chips
-                multiple
-                chips
-                hint="Select which addons should be enabled"
+              <v-checkbox
+                v-model="index.enabled"
+                :label="index.model.title"
+                color="success"
               />
             </v-col>
           </v-row>
@@ -73,35 +69,43 @@ import { inject } from 'inversify-props'
 })
 export default class AddOnsCard extends Vue {
   @inject(TYPES.IAddonsService)
-  private addonManagerService!: IAddonsService
+  private addonService!: IAddonsService
 
   // It will need to grab the possible addons from the store
   private selectedEnabledAddonsTitles : string[] = []
-  private registeredAddonsTitles : string[] = this.addonManagerService.getRegisteredAddonsTitles
+  private registeredAddons: IAddon[] = this.addonService.getRegisteredAddonsFromStore()
   private addonsSavedToStorageAlert : string = 'Addons Saved!'
   private showAlertAddonsSaved : boolean = false
 
-  async created () {
-    this.addonManagerService.retrieveAddonComponentsFromLocalStorage()
-    await new Promise(resolve => {
-      setTimeout(resolve, 1000)
-    }).then(() => {
-      this.selectedEnabledAddonsTitles = this.addonManagerService.getEnabledAddonsTitles
-    })
+  mounted () {
+    this.selectedEnabledAddonsTitles = this.addonService.getEnabledAddonsTitles
   }
 
-  @Watch('selectedEnabledAddonsTitles', { immediate: false, deep: false })
+  @Watch('selectedEnabledAddonsTitles', { immediate: true, deep: false })
   public syncAddonsTitlesWithEnabledDisabledAddons () : void {
-    this.addonManagerService.syncEnableDisableAddons(this.selectedEnabledAddonsTitles)
+    this.selectedEnabledAddonsTitles.forEach((enabledAddonTitle: string) => {
+      console.log('Checking Selection is enabled for: ', enabledAddonTitle)
+      this.registeredAddons.forEach((registeredAddon: IAddon) => {
+        if (registeredAddon.model.title === enabledAddonTitle && !registeredAddon.enabled) {
+          console.log('Enabling Addon since it is not enabled:', registeredAddon.model.title)
+          registeredAddon.enabled = true
+        }
+      })
+    })
   }
 
   public clearAllAddons () : void {
     this.selectedEnabledAddonsTitles = []
+    this.registeredAddons.forEach((addon: IAddon) => {
+      addon.enabled = false
+    })
+    // need to show a confirmation dialog then
+    // wipe local storage.
   }
 
   public saveAddons () : void {
     this.toggleAddonsSavedAlert()
-    this.addonManagerService.saveAddonsToLocalStorage()
+    this.addonService.saveAddonsToLocalStorage()
   }
 
   get addonsSavedAlert () : boolean {

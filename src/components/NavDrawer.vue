@@ -22,8 +22,7 @@
           <v-list-item
             v-for="(item, key) in menuItems"
             :key="key"
-            :to="item.path"
-            link
+            @click="gotoPath(item.path)"
           >
             <v-tooltip
               right
@@ -49,7 +48,7 @@
       <v-content>
         <v-container>
           <v-fade-transition mode="out-in">
-            <router-view />
+            <router-view :key="$route.fullPath" />
           </v-fade-transition>
         </v-container>
       </v-content>
@@ -66,8 +65,10 @@ import IHomeDashboardService from '@/components/home-dashboard/services/IHomeDas
 import IAddonsService from '@/components/add-on-manager/services/IAddonsService'
 import TYPES from '@/InjectableTypes/types'
 import { concat } from 'lodash'
-import { Component } from 'vue-property-decorator'
+import { Component, Mixins } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
+import ISettingsGlobalService from './home-dashboard copy/services/ISettingsGlobalService'
+import RouteMixin from '@/mixins/route-mixin'
 
 @Component({
   name: 'NavDrawer',
@@ -75,7 +76,7 @@ import { inject } from 'inversify-props'
     'hello-world': HelloWorld
   }
 })
-export default class NavDrawer extends Vue {
+export default class NavDrawer extends Mixins(RouteMixin) {
   private drawer: boolean = true
 
   @inject(TYPES.IAddonsService)
@@ -84,8 +85,16 @@ export default class NavDrawer extends Vue {
   @inject(TYPES.IHomeDashboardService)
   private homeDashboardService!: IHomeDashboardService
 
+  @inject(TYPES.ISettingsGlobalService)
+  private settingsGlobalService!: ISettingsGlobalService
+
+  mounted () {
+    this.settingsGlobalService.initializeSettings()
+  }
+
   private navMenuItems: IMenuItem[] = [
-    this.homeDashboardService.defaultModel()
+    this.homeDashboardService.defaultModel(),
+    this.settingsGlobalService.defaultModel()
   ]
 
   get menuItems () : IMenuItem[] {
@@ -93,7 +102,7 @@ export default class NavDrawer extends Vue {
   }
 
   get enabledAddons () : IMenuItem[] {
-    return this.addonService.getEnabledAddonsModelsForRender()
+    return this.addonService.getEnabledAddonsMenuItemForRender
   }
 }
 </script>

@@ -35,7 +35,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     const componentsToDisable = this.computeTheComponentsToDisable(componentsToEnable)
 
     if (componentsToEnable.length) {
-      forEach(componentsToEnable, (addonTitle: string) => {
+      componentsToEnable.forEach((addonTitle: string) => {
         if (this.isAddonRegistered(addonTitle) && !this.isAddonInListOfEnabledAddons(addonTitle)) {
           const addonComponent: IAddon | undefined = this.getAddonComponentFromTitle(addonTitle)
           if (addonComponent !== undefined) {
@@ -46,7 +46,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     }
 
     if (componentsToDisable.length) {
-      forEach(componentsToDisable, (addonTitle: string) => {
+      componentsToDisable.forEach((addonTitle: string) => {
         if (this.isAddonRegistered(addonTitle) && this.isAddonInListOfEnabledAddons(addonTitle)) {
           const addonComponent: IAddon | undefined = this.getAddonComponentFromTitle(addonTitle)
           if (addonComponent !== undefined) {
@@ -68,7 +68,7 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     addonStore.storeTheseAddons()
   }
 
-  public async retrieveAddonComponentsFromLocalStorage () : Promise<void> {
+  public retrieveAddonComponentsFromLocalStorage () : void {
     addonStore.retrieveAddonsFromLocalStorage()
   }
 
@@ -103,12 +103,12 @@ export default class AddonsService extends MenuItemService implements IAddonsSer
     return addonStore.getEnabledAddonComponents
   }
 
-  public getEnabledAddonsModelsForRender () : IMenuItem[] {
-    return addonStore.getEnabledAddonComponentsModels
+  get getEnabledAddonsMenuItemForRender () : IMenuItem[] {
+    return addonStore.getEnabledAddonComponentsMenuItem
   }
 
   get getEnabledAddonsTitles () : string[] {
-    return this.getEnabledAddonsModelsForRender().map((addonModel: IMenuItem) => addonModel.title)
+    return this.getEnabledAddonsMenuItemForRender.map((addonMenuItem: IMenuItem) => addonMenuItem.title)
   }
 
   // `keyof any` is short for "string | number | symbol"

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    Dashboard Things
+    <addon-manager />
   </v-container>
 </template>
 
@@ -10,9 +10,12 @@ import Component from 'vue-class-component'
 import AddOnsView from '@/components/add-on-manager/AddOnsView.vue'
 
 @Component({
-  name: 'HomeDashboardCard'
+  name: 'SettingsGlobalCard',
+  components: {
+    'addon-manager': AddOnsView
+  }
 })
-export default class HomeDashboardCard extends Vue {
+export default class SettingsGlobalCard extends Vue {
 
 }
 </script>

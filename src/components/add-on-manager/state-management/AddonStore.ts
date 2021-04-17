@@ -12,7 +12,7 @@ import IAddon from '../types/IAddon'
 import IAddonStore from '../types/IAddonStore'
 import { IAddonProperty } from '../types/IAddonDataTypes'
 import { inject } from 'inversify-props'
-import { cloneDeep, find, forEach } from 'lodash'
+import { clone, find, forEach } from 'lodash'
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 
 const localStorageAddonKey: string = 'localAddons'
@@ -59,7 +59,7 @@ export default class AddonStore extends VuexModule implements IAddonStore {
     return this.getRegisteredAddonComponents.filter((addon: IAddon) => addon.enabled === true)
   }
 
-  get getEnabledAddonComponentsModels () : IMenuItem[] {
+  get getEnabledAddonComponentsMenuItem () : IMenuItem[] {
     return this.getEnabledAddonComponents.map((addon) => addon.model)
   }
 
@@ -68,12 +68,12 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   @Action
-  public async storeTheseAddons () {
+  public storeTheseAddons () {
     localStorage.setItem(localStorageAddonKey, JSON.stringify(this.getRegisteredAddonComponents))
   }
 
   @Action({ commit: 'loadLocalStorageAddons' })
-  public async retrieveAddonsFromLocalStorage () {
+  public retrieveAddonsFromLocalStorage () {
     if (localStorage.length && localStorage.getItem(localStorageAddonKey) !== null) {
       const localStorageAddons: IAddon[] = JSON.parse(localStorage.getItem(localStorageAddonKey)!)
       return localStorageAddons
@@ -81,19 +81,19 @@ export default class AddonStore extends VuexModule implements IAddonStore {
   }
 
   @Action({ commit: 'enableAddon' })
-  public async enableAddonInStore (addonToEnable: string) {
+  public enableAddonInStore (addonToEnable: string) {
     return addonToEnable
   }
 
   @Action({ commit: 'disableAddon' })
-  public async disableAddonInStore (addonToDisable: string) {
+  public disableAddonInStore (addonToDisable: string) {
     return addonToDisable
   }
 
   @Mutation
   public loadLocalStorageAddons (localStorageAddonsComponents: IAddon[]) {
     if (localStorageAddonsComponents !== this.getEnabledAddonComponents) {
-      this.registeredAddonComponents = cloneDeep(localStorageAddonsComponents)
+      this.registeredAddonComponents = localStorageAddonsComponents
     }
   }
 

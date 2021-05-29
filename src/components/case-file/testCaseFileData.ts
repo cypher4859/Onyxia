@@ -1,7 +1,10 @@
 import ICaseFileInfoModel from './types/ICaseFileInfoModel'
 
 const caseFileExampleData : ICaseFileInfoModel = {
-  id: '0',
+  _deleted: false,
+  _user: 'cypher',
+  id: '123312987asdv42',
+  obsId: '0',
   fullName: 'James R. Watts',
   first: 'James',
   middle: 'Ryan',

@@ -1,14 +1,17 @@
 import 'reflect-metadata'
-import { Vue, Component, Model } from 'vue-property-decorator'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import IMenuItem from '@/types/IMenuItem'
 import ICaseFileService from './ICaseFileService'
 import caseFileExampleData from '../testCaseFileData'
-import { injectable } from 'inversify-props'
+import { injectable, inject } from 'inversify-props'
+import TYPES from '@/InjectableTypes/types'
+import { API } from 'aws-amplify'
+import { getICaseFileInfoModel, listICaseFileInfoModels } from '@/graphql/queries'
+import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 
 @injectable()
 export default class extends MenuItemService implements ICaseFileService {
-  defaultModel () : IMenuItem {
+  public defaultModel () : IMenuItem {
     const properties : IMenuItem = {
       title: 'Case File',
       icon: 'mdi-ballot',
@@ -18,7 +21,19 @@ export default class extends MenuItemService implements ICaseFileService {
     return this.getModel()
   }
 
-  getCaseFileData () : object {
-    return caseFileExampleData
+  public async getAllCaseFiles (filter: object) : Promise<ICaseFileInfoModel[]> {
+    const caseFiles = await API.graphql({
+      query: listICaseFileInfoModels
+    })
+    console.log('Case Files: ', caseFiles)
+    // return (caseFiles as any).data.listICaseFileInfoModels.items
+    return [caseFileExampleData]
+  }
+
+  public async getCaseFileDetails (id: string) {
+    return API.graphql({
+      query: getICaseFileInfoModel,
+      variables: { id: id }
+    })
   }
 }

@@ -10,6 +10,9 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 export default class implements ICaseFileInfoService {
   public getDefaultModel () : ICaseFileInfoModel {
     return {
+      _deleted: false,
+      _user: 'cypher',
+      obsId: '111',
       id: '0',
       fullName: 'James R. Watts',
       first: 'James',

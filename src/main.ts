@@ -5,6 +5,7 @@ import store from '@/store'
 import vuetify from '@/plugins/vuetify'
 import registerContainerServices from './app.container'
 import 'reflect-metadata'
+import Amplify from 'aws-amplify'
 
 // css
 require('@mdi/font/css/materialdesignicons.css')

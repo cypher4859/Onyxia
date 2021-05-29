@@ -14,6 +14,7 @@ import TYPES from '@/InjectableTypes/types'
 import { inject } from 'inversify-props'
 import ICaseFileInfoService from '../services/ICaseFileInfoService'
 import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
+import ICaseFileService from '../services/ICaseFileService'
 
 @Component({
   name: 'CaseFileCard',
@@ -22,9 +23,16 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
   }
 })
 export default class CaseFileCard extends Vue {
-  @inject(TYPES.ICaseFileInfoService)
-  public caseFileInfoService!: ICaseFileInfoService
+  @inject(TYPES.ICaseFileService)
+  public caseFileService!: ICaseFileService
 
-  private caseFileModel: ICaseFileInfoModel = this.caseFileInfoService.getDefaultModel()
+  private caseFiles: ICaseFileInfoModel[] = []
+
+  async created () {
+    await Promise.resolve(this.caseFileService.getAllCaseFiles({})).then((result) => {
+      this.caseFiles = result
+    })
+  }
+  // private caseFileModel: ICaseFileInfoModel = this.caseFileService.getDefaultModel()
 }
 </script>

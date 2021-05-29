@@ -66,7 +66,7 @@ import TYPES from '@/InjectableTypes/types'
 import { concat } from 'lodash'
 import { Component, Mixins } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
-import ISettingsGlobalService from './home-dashboard copy/services/ISettingsGlobalService'
+import ISettingsGlobalService from '@/components/settings-global/services/ISettingsGlobalService'
 import RouteMixin from '@/mixins/route-mixin'
 
 @Component({

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <case-file-info-bar :model="caseFileModel" />
+    <case-file-info-bar :model="caseFiles[0]" />
     <!-- Create a service for loading a contrived single case file from db.json;
       Grab the data; do a router link and pass that data to the CaseFileReportCard as a prop -->
   </div>

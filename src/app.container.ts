@@ -15,8 +15,8 @@ import TYPES from '@/InjectableTypes/types'
 import IMenuItemService from '@/services/interfaces/IMenuItemService'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
-import ISettingsGlobalService from '@/components/home-dashboard copy/services/ISettingsGlobalService'
-import SettingsGlobalService from '@/components/home-dashboard copy/services/SettingsGlobalService'
+import ISettingsGlobalService from '@/components/settings-global/services/ISettingsGlobalService'
+import SettingsGlobalService from '@/components/settings-global/services/SettingsGlobalService'
 
 export default function registerContainerServices () {
   container.options.skipBaseClassChecks = true

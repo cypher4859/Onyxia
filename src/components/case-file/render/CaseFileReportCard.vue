@@ -277,5 +277,9 @@ export default class CaseFileReportCard extends Vue {
   private snackBarMessage () : string {
     return !this.isEditable ? 'Edit Mode:   OFF' : 'Edit Mode:   ON'
   }
+
+  mounted () {
+    console.log('Report: ', this.model)
+  }
 }
 </script>

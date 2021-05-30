@@ -1,8 +1,11 @@
 <template>
   <div>
-    <case-file-info-bar :model="caseFiles[0]" />
-    <!-- Create a service for loading a contrived single case file from db.json;
-      Grab the data; do a router link and pass that data to the CaseFileReportCard as a prop -->
+    <div
+      v-for="(casefile, index) in caseFiles"
+      :key="index"
+    >
+      <case-file-info-bar :model="casefile" />
+    </div>
   </div>
 </template>
 
@@ -28,9 +31,10 @@ export default class CaseFileCard extends Vue {
 
   private caseFiles: ICaseFileInfoModel[] = []
 
-  async created () {
+  async mounted () {
     await Promise.resolve(this.caseFileService.getAllCaseFiles({})).then((result) => {
       this.caseFiles = result
+      console.log(this.caseFiles)
     })
   }
   // private caseFileModel: ICaseFileInfoModel = this.caseFileService.getDefaultModel()

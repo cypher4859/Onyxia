@@ -3,7 +3,7 @@ type ICaseFileInfoModel @model {
   _user: String
   id: ID!
   obsId: String!
-  fullname: String
+  fullName: String
   first: String
   middle: String
   last: String
@@ -28,4 +28,14 @@ type ICaseFileInfoModel @model {
   piercings: [String]
   physicalDeformities: [String]
   profile: String
+  streetAddress: String
+  city: String
+  zip: String
+  state: String
+  country: String
+  personalReferences: [String]
+  businessReferences: [String]
+  romanticReferences: [String]
+  familialReferences: [String]
+  outlierAssociates: [String]
 }

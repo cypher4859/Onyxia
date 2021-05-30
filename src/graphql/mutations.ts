@@ -12,7 +12,7 @@ export const createICaseFileInfoModel = /* GraphQL */ `
       _user
       id
       obsId
-      fullname
+      fullName
       first
       middle
       last
@@ -37,6 +37,16 @@ export const createICaseFileInfoModel = /* GraphQL */ `
       piercings
       physicalDeformities
       profile
+      streetAddress
+      city
+      zip
+      state
+      country
+      personalReferences
+      businessReferences
+      romanticReferences
+      familialReferences
+      outlierAssociates
       createdAt
       updatedAt
     }
@@ -52,7 +62,7 @@ export const updateICaseFileInfoModel = /* GraphQL */ `
       _user
       id
       obsId
-      fullname
+      fullName
       first
       middle
       last
@@ -77,6 +87,16 @@ export const updateICaseFileInfoModel = /* GraphQL */ `
       piercings
       physicalDeformities
       profile
+      streetAddress
+      city
+      zip
+      state
+      country
+      personalReferences
+      businessReferences
+      romanticReferences
+      familialReferences
+      outlierAssociates
       createdAt
       updatedAt
     }
@@ -92,7 +112,7 @@ export const deleteICaseFileInfoModel = /* GraphQL */ `
       _user
       id
       obsId
-      fullname
+      fullName
       first
       middle
       last
@@ -117,6 +137,16 @@ export const deleteICaseFileInfoModel = /* GraphQL */ `
       piercings
       physicalDeformities
       profile
+      streetAddress
+      city
+      zip
+      state
+      country
+      personalReferences
+      businessReferences
+      romanticReferences
+      familialReferences
+      outlierAssociates
       createdAt
       updatedAt
     }

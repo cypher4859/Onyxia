@@ -138,7 +138,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "fullname",
+          "name" : "fullName",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -584,7 +584,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fullname",
+          "name" : "fullName",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1450,7 +1450,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fullname",
+          "name" : "fullName",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1735,7 +1735,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fullname",
+          "name" : "fullName",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -2044,7 +2044,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fullname",
+          "name" : "fullName",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",

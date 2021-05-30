@@ -4,7 +4,6 @@ import IMenuItem from '@/types/IMenuItem'
 import ICaseFileService from './ICaseFileService'
 import caseFileExampleData from '../testCaseFileData'
 import { injectable, inject } from 'inversify-props'
-import TYPES from '@/InjectableTypes/types'
 import { API } from 'aws-amplify'
 import { getICaseFileInfoModel, listICaseFileInfoModels } from '@/graphql/queries'
 import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
@@ -22,12 +21,12 @@ export default class extends MenuItemService implements ICaseFileService {
   }
 
   public async getAllCaseFiles (filter: object) : Promise<ICaseFileInfoModel[]> {
+    // filter on user
     const caseFiles = await API.graphql({
       query: listICaseFileInfoModels
     })
-    console.log('Case Files: ', caseFiles)
-    // return (caseFiles as any).data.listICaseFileInfoModels.items
-    return [caseFileExampleData]
+    return (caseFiles as any).data.listICaseFileInfoModels.items
+    // return caseFileExampleData
   }
 
   public async getCaseFileDetails (id: string) {

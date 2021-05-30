@@ -9,7 +9,7 @@ export const getICaseFileInfoModel = /* GraphQL */ `
       _user
       id
       obsId
-      fullname
+      fullName
       first
       middle
       last
@@ -34,6 +34,16 @@ export const getICaseFileInfoModel = /* GraphQL */ `
       piercings
       physicalDeformities
       profile
+      streetAddress
+      city
+      zip
+      state
+      country
+      personalReferences
+      businessReferences
+      romanticReferences
+      familialReferences
+      outlierAssociates
       createdAt
       updatedAt
     }
@@ -55,7 +65,7 @@ export const listICaseFileInfoModels = /* GraphQL */ `
         _user
         id
         obsId
-        fullname
+        fullName
         first
         middle
         last
@@ -80,6 +90,16 @@ export const listICaseFileInfoModels = /* GraphQL */ `
         piercings
         physicalDeformities
         profile
+        streetAddress
+        city
+        zip
+        state
+        country
+        personalReferences
+        businessReferences
+        romanticReferences
+        familialReferences
+        outlierAssociates
         createdAt
         updatedAt
       }

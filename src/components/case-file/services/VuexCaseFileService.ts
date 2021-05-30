@@ -3,9 +3,9 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 import store from '@/store'
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import { getICaseFileInfoModel } from '@/graphql/queries'
-import IVuexCaseFileService from '../services/IVuexCaseFileService'
-@Module({ dynamic: true, store, name: 'CaseFileStore' })
-export default class CaseFileStore extends VuexModule {
+import IVuexCaseFileService from './IVuexCaseFileService'
+
+export default class VuexCaseFileService implements IVuexCaseFileService {
   private caseFiles: ICaseFileInfoModel[] = []
 
   get getMultipleCaseFiles () : (filter: object) => ICaseFileInfoModel[] {
@@ -20,13 +20,9 @@ export default class CaseFileStore extends VuexModule {
     }
   }
 
-  @Action({ commit: 'storeCaseFile' })
   public saveCaseFiles (newCaseFiles: ICaseFileInfoModel[]) : ICaseFileInfoModel[] {
     return newCaseFiles
   }
 
-  @Mutation
-  public storeCaseFile (newCaseFiles: ICaseFileInfoModel[]) {
-    this.caseFiles = [...newCaseFiles]
-  }
+  public updateCaseFile () {}
 }

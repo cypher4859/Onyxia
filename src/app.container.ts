@@ -17,6 +17,8 @@ import MenuItemService from '@/services/implementations/MenuItemService'
 import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
 import ISettingsGlobalService from '@/components/settings-global/services/ISettingsGlobalService'
 import SettingsGlobalService from '@/components/settings-global/services/SettingsGlobalService'
+import IVuexCaseFileService from '@/components/case-file/services/IVuexCaseFileService'
+import VuexCaseFileService from '@/components/case-file/services/VuexCaseFileService'
 
 export default function registerContainerServices () {
   container.options.skipBaseClassChecks = true
@@ -28,4 +30,5 @@ export default function registerContainerServices () {
   container.bind<ICameraMonitorService>(TYPES.ICameraMonitorService).to(CameraMonitorService)
   container.bind<ICaseFileInfoService>(TYPES.ICaseFileInfoService).to(CaseFileInfoService)
   container.bind<ISettingsGlobalService>(TYPES.ISettingsGlobalService).to(SettingsGlobalService)
+  container.bind<IVuexCaseFileService>(TYPES.IVuexCaseFileService).to(VuexCaseFileService)
 }

@@ -12,7 +12,8 @@ const TYPES : IRegistryTypes = {
   ICaseFileService: Symbol('ICaseFileService'),
   ICaseFileInfoService: Symbol('ICaseFileInfoService'),
   ICameraMonitorService: Symbol('ICameraMonitorService'),
-  ISettingsGlobalService: Symbol('ISettingsGlobalService')
+  ISettingsGlobalService: Symbol('ISettingsGlobalService'),
+  IVuexCaseFileService: Symbol('IVuexCaseFileService')
 }
 
 export default TYPES

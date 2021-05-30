@@ -3,5 +3,5 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 
 export default interface ICaseFileService extends IService {
   getCaseFileDetails(id: string) : any
-  getAllCaseFiles(filter: object) : Promise<ICaseFileInfoModel[]>
+  getAllCaseFiles(filter?: object) : Promise<ICaseFileInfoModel[]>
 }

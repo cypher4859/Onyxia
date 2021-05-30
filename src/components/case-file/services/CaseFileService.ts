@@ -27,7 +27,9 @@ export default class extends MenuItemService implements ICaseFileService {
   public async getAllCaseFiles (filter: object = {}) : Promise<ICaseFileInfoModel[]> {
     Object.assign(filter, { _deleted: { eq: false }, _user: { eq: 'cypher' } })
     const caseFiles = this.vuexCaseFileService.getMultipleCaseFiles(filter)
+    console.log('Case Files in Store before grabbing from API: ', caseFiles)
     if (caseFiles.length < 1) {
+      console.log('No casefiles in store...')
       let caseFilesToReturn: ICaseFileInfoModel[] = []
       await this.loadCaseFilesIntoStore(filter)
         .then((result) => {
@@ -37,6 +39,7 @@ export default class extends MenuItemService implements ICaseFileService {
           console.error(e)
           caseFilesToReturn = []
         })
+      console.log('Returning the casefiles we have loaded...')
       return caseFilesToReturn
     } else {
       return caseFiles
@@ -44,6 +47,7 @@ export default class extends MenuItemService implements ICaseFileService {
   }
 
   public async loadCaseFilesIntoStore (filter: object) {
+    console.log('Loading casefiles in store...')
     return Promise.resolve(
       await this.apiGetCaseFiles(filter).then((result) => {
         this.vuexCaseFileService.saveCaseFiles(result)
@@ -66,6 +70,7 @@ export default class extends MenuItemService implements ICaseFileService {
         filter: filter
       }
     })
+    console.log('Grabbed casefiles from the API...')
     return (caseFiles as any).data.listICaseFileInfoModels.items as ICaseFileInfoModel[]
   }
 }

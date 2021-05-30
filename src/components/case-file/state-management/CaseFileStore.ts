@@ -10,13 +10,13 @@ export default class CaseFileStore extends VuexModule {
 
   get getMultipleCaseFiles () : (filter: object) => ICaseFileInfoModel[] {
     return (filter: object) : ICaseFileInfoModel[] => {
-      return []
+      return this.caseFiles.filter((caseFile) => filter)
     }
   }
 
-  get getSingleCaseFile () : (filter: object) => ICaseFileInfoModel[] {
-    return (filter: object) : ICaseFileInfoModel[] => {
-      return []
+  get getSingleCaseFile () : (id: string) => ICaseFileInfoModel {
+    return (id: string) : ICaseFileInfoModel => {
+      return this.caseFiles.filter((caseFile) => { return caseFile.id === id })[0]
     }
   }
 

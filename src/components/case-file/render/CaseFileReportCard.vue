@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="model">
     <v-row dense>
       <v-col
         cols="12"

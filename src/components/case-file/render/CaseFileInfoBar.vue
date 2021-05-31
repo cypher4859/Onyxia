@@ -29,7 +29,7 @@
           <v-btn
             icon
             color="success"
-            :to="{ path: '/case-file-report', params: { model: model }}"
+            :to="{ name: 'Case File Report', params: { model: model }}"
           >
             <v-icon>mdi-export</v-icon>
           </v-btn>
@@ -52,5 +52,9 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 })
 export default class CaseFileInfoBar extends Vue {
   @Prop(Object) model!: ICaseFileInfoModel
+
+  mounted () {
+    console.log('Info Bar model: ', this.model)
+  }
 }
 </script>

@@ -34,9 +34,7 @@ export default class CaseFileCard extends Vue {
   async mounted () {
     await Promise.resolve(this.caseFileService.getAllCaseFiles()).then((result) => {
       this.caseFiles = result
-      console.log(this.caseFiles)
     })
   }
-  // private caseFileModel: ICaseFileInfoModel = this.caseFileService.getDefaultModel()
 }
 </script>

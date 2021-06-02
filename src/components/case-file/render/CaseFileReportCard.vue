@@ -22,10 +22,10 @@
               <v-text-field
                 v-model="model.fullName"
                 label="Full Name"
-                color="success"
                 outlined
                 shaped
-                success
+                color="success"
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -36,7 +36,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules(20)"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -49,7 +49,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules(2)"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -60,7 +60,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules(2)"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -71,7 +71,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules(4)"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -84,7 +84,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -95,7 +95,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -106,7 +106,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -117,7 +117,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -130,7 +130,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -141,7 +141,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -152,7 +152,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -163,7 +163,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -176,7 +176,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -191,7 +191,7 @@
                 color="success"
                 outlined
                 shaped
-                success
+                :rules="maxLengthRules()"
                 :readonly="!isEditable"
               />
             </v-col>
@@ -202,7 +202,6 @@
                 color="success"
                 outlined
                 shaped
-                success
                 :readonly="!isEditable"
               />
             </v-col> -->
@@ -213,7 +212,6 @@
                 color="success"
                 outlined
                 shaped
-                success
                 :readonly="!isEditable"
               />
             </v-col> -->
@@ -224,7 +222,6 @@
                 color="success"
                 outlined
                 shaped
-                success
                 :readonly="!isEditable"
               />
             </v-col> -->
@@ -232,6 +229,14 @@
         </div>
       </v-container>
     </v-card>
+    <!-- <v-row dense>
+      <v-col
+        cols="12"
+        md="1"
+      >
+        <save-btn />
+      </v-col>
+    </v-row> -->
     <snackbar-alert
       :snack-bar-message="snackBarMessage()"
       :show-snackbar="showIsEditableSnackbar"
@@ -249,8 +254,9 @@ import CaseFileReportCardIdentity from './CaseFileReportCardIdentity.vue'
 import CaseFileReportCardReferencesCard from './CaseFileReportCardReferences.vue'
 import CaseFileReportCardLocation from './CaseFileReportCardLocation.vue'
 import IPersonOfInterest from '../types/IPersonOfInterest'
-import { Prop } from 'vue-property-decorator'
+import { Mixins, Prop } from 'vue-property-decorator'
 import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
+import CaseFileValidators from '../CaseFileValidatorsMixin'
 
 @Component({
   name: 'CaseFileReportCard',
@@ -263,7 +269,7 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
     'report-location': CaseFileReportCardLocation
   }
 })
-export default class CaseFileReportCard extends Vue {
+export default class CaseFileReportCard extends Mixins(CaseFileValidators) {
   private isEditable : boolean = false
   private showIsEditableSnackbar : boolean = false
 

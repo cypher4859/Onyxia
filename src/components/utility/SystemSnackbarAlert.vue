@@ -3,8 +3,10 @@
     <v-snackbar
       v-model="showSnackbar"
       top
-      left
+      right
       :timeout="1800"
+      color="primary"
+      text
     >
       <span color="success">
         {{ snackBarMessage }}

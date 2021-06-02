@@ -1,14 +1,15 @@
 <template>
   <v-container v-if="model">
-    <v-row dense>
-      <v-col
-        cols="12"
-        md="1"
-      >
-        <back-btn />
-      </v-col>
+    <v-row>
       <v-col>
-        <edit-btn @toggleIsEditable="toggleIsEditableFlag()" />
+        <div class="d-flex justify-start">
+          <div class="ma-1">
+            <back-btn />
+          </div>
+          <div class="ma-1">
+            <edit-btn @toggleIsEditable="toggleIsEditableFlag()" />
+          </div>
+        </div>
       </v-col>
     </v-row>
     <v-card
@@ -229,18 +230,19 @@
         </div>
       </v-container>
     </v-card>
-    <!-- <v-row dense>
-      <v-col
-        cols="12"
-        md="1"
-      >
-        <save-btn />
+    <v-row>
+      <v-col>
+        <div class="d-flex justify-end">
+          <save-btn
+            @save="caseFileService.save(model)"
+          />
+        </div>
       </v-col>
-    </v-row> -->
-    <snackbar-alert
+    </v-row>
+    <!-- <snackbar-alert
       :snack-bar-message="snackBarMessage()"
-      :show-snackbar="showIsEditableSnackbar"
-    />
+      :show-snackbar="computeShowIsEditableSnackbar"
+    /> -->
   </v-container>
 </template>
 
@@ -255,14 +257,19 @@ import CaseFileReportCardReferencesCard from './CaseFileReportCardReferences.vue
 import CaseFileReportCardLocation from './CaseFileReportCardLocation.vue'
 import IPersonOfInterest from '../types/IPersonOfInterest'
 import { Mixins, Prop } from 'vue-property-decorator'
+import { inject } from 'inversify-props'
 import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 import CaseFileValidators from '../CaseFileValidatorsMixin'
+import SaveButton from '@/components/utility/SaveButton.vue'
+import ICaseFileService from '../services/ICaseFileService'
+import TYPES from '@/InjectableTypes/types'
 
 @Component({
   name: 'CaseFileReportCard',
   components: {
     'back-btn': RouterBackButton,
     'edit-btn': EditButton,
+    'save-btn': SaveButton,
     'snackbar-alert': SnackbarAlert,
     'report-identity': CaseFileReportCardIdentity,
     'report-references': CaseFileReportCardReferencesCard,
@@ -270,6 +277,9 @@ import CaseFileValidators from '../CaseFileValidatorsMixin'
   }
 })
 export default class CaseFileReportCard extends Mixins(CaseFileValidators) {
+  @inject(TYPES.ICaseFileService)
+  public caseFileService!: ICaseFileService
+
   private isEditable : boolean = false
   private showIsEditableSnackbar : boolean = false
 
@@ -277,15 +287,11 @@ export default class CaseFileReportCard extends Mixins(CaseFileValidators) {
 
   public toggleIsEditableFlag () : void {
     this.isEditable = !this.isEditable
-    this.showIsEditableSnackbar = true
+    this.$toasted.success(this.snackBarMessage, { duration: 2000 })
   }
 
-  private snackBarMessage () : string {
+  get snackBarMessage () : string {
     return !this.isEditable ? 'Edit Mode:   OFF' : 'Edit Mode:   ON'
-  }
-
-  mounted () {
-    console.log('Report: ', this.model)
   }
 }
 </script>

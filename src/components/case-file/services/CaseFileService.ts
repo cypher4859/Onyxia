@@ -68,4 +68,8 @@ export default class extends MenuItemService implements ICaseFileService {
     })
     return (caseFiles as any).data.listICaseFileInfoModels.items as ICaseFileInfoModel[]
   }
+
+  public async save (caseFile: ICaseFileInfoModel) {
+    console.log('Saving: ', caseFile)
+  }
 }

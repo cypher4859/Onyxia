@@ -7,6 +7,7 @@ import registerContainerServices from './app.container'
 import 'reflect-metadata'
 import Amplify from 'aws-amplify'
 import config from './aws-exports'
+import Toasted from 'vue-toasted'
 
 Amplify.configure(config)
 
@@ -25,6 +26,7 @@ class AppSetup {
   }
 
   private loadApp (): void {
+    Vue.use(Toasted)
     Vue.config.productionTip = false
     new Vue({
       router,

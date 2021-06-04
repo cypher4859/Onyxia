@@ -72,5 +72,13 @@ export default class extends MenuItemService implements ICaseFileService {
   public async save (caseFile: ICaseFileInfoModel, savedCaseFile: ICaseFileInfoModel) {
     console.log('Saving: ', caseFile)
     console.log('Old Saved CaseFile: ', savedCaseFile)
+    // save on API side
+    // save on the store
+  }
+
+  public async deleteCaseFiles (caseFiles: ICaseFileInfoModel[]) {
+    console.log('Deleting following casefiles: ', caseFiles)
+    // Delete on API side
+    // then Delete on Store side
   }
 }

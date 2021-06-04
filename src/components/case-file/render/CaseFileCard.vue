@@ -174,7 +174,7 @@ export default class CaseFileCard extends Vue {
   }
 
   private deleteSelectedCaseFiles () : void {
-    console.log('Deleting following casefiles: ', this.selectedCaseFiles)
+    this.caseFileService.deleteCaseFiles(this.selectedCaseFiles)
     this.selectedCaseFiles = []
     this.changeSelectMode()
     this.showDeleteWarning = false

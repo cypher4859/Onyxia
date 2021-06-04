@@ -1,6 +1,12 @@
 <template>
-  <v-container fluid>
-    <v-row>
+  <v-container>
+    <v-row
+      dense
+      no-gutters
+    >
+      <slot
+        name="caseFileSelection"
+      />
       <v-col>
         <v-toolbar prominent>
           <v-col>

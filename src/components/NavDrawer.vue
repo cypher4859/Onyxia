@@ -44,13 +44,13 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-content>
+      <v-main>
         <v-container>
           <v-fade-transition mode="out-in">
             <router-view :key="$route.fullPath" />
           </v-fade-transition>
         </v-container>
-      </v-content>
+      </v-main>
     </v-card>
   </v-container>
 </template>

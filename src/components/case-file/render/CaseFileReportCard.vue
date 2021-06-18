@@ -1,319 +1,342 @@
 <template>
-  <v-container
-    v-if="model"
-    fluid
-  >
-    <v-row no-gutters>
-      <v-col>
-        <div class="d-flex justify-start">
-          <div class="ma-1">
-            <back-btn />
-          </div>
-          <div class="ma-1">
-            <edit-btn @toggleIsEditable="toggleIsEditableFlag()" />
-          </div>
-        </div>
-      </v-col>
-    </v-row>
-    <v-card
-      class="d-flex justify-center align-center"
-      elevation="19"
+  <div>
+    <v-container
+      v-if="model"
+      fluid
     >
-      <v-container>
-        <div>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.fullName"
-                label="Full Name"
-                outlined
-                shaped
-                color="success"
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
+      <v-row no-gutters>
+        <v-col>
+          <div class="d-flex justify-start align-center">
+            <div class="ma-1">
+              <back-btn />
+            </div>
+            <div class="ma-1">
+              <edit-btn
+                @toggleIsEditable="toggleIsEditableFlag()"
               />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.socialSecurityNumber"
-                label="Social Security Number"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules(20)"
-                :readonly="!isEditable"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.month"
-                label="Month"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules(2)"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.day"
-                label="Day"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules(2)"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.year"
-                label="Year"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules(4)"
-                :readonly="!isEditable"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.first"
-                label="First Name"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.middle"
-                label="Middle Name"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.last"
-                label="Last Name"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.additional"
-                label="Additional Names"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.streetAddress"
-                label="Street Address"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.city"
-                label="City"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.zip"
-                label="Zip"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.state"
-                label="State"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.country"
-                label="Country"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-          </v-row>
-        </div>
-        <div>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="workingCopy.phones[0]"
-                label="Phone Number"
-                color="success"
-                outlined
-                shaped
-                :rules="maxLengthRules()"
-                :readonly="!isEditable"
-              />
-            </v-col>
-            <!-- <v-col>
-              <v-text-field
-                v-model="workingCopy['current-workplace']"
-                label="Current Workplace"
-                color="success"
-                outlined
-                shaped
-                :readonly="!isEditable"
-              />
-            </v-col> -->
-            <!-- <v-col>
-              <v-text-field
-                v-model="workingCopy['previous-workplaces']"
-                label="Previous Workplaces"
-                color="success"
-                outlined
-                shaped
-                :readonly="!isEditable"
-              />
-            </v-col> -->
-            <!-- <v-col>
-              <v-text-field
-                v-model="workingCopy['family']"
-                label="Family Members"
-                color="success"
-                outlined
-                shaped
-                :readonly="!isEditable"
-              />
-            </v-col> -->
-          </v-row>
-        </div>
-      </v-container>
-    </v-card>
-    <v-row>
-      <v-col>
-        <div class="d-flex justify-end">
-          <save-btn
-            :disabled="changesHaveBeenMade"
-            @save="showSaveConfirmation = true"
-          />
-        </div>
-      </v-col>
-    </v-row>
-    <v-dialog
-      v-model="showDeleteWorkingCopyDialog"
-      transition="dialog-bottom-transition"
-      max-width="600"
-      max-height="400"
-    >
-      <v-card>
-        <v-container>
-          <v-card-title>
-            Unsaved Progress
-          </v-card-title>
-          <div class="d-flex align-content-center justify-center ma0-4">
-            {{ deleteWorkingCopyWarningMessage }}
+            </div>
           </div>
-          <div class="d-flex align-content-center justify-center ma-4">
-            <v-btn
-              class="d-flex ma-2"
-              @click="deleteWorkingCopy()"
+          <div
+            v-if="isEditable"
+            class="d-flex justify-start ma-1 align-center"
+          >
+            <v-icon
+              large
+              color="blue darken-1"
             >
-              <div class="primary-content-button-text">
-                Continue
-              </div>
-            </v-btn>
-            <v-btn
-              class="d-flex ma-2"
-              @click="showDeleteWorkingCopyDialog = false"
+              mdi-pencil-circle-outline
+            </v-icon>
+            <span
+              class="mx-2 subtitle-1 font-weight-medium"
+              color="blue darken-1"
             >
-              <div class="primary-content-button-text">
-                Cancel
-              </div>
-            </v-btn>
+              EDITING
+            </span>
           </div>
-        </v-container>
+        </v-col>
+      </v-row>
+      <v-card
+        class="d-flex justify-center align-center"
+        elevation="19"
+      >
+        <v-form>
+          <v-container>
+            <div>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.fullName"
+                    label="Full Name"
+                    outlined
+                    shaped
+                    color="success"
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.socialSecurityNumber"
+                    label="Social Security Number"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(20)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.month"
+                    label="Month"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(2)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.day"
+                    label="Day"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(2)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.year"
+                    label="Year"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(4)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.first"
+                    label="First Name"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.middle"
+                    label="Middle Name"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.last"
+                    label="Last Name"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.additional"
+                    label="Additional Names"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.streetAddress"
+                    label="Street Address"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.city"
+                    label="City"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.zip"
+                    label="Zip"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.state"
+                    label="State"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.country"
+                    label="Country"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+            </div>
+            <div>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.phones[0]"
+                    label="Phone Number"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <!-- <v-col>
+                  <v-text-field
+                    v-model="workingCopy['current-workplace']"
+                    label="Current Workplace"
+                    color="success"
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col> -->
+                <!-- <v-col>
+                  <v-text-field
+                    v-model="workingCopy['previous-workplaces']"
+                    label="Previous Workplaces"
+                    color="success"
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col> -->
+                <!-- <v-col>
+                  <v-text-field
+                    v-model="workingCopy['family']"
+                    label="Family Members"
+                    color="success"
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col> -->
+              </v-row>
+            </div>
+          </v-container>
+        </v-form>
       </v-card>
-    </v-dialog>
-    <v-dialog
-      v-model="showSaveConfirmation"
-      transition="dialog-bottom-transition"
-      max-width="600"
-      max-height="400"
-    >
-      <v-card>
-        <v-container>
-          <v-card-title>
-            Save
-          </v-card-title>
-          <div class="d-flex align-content-center justify-center ma0-4">
-            {{ showSaveConfirmationMessage }}
+      <v-row>
+        <v-col>
+          <div class="d-flex justify-end">
+            <save-btn
+              :disabled="changesHaveBeenMade"
+              @save="showSaveConfirmation = true"
+            />
           </div>
-          <div class="d-flex align-content-center justify-center ma-4">
-            <v-btn
-              class="d-flex ma-2"
-              @click="saveWorkingCopy()"
-            >
-              <div class="primary-content-button-text">
-                Continue
-              </div>
-            </v-btn>
-            <v-btn
-              class="d-flex ma-2"
-              @click="showSaveConfirmation = false"
-            >
-              <div class="primary-content-button-text">
-                Cancel
-              </div>
-            </v-btn>
-          </div>
-        </v-container>
-      </v-card>
-    </v-dialog>
-  </v-container>
+        </v-col>
+      </v-row>
+      <v-dialog
+        v-model="showDeleteWorkingCopyDialog"
+        transition="dialog-bottom-transition"
+        max-width="600"
+        max-height="400"
+      >
+        <v-card>
+          <v-container>
+            <v-card-title>
+              Unsaved Progress
+            </v-card-title>
+            <div class="d-flex align-content-center justify-center ma0-4">
+              {{ deleteWorkingCopyWarningMessage }}
+            </div>
+            <div class="d-flex align-content-center justify-center ma-4">
+              <v-btn
+                class="d-flex ma-2"
+                @click="deleteWorkingCopy()"
+              >
+                <div class="primary-content-button-text">
+                  Continue
+                </div>
+              </v-btn>
+              <v-btn
+                class="d-flex ma-2"
+                @click="showDeleteWorkingCopyDialog = false"
+              >
+                <div class="primary-content-button-text">
+                  Cancel
+                </div>
+              </v-btn>
+            </div>
+          </v-container>
+        </v-card>
+      </v-dialog>
+      <v-dialog
+        v-model="showSaveConfirmation"
+        transition="dialog-bottom-transition"
+        max-width="600"
+        max-height="400"
+      >
+        <v-card>
+          <v-container>
+            <v-card-title>
+              Save
+            </v-card-title>
+            <div class="d-flex align-content-center justify-center ma0-4">
+              {{ showSaveConfirmationMessage }}
+            </div>
+            <div class="d-flex align-content-center justify-center ma-4">
+              <v-btn
+                class="d-flex ma-2"
+                @click="saveWorkingCopy()"
+              >
+                <div class="primary-content-button-text">
+                  Continue
+                </div>
+              </v-btn>
+              <v-btn
+                class="d-flex ma-2"
+                @click="showSaveConfirmation = false"
+              >
+                <div class="primary-content-button-text">
+                  Cancel
+                </div>
+              </v-btn>
+            </div>
+          </v-container>
+        </v-card>
+      </v-dialog>
+    </v-container>
+  </div>
 </template>
 
 <script lang="ts">

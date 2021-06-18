@@ -8,6 +8,8 @@ import { getICaseFileInfoModel, listICaseFileInfoModels } from '@/graphql/querie
 import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 import TYPES from '@/InjectableTypes/types'
 import IVuexCaseFileService from './IVuexCaseFileService'
+import { isEqual } from 'lodash'
+import { createICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
 
 @injectable()
 export default class extends MenuItemService implements ICaseFileService {
@@ -72,7 +74,26 @@ export default class extends MenuItemService implements ICaseFileService {
   public async save (caseFile: ICaseFileInfoModel, savedCaseFile: ICaseFileInfoModel) {
     console.log('Saving: ', caseFile)
     console.log('Old Saved CaseFile: ', savedCaseFile)
-    // save on API side
+    // Check for differences
+    if (caseFile && savedCaseFile && !isEqual(caseFile, savedCaseFile)) {
+      // case file is being updated
+      // update
+      console.log('Updating existing casefile with (old, new): ', savedCaseFile, caseFile)
+      await API.graphql({
+        query: updateICaseFileInfoModel,
+        variables: { input: caseFile }
+      })
+    } else if (caseFile && !savedCaseFile) {
+      // brand new case file
+      // save
+      console.log('Saving new caseFile')
+      // await API.graphql({
+      //   query: createICaseFileInfoModel,
+      //   variables: { input: caseFile }
+      // })
+    }
+    // If it's a brand new case file than save
+    // Confirm that it's saved on API side then
     // save on the store
   }
 

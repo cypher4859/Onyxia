@@ -8,7 +8,7 @@ import { getICaseFileInfoModel, listICaseFileInfoModels } from '@/graphql/querie
 import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 import TYPES from '@/InjectableTypes/types'
 import IVuexCaseFileService from './IVuexCaseFileService'
-import { isEqual } from 'lodash'
+import { isEqual, omit } from 'lodash'
 import { createICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
 
 @injectable()
@@ -68,22 +68,27 @@ export default class extends MenuItemService implements ICaseFileService {
         filter: filter
       }
     })
-    return (caseFiles as any).data.listICaseFileInfoModels.items as ICaseFileInfoModel[]
+    const rawCaseFiles = (caseFiles as any).data.listICaseFileInfoModels.items as ICaseFileInfoModel[]
+    const cleanedCaseFiles = rawCaseFiles.map((caseFile) => {
+      return omit(caseFile!, ['createdAt', 'updatedAt'])
+    })
+    console.log('cleaned case files: ', cleanedCaseFiles)
+    return cleanedCaseFiles as ICaseFileInfoModel[]
   }
 
-  public async save (caseFile: ICaseFileInfoModel, savedCaseFile: ICaseFileInfoModel) {
-    console.log('Saving: ', caseFile)
+  public async save (workingCopy: ICaseFileInfoModel, savedCaseFile: ICaseFileInfoModel) {
+    console.log('Saving: ', workingCopy)
     console.log('Old Saved CaseFile: ', savedCaseFile)
     // Check for differences
-    if (caseFile && savedCaseFile && !isEqual(caseFile, savedCaseFile)) {
+    if (workingCopy && savedCaseFile && !isEqual(workingCopy, savedCaseFile)) {
       // case file is being updated
       // update
-      console.log('Updating existing casefile with (old, new): ', savedCaseFile, caseFile)
+      console.log('Updating existing casefile with (old, new): ', savedCaseFile, workingCopy)
       await API.graphql({
         query: updateICaseFileInfoModel,
-        variables: { input: caseFile }
+        variables: { input: workingCopy }
       })
-    } else if (caseFile && !savedCaseFile) {
+    } else if (workingCopy && !savedCaseFile) {
       // brand new case file
       // save
       console.log('Saving new caseFile')

@@ -17,8 +17,8 @@ export default class VuexCaseFileService implements IVuexCaseFileService {
     }
   }
 
-  get getSingleCaseFile () : (id: string) => ICaseFileInfoModel {
-    return (id: string) : ICaseFileInfoModel => {
+  get getSingleCaseFile () : (id: string) => ICaseFileInfoModel | null {
+    return (id: string) : ICaseFileInfoModel | null => {
       return caseFileStore.getSingleCaseFile(id)
     }
   }

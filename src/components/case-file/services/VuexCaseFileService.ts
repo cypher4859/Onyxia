@@ -27,5 +27,8 @@ export default class VuexCaseFileService implements IVuexCaseFileService {
     return caseFileStore.saveCaseFiles(newCaseFiles)
   }
 
-  public updateCaseFile () {}
+  public updateCaseFile (caseFile: ICaseFileInfoModel) : void {
+    console.log('Updating with: ', caseFile)
+    caseFileStore.updateCaseFile(caseFile)
+  }
 }

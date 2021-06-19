@@ -10,6 +10,7 @@ import TYPES from '@/InjectableTypes/types'
 import IVuexCaseFileService from './IVuexCaseFileService'
 import { isEqual, omit } from 'lodash'
 import { createICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
+import IBaseService from '@/services/interfaces/IBaseService'
 
 @injectable()
 export default class extends MenuItemService implements ICaseFileService {
@@ -54,11 +55,12 @@ export default class extends MenuItemService implements ICaseFileService {
     )
   }
 
-  public async getCaseFileDetails (id: string) {
-    return API.graphql({
-      query: getICaseFileInfoModel,
-      variables: { id: id }
-    })
+  public getCaseFileDetails (id: string) : ICaseFileInfoModel {
+    return this.vuexCaseFileService.getSingleCaseFile(id)
+    // return API.graphql({
+    //   query: getICaseFileInfoModel,
+    //   variables: { id: id }
+    // })
   }
 
   public async apiGetCaseFiles (filter: object) : Promise<ICaseFileInfoModel[]> {
@@ -69,25 +71,21 @@ export default class extends MenuItemService implements ICaseFileService {
       }
     })
     const rawCaseFiles = (caseFiles as any).data.listICaseFileInfoModels.items as ICaseFileInfoModel[]
-    const cleanedCaseFiles = rawCaseFiles.map((caseFile) => {
-      return omit(caseFile!, ['createdAt', 'updatedAt'])
-    })
-    console.log('cleaned case files: ', cleanedCaseFiles)
-    return cleanedCaseFiles as ICaseFileInfoModel[]
+    return this.removeAmplifyProperties(rawCaseFiles) as ICaseFileInfoModel[]
   }
 
-  public async save (workingCopy: ICaseFileInfoModel, savedCaseFile: ICaseFileInfoModel) {
-    console.log('Saving: ', workingCopy)
-    console.log('Old Saved CaseFile: ', savedCaseFile)
-    // Check for differences
+  public async save (workingCopy: ICaseFileInfoModel, savedCaseFile: ICaseFileInfoModel) : Promise<ICaseFileInfoModel> {
     if (workingCopy && savedCaseFile && !isEqual(workingCopy, savedCaseFile)) {
       // case file is being updated
-      // update
       console.log('Updating existing casefile with (old, new): ', savedCaseFile, workingCopy)
-      await API.graphql({
+      const result = await API.graphql({
         query: updateICaseFileInfoModel,
         variables: { input: workingCopy }
       })
+      const updatedCaseFile = (result as any).data.updateICaseFileInfoModel as ICaseFileInfoModel
+      const cleanedUpdatedCaseFile = this.removeAmplifyProperties([updatedCaseFile])[0] as ICaseFileInfoModel
+      this.vuexCaseFileService.updateCaseFile(cleanedUpdatedCaseFile)
+      return cleanedUpdatedCaseFile
     } else if (workingCopy && !savedCaseFile) {
       // brand new case file
       // save
@@ -96,6 +94,9 @@ export default class extends MenuItemService implements ICaseFileService {
       //   query: createICaseFileInfoModel,
       //   variables: { input: caseFile }
       // })
+      return {} as ICaseFileInfoModel
+    } else {
+      return {} as ICaseFileInfoModel
     }
     // If it's a brand new case file than save
     // Confirm that it's saved on API side then

@@ -29,4 +29,19 @@ export default class CaseFileStore extends VuexModule {
   public storeCaseFile (newCaseFiles: ICaseFileInfoModel[]) {
     this.caseFiles = [...newCaseFiles]
   }
+
+  @Action({ commit: 'updateCaseFileInStore' })
+  public updateCaseFile (caseFile: ICaseFileInfoModel) : ICaseFileInfoModel {
+    return caseFile
+  }
+
+  @Mutation
+  public updateCaseFileInStore (updatedCaseFile: ICaseFileInfoModel) {
+    const index = this.caseFiles.findIndex((caseFile) => {
+      return caseFile.id === updatedCaseFile.id
+    })
+    if (index > -1) {
+      this.caseFiles[index] = updatedCaseFile
+    }
+  }
 }

@@ -195,6 +195,8 @@ export default class CaseFileCard extends Vue {
   }
 
   private createNewCaseFile () : void {
+    const defaultNewCaseFile = this.caseFileService.createNew()
+    this.$router.push({ name: 'Case File Report', params: { model: defaultNewCaseFile } })
     // this.caseFileService.createNew()
   }
 }

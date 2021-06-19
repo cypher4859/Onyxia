@@ -396,7 +396,7 @@ export default class CaseFileReportCard extends Mixins(CaseFileValidators) {
   }
 
   private async saveWorkingCopy () : Promise<void> {
-    await this.caseFileService.save(this.workingCopy, this.model)
+    await this.caseFileService.save(this.workingCopy)
     this.showSaveConfirmation = false
     this.goBackAndRemovedUnsavedProgress()
   }

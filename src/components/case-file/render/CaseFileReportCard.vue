@@ -8,7 +8,7 @@
         <v-col>
           <div class="d-flex justify-start align-center">
             <div class="ma-1">
-              <back-btn />
+              <back-btn @go-back="showRemoveUnsavedProgressWarning()" />
             </div>
             <div class="ma-1">
               <edit-btn
@@ -259,7 +259,7 @@
         <v-col>
           <div class="d-flex justify-end">
             <save-btn
-              :disabled="changesHaveBeenMade"
+              :disabled="!changesHaveBeenMade || !isEditable"
               @save="showSaveConfirmation = true"
             />
           </div>
@@ -282,7 +282,7 @@
             <div class="d-flex align-content-center justify-center ma-4">
               <v-btn
                 class="d-flex ma-2"
-                @click="deleteWorkingCopy()"
+                @click="goBackAndRemovedUnsavedProgress()"
               >
                 <div class="primary-content-button-text">
                   Continue
@@ -290,7 +290,7 @@
               </v-btn>
               <v-btn
                 class="d-flex ma-2"
-                @click="showDeleteWorkingCopyDialog = false"
+                @click="cancelDeletingWorkingCopy()"
               >
                 <div class="primary-content-button-text">
                   Cancel
@@ -387,27 +387,22 @@ export default class CaseFileReportCard extends Mixins(CaseFileValidators) {
 
   public toggleIsEditableFlag () : void {
     this.isEditable = !this.isEditable
-    if (!this.isEditable && !isEqual(this.model, this.workingCopy)) {
-      // pop a warning notification that progress is unsaved. Which will delete the working copy
-      this.showDeleteWorkingCopyDialog = true
-    } else {
-      this.$toasted.success(this.snackBarMessage, { duration: 2000 })
-    }
+    this.$toasted.success(this.snackBarMessage, { duration: 2000 })
   }
 
   private deleteWorkingCopy () : void {
-    this.$toasted.success(this.snackBarMessage, { duration: 2000 })
     this.workingCopy = cloneDeep(this.model)
     this.showDeleteWorkingCopyDialog = false
   }
 
-  private saveWorkingCopy () : void {
-    this.caseFileService.save(this.workingCopy, this.model)
+  private async saveWorkingCopy () : Promise<void> {
+    await this.caseFileService.save(this.workingCopy, this.model)
     this.showSaveConfirmation = false
+    this.goBackAndRemovedUnsavedProgress()
   }
 
   get deleteWorkingCopyWarningMessage () : string {
-    return 'Are you sure you want to exit Edit Mode? This will remove any unsaved progress'
+    return 'Are you sure you want to leave? This will remove any unsaved progress'
   }
 
   get showSaveConfirmationMessage () : string {
@@ -419,7 +414,25 @@ export default class CaseFileReportCard extends Mixins(CaseFileValidators) {
   }
 
   get changesHaveBeenMade () {
-    return isEqual(this.model, this.workingCopy)
+    const cachedWorkingCopy = this.caseFileService.getCaseFileDetails(this.workingCopy.id)
+    console.log(!isEqual(cachedWorkingCopy, this.workingCopy))
+    return !isEqual(cachedWorkingCopy, this.workingCopy)
+  }
+
+  private cancelDeletingWorkingCopy () : void {
+    this.showDeleteWorkingCopyDialog = false
+  }
+
+  private goBackAndRemovedUnsavedProgress () : void {
+    this.$router.back()
+  }
+
+  private showRemoveUnsavedProgressWarning () : void {
+    if (this.changesHaveBeenMade) {
+      this.showDeleteWorkingCopyDialog = true
+    } else {
+      this.goBackAndRemovedUnsavedProgress()
+    }
   }
 }
 </script>

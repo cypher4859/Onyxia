@@ -8,10 +8,15 @@
           >
             Select
           </v-btn>
+          <v-btn
+            @click="createNewCaseFile"
+          >
+            Create
+          </v-btn>
         </div>
       </v-col>
       <v-col
-        v-if="selectedCaseFiles.length"
+        v-if="showDeleteButton"
         cols="2"
       >
         <div class="d-flex justify-end">
@@ -36,11 +41,11 @@
             <v-col
               v-if="selectMode"
               :cols="1"
+              align-self="center"
             >
               <v-checkbox
                 v-model="selectedCaseFiles"
                 :value="casefile"
-                class="align-content-center"
               />
             </v-col>
           </template>
@@ -153,7 +158,7 @@ export default class CaseFileCard extends Vue {
   }
 
   private enableSelectMode () : void {
-    if (this.selectMode && this.selectedCaseFiles) {
+    if (this.selectMode && this.selectedCaseFiles.length) {
       this.showDiscardSelectedCaseFileWarning = true
     } else {
       this.changeSelectMode()
@@ -170,6 +175,7 @@ export default class CaseFileCard extends Vue {
 
   private contiueDiscardDialog () : void {
     this.showDiscardSelectedCaseFileWarning = false
+    this.selectedCaseFiles = []
     this.changeSelectMode()
   }
 
@@ -182,6 +188,14 @@ export default class CaseFileCard extends Vue {
 
   get showDeletionWarningMessage () : string {
     return 'Are you sure you want to delete the currently selected case files?'
+  }
+
+  get showDeleteButton () : boolean {
+    return this.selectedCaseFiles.length > 0
+  }
+
+  private createNewCaseFile () : void {
+    // this.caseFileService.createNew()
   }
 }
 </script>

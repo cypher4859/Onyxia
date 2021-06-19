@@ -5,9 +5,9 @@ import { Vue, Component } from 'vue-property-decorator'
 
 @injectable()
 export default class BaseService extends Vue {
-  removeAmplifyProperties (objects: object[], customAttributesToRemove: string[] = []) : object[] {
+  removeAmplifyProperties (objects: object[]) : object[] {
     return objects.map((obj) => {
-      return omit(obj, ['createdAt', 'updatedAt', ...customAttributesToRemove])
+      return omit(obj, ['createdAt', 'updatedAt'])
     })
   }
 }

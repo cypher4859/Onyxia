@@ -8,7 +8,7 @@ import { getICaseFileInfoModel, listICaseFileInfoModels } from '@/graphql/querie
 import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 import TYPES from '@/InjectableTypes/types'
 import IVuexCaseFileService from './IVuexCaseFileService'
-import { isEqual, omit } from 'lodash'
+import { isEqual, omit, uniqueId } from 'lodash'
 import { createICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
 import IBaseService from '@/services/interfaces/IBaseService'
 
@@ -55,7 +55,7 @@ export default class extends MenuItemService implements ICaseFileService {
     )
   }
 
-  public getCaseFileDetails (id: string) : ICaseFileInfoModel {
+  public getCaseFileDetails (id: string) : ICaseFileInfoModel | null {
     return this.vuexCaseFileService.getSingleCaseFile(id)
     // return API.graphql({
     //   query: getICaseFileInfoModel,
@@ -74,7 +74,12 @@ export default class extends MenuItemService implements ICaseFileService {
     return this.removeAmplifyProperties(rawCaseFiles) as ICaseFileInfoModel[]
   }
 
-  public async save (workingCopy: ICaseFileInfoModel, savedCaseFile: ICaseFileInfoModel) : Promise<ICaseFileInfoModel> {
+  public createNew () : ICaseFileInfoModel {
+    return this.getDefaultCaseFileModel()
+  }
+
+  public async save (workingCopy: ICaseFileInfoModel) : Promise<ICaseFileInfoModel> {
+    const savedCaseFile: ICaseFileInfoModel | null = this.getCaseFileDetails(workingCopy.id)
     if (workingCopy && savedCaseFile && !isEqual(workingCopy, savedCaseFile)) {
       // case file is being updated
       console.log('Updating existing casefile with (old, new): ', savedCaseFile, workingCopy)
@@ -88,13 +93,14 @@ export default class extends MenuItemService implements ICaseFileService {
       return cleanedUpdatedCaseFile
     } else if (workingCopy && !savedCaseFile) {
       // brand new case file
-      // save
       console.log('Saving new caseFile')
-      // await API.graphql({
-      //   query: createICaseFileInfoModel,
-      //   variables: { input: caseFile }
-      // })
-      return {} as ICaseFileInfoModel
+      const result = await API.graphql({
+        query: createICaseFileInfoModel,
+        variables: { input: omit(workingCopy, ['id']) }
+      })
+      const cleanedUpResult = (result as any).data.createICaseFileInfoModel as ICaseFileInfoModel
+      this.vuexCaseFileService.saveCaseFiles([cleanedUpResult])
+      return cleanedUpResult
     } else {
       return {} as ICaseFileInfoModel
     }
@@ -107,5 +113,49 @@ export default class extends MenuItemService implements ICaseFileService {
     console.log('Deleting following casefiles: ', caseFiles)
     // Delete on API side
     // then Delete on Store side
+  }
+
+  private getDefaultCaseFileModel () : ICaseFileInfoModel {
+    return {
+      _deleted: false,
+      _user: 'cypher',
+      id: '',
+      obsId: uniqueId(),
+      fullName: '',
+      first: '',
+      middle: '',
+      last: '',
+      suffix: '',
+      additional: '',
+      month: '',
+      day: '',
+      year: '',
+      date: '',
+      age: '',
+      socialSecurityNumber: '',
+      driversLicenseNumber: '',
+      passportIdentifier: '',
+      phones: [],
+      emails: [],
+      messagingApplications: [],
+      streetAddress: '',
+      city: '',
+      zip: '',
+      state: '',
+      country: '',
+      personalReferences: [],
+      businessReferences: [],
+      romanticReferences: [],
+      familialReferences: [],
+      outlierAssociates: [],
+      height: '',
+      weight: '',
+      eyeColor: '',
+      hairColor: '',
+      tattoos: [],
+      piercings: [],
+      physicalDeformities: [],
+      profile: ''
+    }
   }
 }

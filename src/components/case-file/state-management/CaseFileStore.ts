@@ -14,9 +14,14 @@ export default class CaseFileStore extends VuexModule {
     }
   }
 
-  get getSingleCaseFile () : (id: string) => ICaseFileInfoModel {
-    return (id: string) : ICaseFileInfoModel => {
-      return this.caseFiles.filter((caseFile) => { return caseFile.id === id })[0]
+  get getSingleCaseFile () : (id: string) => ICaseFileInfoModel | null {
+    return (id: string) : ICaseFileInfoModel | null => {
+      const foundCaseFiles = this.caseFiles.filter((caseFile) => { return caseFile.id === id })
+      if (foundCaseFiles.length) {
+        return foundCaseFiles[0]
+      } else {
+        return null
+      }
     }
   }
 
@@ -27,7 +32,7 @@ export default class CaseFileStore extends VuexModule {
 
   @Mutation
   public storeCaseFile (newCaseFiles: ICaseFileInfoModel[]) {
-    this.caseFiles = [...newCaseFiles]
+    this.caseFiles = [...this.caseFiles, ...newCaseFiles]
   }
 
   @Action({ commit: 'updateCaseFileInStore' })

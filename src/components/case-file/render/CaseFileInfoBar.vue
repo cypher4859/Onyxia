@@ -58,9 +58,5 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 })
 export default class CaseFileInfoBar extends Vue {
   @Prop(Object) model!: ICaseFileInfoModel
-
-  mounted () {
-    console.log('Info Bar model: ', this.model)
-  }
 }
 </script>

@@ -88,10 +88,8 @@ export default class extends MenuItemService implements ICaseFileService {
 
   public async save (workingCopy: ICaseFileInfoModel) : Promise<ICaseFileInfoModel> {
     const savedCaseFile: ICaseFileInfoModel | null = this.getCaseFileDetails(workingCopy.id)
-    console.log('Saved Case File', savedCaseFile)
     if (workingCopy && savedCaseFile && !isEqual(workingCopy, savedCaseFile)) {
       // case file is being updated
-      console.log('Updating existing casefile with (old, new): ', savedCaseFile, workingCopy)
       const result = await API.graphql({
         query: updateICaseFileInfoModel,
         variables: { input: workingCopy }
@@ -102,7 +100,6 @@ export default class extends MenuItemService implements ICaseFileService {
       return cleanedUpdatedCaseFile
     } else if (workingCopy && !savedCaseFile) {
       // brand new case file
-      console.log('Saving new caseFile')
       const result = await API.graphql({
         query: createICaseFileInfoModel,
         variables: { input: omit(workingCopy, ['id']) }
@@ -111,7 +108,6 @@ export default class extends MenuItemService implements ICaseFileService {
       this.vuexCaseFileService.saveCaseFiles([cleanedUpResult])
       return cleanedUpResult
     } else {
-      console.error('Outside parameters...')
       return {} as ICaseFileInfoModel
     }
     // If it's a brand new case file than save

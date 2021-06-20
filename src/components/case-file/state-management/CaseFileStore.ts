@@ -60,6 +60,5 @@ export default class CaseFileStore extends VuexModule {
     this.caseFiles = this.caseFiles.filter((caseFile) => {
       return caseFile.id !== caseFileToRemove.id
     })
-    console.log('New CaseFile Store: ', this.caseFiles)
   }
 }

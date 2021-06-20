@@ -610,7 +610,6 @@ export default class CaseFileReportCard extends Mixins(CaseFileValidators) {
 
   get changesHaveBeenMade () {
     const cachedWorkingCopy = this.caseFileService.getCaseFileDetails(this.workingCopy.id)
-    console.log(!isEqual(cachedWorkingCopy, this.workingCopy))
     return !isEqual(cachedWorkingCopy, this.workingCopy)
   }
 

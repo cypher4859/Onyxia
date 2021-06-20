@@ -218,11 +218,9 @@ export default class CaseFileCard extends Vue {
 
   private async deleteSelectedCaseFiles () : Promise<void> {
     const caseFilesToDelete = this.selectedCaseFiles.map((caseFile) => {
-      caseFile._deleted ? console.error('Fucked up go back!') : console.log('its good')
       caseFile._deleted = true
       return caseFile
     })
-    console.log('Preparing to delete', caseFilesToDelete)
     await this.caseFileService.saveAll(caseFilesToDelete).then((results) => {
       this.loadCaseFiles().then(() => {
         this.selectedCaseFiles = []

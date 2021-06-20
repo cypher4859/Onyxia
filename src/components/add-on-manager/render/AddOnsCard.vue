@@ -84,10 +84,8 @@ export default class AddOnsCard extends Vue {
   @Watch('selectedEnabledAddonsTitles', { immediate: true, deep: false })
   public syncAddonsTitlesWithEnabledDisabledAddons () : void {
     this.selectedEnabledAddonsTitles.forEach((enabledAddonTitle: string) => {
-      console.log('Checking Selection is enabled for: ', enabledAddonTitle)
       this.registeredAddons.forEach((registeredAddon: IAddon) => {
         if (registeredAddon.model.title === enabledAddonTitle && !registeredAddon.enabled) {
-          console.log('Enabling Addon since it is not enabled:', registeredAddon.model.title)
           registeredAddon.enabled = true
         }
       })

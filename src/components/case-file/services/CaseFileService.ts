@@ -9,7 +9,7 @@ import ICaseFileInfoModel from '../types/ICaseFileInfoModel'
 import TYPES from '@/InjectableTypes/types'
 import IVuexCaseFileService from './IVuexCaseFileService'
 import { isEqual, omit, uniqueId } from 'lodash'
-import { createICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
+import { createICaseFileInfoModel, deleteICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
 import IBaseService from '@/services/interfaces/IBaseService'
 
 @injectable()
@@ -78,8 +78,17 @@ export default class extends MenuItemService implements ICaseFileService {
     return this.getDefaultCaseFileModel()
   }
 
+  public async saveAll (caseFiles: ICaseFileInfoModel[]) : Promise<ICaseFileInfoModel[]> {
+    let results: any[] = []
+    for (const caseFile of caseFiles) {
+      await this.save(caseFile)
+    }
+    return results
+  }
+
   public async save (workingCopy: ICaseFileInfoModel) : Promise<ICaseFileInfoModel> {
     const savedCaseFile: ICaseFileInfoModel | null = this.getCaseFileDetails(workingCopy.id)
+    console.log('Saved Case File', savedCaseFile)
     if (workingCopy && savedCaseFile && !isEqual(workingCopy, savedCaseFile)) {
       // case file is being updated
       console.log('Updating existing casefile with (old, new): ', savedCaseFile, workingCopy)
@@ -102,6 +111,7 @@ export default class extends MenuItemService implements ICaseFileService {
       this.vuexCaseFileService.saveCaseFiles([cleanedUpResult])
       return cleanedUpResult
     } else {
+      console.error('Outside parameters...')
       return {} as ICaseFileInfoModel
     }
     // If it's a brand new case file than save
@@ -109,10 +119,17 @@ export default class extends MenuItemService implements ICaseFileService {
     // save on the store
   }
 
-  public async deleteCaseFiles (caseFiles: ICaseFileInfoModel[]) {
-    console.log('Deleting following casefiles: ', caseFiles)
-    // Delete on API side
-    // then Delete on Store side
+  public async destroyCaseFiles (caseFiles: ICaseFileInfoModel[]) : Promise<void> {
+    const results: any = []
+    for (const caseFile of caseFiles) {
+      let res = await API.graphql({
+        query: deleteICaseFileInfoModel,
+        variables: { input: { id: caseFile.id } }
+      })
+      let resultCaseFile = (res as any).data.deleteICaseFileInfoModel as ICaseFileInfoModel
+      this.vuexCaseFileService.removeCaseFile(resultCaseFile)
+      results.push(resultCaseFile)
+    }
   }
 
   private getDefaultCaseFileModel () : ICaseFileInfoModel {

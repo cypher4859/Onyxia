@@ -28,7 +28,10 @@ export default class VuexCaseFileService implements IVuexCaseFileService {
   }
 
   public updateCaseFile (caseFile: ICaseFileInfoModel) : void {
-    console.log('Updating with: ', caseFile)
     caseFileStore.updateCaseFile(caseFile)
+  }
+
+  public removeCaseFile (caseFileToRemove: ICaseFileInfoModel) : void {
+    caseFileStore.removeCaseFile(caseFileToRemove)
   }
 }

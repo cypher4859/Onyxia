@@ -49,4 +49,17 @@ export default class CaseFileStore extends VuexModule {
       this.caseFiles[index] = updatedCaseFile
     }
   }
+
+  @Action({ commit: 'removeCaseFileFromStore' })
+  public removeCaseFile (caseFile: ICaseFileInfoModel) {
+    return caseFile
+  }
+
+  @Mutation
+  public removeCaseFileFromStore (caseFileToRemove: ICaseFileInfoModel) {
+    this.caseFiles = this.caseFiles.filter((caseFile) => {
+      return caseFile.id !== caseFileToRemove.id
+    })
+    console.log('New CaseFile Store: ', this.caseFiles)
+  }
 }

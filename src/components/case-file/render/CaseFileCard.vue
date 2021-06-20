@@ -22,7 +22,7 @@
             Select
           </v-btn>
           <v-btn
-            @click="createNewCaseFile"
+            @click="$router.push({ name: 'Case File Report', params: { model: caseFileService.createNew() } })"
           >
             Create
           </v-btn>
@@ -236,12 +236,6 @@ export default class CaseFileCard extends Vue {
 
   get showDeleteButton () : boolean {
     return this.selectedCaseFiles.length > 0
-  }
-
-  private createNewCaseFile () : void {
-    const defaultNewCaseFile = this.caseFileService.createNew()
-    this.$router.push({ name: 'Case File Report', params: { modelId: defaultNewCaseFile.id } })
-    // this.caseFileService.createNew()
   }
 }
 </script>

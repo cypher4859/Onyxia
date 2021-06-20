@@ -69,41 +69,6 @@
               <v-row>
                 <v-col>
                   <v-text-field
-                    v-model="workingCopy.month"
-                    label="Month"
-                    color="success"
-                    outlined
-                    shaped
-                    :rules="maxLengthRules(2)"
-                    :readonly="!isEditable"
-                  />
-                </v-col>
-                <v-col>
-                  <v-text-field
-                    v-model="workingCopy.day"
-                    label="Day"
-                    color="success"
-                    outlined
-                    shaped
-                    :rules="maxLengthRules(2)"
-                    :readonly="!isEditable"
-                  />
-                </v-col>
-                <v-col>
-                  <v-text-field
-                    v-model="workingCopy.year"
-                    label="Year"
-                    color="success"
-                    outlined
-                    shaped
-                    :rules="maxLengthRules(4)"
-                    :readonly="!isEditable"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <v-text-field
                     v-model="workingCopy.first"
                     label="First Name"
                     color="success"
@@ -143,6 +108,65 @@
                     outlined
                     shaped
                     :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.driversLicenseNumber"
+                    label="Drivers License Number"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(20)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.passportIdentifier"
+                    label="Passport Number"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(40)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.month"
+                    label="Month"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(2)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.day"
+                    label="Day"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(2)"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.year"
+                    label="Year"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules(4)"
                     :readonly="!isEditable"
                   />
                 </v-col>
@@ -196,6 +220,93 @@
               <v-row>
                 <v-col>
                   <v-text-field
+                    v-model="workingCopy.height"
+                    label="Height"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.weight"
+                    label="Weight"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.eyeColor"
+                    label="Eye Color"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="workingCopy.hairColor"
+                    label="Hair Color"
+                    color="success"
+                    outlined
+                    shaped
+                    :rules="maxLengthRules()"
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.tattoos"
+                    color="success"
+                    label="Tattoos"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.piercings"
+                    color="success"
+                    label="Piercings"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.physicalDeformities"
+                    color="success"
+                    label="Physical Deformities"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
                     v-model="workingCopy.country"
                     label="Country"
                     color="success"
@@ -205,51 +316,135 @@
                     :readonly="!isEditable"
                   />
                 </v-col>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.phones"
+                    color="success"
+                    label="Phone Number"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
               </v-row>
             </div>
             <div>
               <v-row>
                 <v-col>
-                  <v-text-field
-                    v-model="workingCopy.phones[0]"
-                    label="Phone Number"
+                  <v-combobox
+                    v-model="workingCopy.emails"
+                    color="success"
+                    label="Emails"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.messagingApplications"
+                    color="success"
+                    label="Messaging Apps"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.personalReferences"
+                    color="success"
+                    label="Personal Connections"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.businessReferences"
+                    color="success"
+                    label="Business Associates"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.romanticReferences"
+                    color="success"
+                    label="Romantic Relations"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.familialReferences"
+                    color="success"
+                    label="Family Members"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-combobox
+                    v-model="workingCopy.outlierAssociates"
+                    color="success"
+                    label="Outlier Connections"
+                    multiple
+                    chips
+                    deletable-chips
+                    outlined
+                    shaped
+                    :readonly="!isEditable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-textarea
+                    v-model="workingCopy.profile"
+                    label="Profile & Notes"
                     color="success"
                     outlined
                     shaped
+                    rows="1"
+                    auto-grow
                     :rules="maxLengthRules()"
                     :readonly="!isEditable"
                   />
                 </v-col>
-                <!-- <v-col>
-                  <v-text-field
-                    v-model="workingCopy['current-workplace']"
-                    label="Current Workplace"
-                    color="success"
-                    outlined
-                    shaped
-                    :readonly="!isEditable"
-                  />
-                </v-col> -->
-                <!-- <v-col>
-                  <v-text-field
-                    v-model="workingCopy['previous-workplaces']"
-                    label="Previous Workplaces"
-                    color="success"
-                    outlined
-                    shaped
-                    :readonly="!isEditable"
-                  />
-                </v-col> -->
-                <!-- <v-col>
-                  <v-text-field
-                    v-model="workingCopy['family']"
-                    label="Family Members"
-                    color="success"
-                    outlined
-                    shaped
-                    :readonly="!isEditable"
-                  />
-                </v-col> -->
               </v-row>
             </div>
           </v-container>

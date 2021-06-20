@@ -1,12 +1,15 @@
 <template>
-  <v-app>
-    <v-main
-      class="fill-height"
-      fluid
-    >
-      <nav-drawer />
-    </v-main>
-  </v-app>
+  <amplify-authenticator>
+    <v-app>
+      <v-main
+        class="fill-height"
+        fluid
+      >
+        <nav-drawer />
+      </v-main>
+    </v-app>
+    <amplify-sign-out />
+  </amplify-authenticator>
 </template>
 
 <script lang="ts">

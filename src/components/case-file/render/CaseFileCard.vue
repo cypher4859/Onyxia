@@ -8,7 +8,7 @@
         <v-text-field
           v-model="searchText"
           class="mx-auto"
-          label="Name Search"
+          label="Search"
           color="success"
         />
       </v-col>

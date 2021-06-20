@@ -1,15 +1,17 @@
 <template>
   <div>
-    <v-snackbar
+    <!-- <v-snackbar
       v-model="showSnackbar"
       top
-      left
+      right
       :timeout="1800"
+      color="primary"
+      text
     >
       <span color="success">
         {{ snackBarMessage }}
       </span>
-    </v-snackbar>
+    </v-snackbar> -->
   </div>
 </template>
 
@@ -17,12 +19,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
+import Toasted from 'vue-toasted'
 
 @Component({
   name: 'SystemSnackbarAlert'
 })
 export default class SystemSnackbarAlert extends Vue {
   @Prop(String) readonly snackBarMessage!: string
-  @Prop(Boolean) readonly showSnackbar!: boolean
+  @Prop({ type: Boolean, default: false }) readonly showSnackbar!: boolean
 }
 </script>

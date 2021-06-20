@@ -44,14 +44,13 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <hello-world />
-      <v-content>
+      <v-main>
         <v-container>
           <v-fade-transition mode="out-in">
             <router-view :key="$route.fullPath" />
           </v-fade-transition>
         </v-container>
-      </v-content>
+      </v-main>
     </v-card>
   </v-container>
 </template>
@@ -67,7 +66,7 @@ import TYPES from '@/InjectableTypes/types'
 import { concat } from 'lodash'
 import { Component, Mixins } from 'vue-property-decorator'
 import { inject } from 'inversify-props'
-import ISettingsGlobalService from './home-dashboard copy/services/ISettingsGlobalService'
+import ISettingsGlobalService from '@/components/settings-global/services/ISettingsGlobalService'
 import RouteMixin from '@/mixins/route-mixin'
 
 @Component({

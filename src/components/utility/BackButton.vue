@@ -1,10 +1,11 @@
 <template>
   <div>
-    <v-btn @click="$router.back()">
+    <v-btn @click="backClick()">
       <div class="primary-content-button-text">
         Back
       </div>
     </v-btn>
+    <slot name="warning" />
   </div>
 </template>
 
@@ -16,6 +17,8 @@ import Component from 'vue-class-component'
   name: 'RouterBackButton'
 })
 export default class RouterBackButton extends Vue {
-
+  private backClick () : void {
+    this.$emit('go-back')
+  }
 }
 </script>

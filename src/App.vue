@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <v-content
+    <v-main
       class="fill-height"
       fluid
     >
       <nav-drawer />
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

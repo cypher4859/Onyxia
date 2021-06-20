@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-btn @click="$emit('toggleIsEditable')">
+    <v-btn
+      :elevation="changeElevation"
+      @click="callToggle()"
+    >
       <div class="primary-content-button-text">
         Edit
       </div>
@@ -16,6 +19,14 @@ import Component from 'vue-class-component'
   name: 'EditButton'
 })
 export default class EditButton extends Vue {
+  private clickedElevationRaised: boolean = false
+  private callToggle () : void {
+    this.clickedElevationRaised = !this.clickedElevationRaised
+    this.$emit('toggleIsEditable')
+  }
 
+  get changeElevation () : number {
+    return this.clickedElevationRaised ? 16 : 1
+  }
 }
 </script>

@@ -15,8 +15,12 @@ import TYPES from '@/InjectableTypes/types'
 import IMenuItemService from '@/services/interfaces/IMenuItemService'
 import MenuItemService from '@/services/implementations/MenuItemService'
 import CameraMonitorService from '@/components/camera-monitor/services/CameraMonitorService'
-import ISettingsGlobalService from '@/components/home-dashboard copy/services/ISettingsGlobalService'
-import SettingsGlobalService from '@/components/home-dashboard copy/services/SettingsGlobalService'
+import ISettingsGlobalService from '@/components/settings-global/services/ISettingsGlobalService'
+import SettingsGlobalService from '@/components/settings-global/services/SettingsGlobalService'
+import IVuexCaseFileService from '@/components/case-file/services/IVuexCaseFileService'
+import VuexCaseFileService from '@/components/case-file/services/VuexCaseFileService'
+import IBaseService from './services/interfaces/IBaseService'
+import BaseService from './services/implementations/BaseService'
 
 export default function registerContainerServices () {
   container.options.skipBaseClassChecks = true
@@ -28,4 +32,6 @@ export default function registerContainerServices () {
   container.bind<ICameraMonitorService>(TYPES.ICameraMonitorService).to(CameraMonitorService)
   container.bind<ICaseFileInfoService>(TYPES.ICaseFileInfoService).to(CaseFileInfoService)
   container.bind<ISettingsGlobalService>(TYPES.ISettingsGlobalService).to(SettingsGlobalService)
+  container.bind<IVuexCaseFileService>(TYPES.IVuexCaseFileService).to(VuexCaseFileService)
+  container.bind<IBaseService>(TYPES.IBaseService).to(BaseService)
 }

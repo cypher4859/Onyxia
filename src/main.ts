@@ -5,6 +5,11 @@ import store from '@/store'
 import vuetify from '@/plugins/vuetify'
 import registerContainerServices from './app.container'
 import 'reflect-metadata'
+import Amplify from 'aws-amplify'
+import config from './aws-exports'
+import Toasted from 'vue-toasted'
+
+Amplify.configure(config)
 
 // css
 require('@mdi/font/css/materialdesignicons.css')
@@ -21,6 +26,7 @@ class AppSetup {
   }
 
   private loadApp (): void {
+    Vue.use(Toasted)
     Vue.config.productionTip = false
     new Vue({
       router,

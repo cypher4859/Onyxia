@@ -1,6 +1,19 @@
 <template>
   <div>
     <v-row>
+      <v-col
+        cols="8"
+        offset="2"
+      >
+        <v-text-field
+          v-model="searchText"
+          class="mx-auto"
+          label="Name Search"
+          color="success"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col>
         <div class="d-flex justify-end">
           <v-btn
@@ -28,30 +41,39 @@
         </div>
       </v-col>
     </v-row>
-    <div
-      v-for="(casefile, index) in caseFiles"
-      :key="index"
+    <v-data-iterator
+      :items="caseFiles"
+      item-key="id"
+      :items-per-page="10"
+      :search="searchText"
     >
-      <div>
-        <case-file-info-bar
-          :model="casefile"
-          :disabled="selectMode"
+      <template v-slot:default="{ items }">
+        <!-- <add-new-info-bar /> -->
+        <div
+          v-for="(casefile, index) in items"
+          :key="index"
         >
-          <template v-slot:caseFileSelection>
-            <v-col
-              v-if="selectMode"
-              :cols="1"
-              align-self="center"
-            >
-              <v-checkbox
-                v-model="selectedCaseFiles"
-                :value="casefile"
-              />
-            </v-col>
-          </template>
-        </case-file-info-bar>
-      </div>
-    </div>
+          <case-file-info-bar
+            :model="casefile"
+            :disabled="selectMode"
+          >
+            <template v-slot:caseFileSelection>
+              <v-col
+                v-if="selectMode"
+                :cols="1"
+                align-self="center"
+              >
+                <v-checkbox
+                  v-model="selectedCaseFiles"
+                  color="success"
+                  :value="casefile"
+                />
+              </v-col>
+            </template>
+          </case-file-info-bar>
+        </div>
+      </template>
+    </v-data-iterator>
     <v-dialog
       v-model="showDiscardSelectedCaseFileWarning"
       transition="dialog-bottom-transition"
@@ -104,7 +126,7 @@
           <div class="d-flex align-content-center justify-center ma-4">
             <v-btn
               class="d-flex ma-2"
-              @click="deleteSelectedCaseFiles()"
+              @click="destroySelectedCaseFiles()"
             >
               <div class="primary-content-button-text">
                 Continue
@@ -150,8 +172,13 @@ export default class CaseFileCard extends Vue {
   private selectedCaseFiles: ICaseFileInfoModel[] = []
   private showDiscardSelectedCaseFileWarning: boolean = false
   private showDeleteWarning: boolean = false
+  private searchText: string = ''
 
   async mounted () {
+    this.loadCaseFiles()
+  }
+
+  private async loadCaseFiles () {
     await Promise.resolve(this.caseFileService.getAllCaseFiles()).then((result) => {
       this.caseFiles = result
     })
@@ -179,11 +206,30 @@ export default class CaseFileCard extends Vue {
     this.changeSelectMode()
   }
 
-  private deleteSelectedCaseFiles () : void {
-    this.caseFileService.deleteCaseFiles(this.selectedCaseFiles)
-    this.selectedCaseFiles = []
-    this.changeSelectMode()
-    this.showDeleteWarning = false
+  private async destroySelectedCaseFiles () : Promise<void> {
+    await this.caseFileService.destroyCaseFiles(this.selectedCaseFiles).then(() => {
+      this.loadCaseFiles().then(() => {
+        this.selectedCaseFiles = []
+        this.changeSelectMode()
+        this.showDeleteWarning = false
+      })
+    })
+  }
+
+  private async deleteSelectedCaseFiles () : Promise<void> {
+    const caseFilesToDelete = this.selectedCaseFiles.map((caseFile) => {
+      caseFile._deleted ? console.error('Fucked up go back!') : console.log('its good')
+      caseFile._deleted = true
+      return caseFile
+    })
+    console.log('Preparing to delete', caseFilesToDelete)
+    await this.caseFileService.saveAll(caseFilesToDelete).then((results) => {
+      this.loadCaseFiles().then(() => {
+        this.selectedCaseFiles = []
+        this.changeSelectMode()
+        this.showDeleteWarning = false
+      })
+    })
   }
 
   get showDeletionWarningMessage () : string {

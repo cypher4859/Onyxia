@@ -37,7 +37,6 @@ export default class extends MenuItemService implements ICaseFileService {
           caseFilesToReturn = result
         })
         .catch(e => {
-          console.error(e)
           caseFilesToReturn = []
         })
       return caseFilesToReturn

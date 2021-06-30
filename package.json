@@ -10,6 +10,7 @@
     "api:server": "json-server public/api/db.json --routes public/api/routes.json"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^4.1.0",
     "@aws-amplify/ui-vue": "^1.0.10",
     "@mdi/font": "^4.9.95",
     "@types/graphql": "^14.5.0",

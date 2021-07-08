@@ -15,7 +15,7 @@
     "@mdi/font": "^4.9.95",
     "@types/graphql": "^14.5.0",
     "@types/lodash": "^4.14.150",
-    "aws-amplify": "^4.0.3",
+    "aws-amplify": "^4.1.2",
     "core-js": "^3.4.4",
     "flatted": "^2.0.2",
     "inversify": "^5.0.1",

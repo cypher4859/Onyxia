@@ -20,11 +20,10 @@ export default class UserManagementService implements IUserManagementService {
   }
 
   loadUser (user: any, authState: string) : void {
-    console.log(user, authState)
     this.vuexUserManagementService.cacheAuthData(user, authState)
   }
 
   getUser () : string {
-    return (this.vuexUserManagementService.getCachedUserData() as any as userData).username
+    return this.vuexUserManagementService.getCachedUsername()
   }
 }

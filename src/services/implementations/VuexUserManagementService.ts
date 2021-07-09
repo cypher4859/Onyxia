@@ -14,11 +14,15 @@ export default class VuexUserManagementService implements IVuexUserManagementSer
     userManagementStore.loadAuthStateToStore(authState)
   }
 
-  getCachedAuthData () : string {
+  getCachedAuthState () : string {
     return userManagementStore.currentUserAuthState
   }
 
   getCachedUserData () : object {
     return userManagementStore.currentUserData
+  }
+
+  getCachedUsername () : string {
+    return userManagementStore.getCurrentUsername
   }
 }

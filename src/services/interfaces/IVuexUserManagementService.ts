@@ -1,5 +1,6 @@
 export default interface IVuexCaseFileService {
   cacheAuthData (user: any, authState: string) : void
-  getCachedAuthData () : string
+  getCachedAuthState () : string
   getCachedUserData () : object
+  getCachedUsername () : string
 }

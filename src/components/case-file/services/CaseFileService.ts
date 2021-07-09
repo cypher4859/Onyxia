@@ -11,11 +11,15 @@ import IVuexCaseFileService from './IVuexCaseFileService'
 import { isEqual, omit, uniqueId } from 'lodash'
 import { createICaseFileInfoModel, deleteICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
 import IBaseService from '@/services/interfaces/IBaseService'
+import IUserManagementService from '@/services/interfaces/IUserManagementService'
 
 @injectable()
 export default class extends MenuItemService implements ICaseFileService {
   @inject(TYPES.IVuexCaseFileService)
   private vuexCaseFileService!: IVuexCaseFileService
+
+  @inject(TYPES.IUserManagementService)
+  private userManagementService!: IUserManagementService
 
   public defaultModel () : IMenuItem {
     const properties : IMenuItem = {
@@ -130,7 +134,7 @@ export default class extends MenuItemService implements ICaseFileService {
   private getDefaultCaseFileModel () : ICaseFileInfoModel {
     return {
       _deleted: false,
-      _user: 'cypher',
+      _user: this.userManagementService.getUser(),
       id: '',
       obsId: uniqueId(),
       fullName: '',

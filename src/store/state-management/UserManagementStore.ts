@@ -4,7 +4,8 @@ import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 
 @Module({ dynamic: true, store, name: 'UserManagementStore' })
 export default class UserManagementStore extends VuexModule {
-  private currentUser: any = ''
+  private currentUser: any = {}
+  private currentUsername: string = ''
   private currentAuthState: string = ''
 
   get currentUserData () : any {
@@ -13,6 +14,10 @@ export default class UserManagementStore extends VuexModule {
 
   get currentUserAuthState () : string {
     return this.currentAuthState
+  }
+
+  get getCurrentUsername () : string {
+    return this.currentUsername
   }
 
   @Action({ commit: 'loadAuthState' })
@@ -33,5 +38,8 @@ export default class UserManagementStore extends VuexModule {
   @Mutation
   public loadAuthData (newAuthData: any) {
     this.currentUser = newAuthData
+    if (newAuthData) {
+      this.currentUsername = newAuthData.username
+    }
   }
 }

@@ -95,13 +95,9 @@ export default class App extends Vue {
     })
   }
 
-  mounted () {
-  }
-
   beforeDestroy () {
     this.unsubscribeAuth = onAuthUIStateChange((authState, authData) => {
       this.userManagementService.loadUser(authData, authState)
-      console.log(this.userManagementService.getUser())
     })
   }
 
@@ -114,7 +110,7 @@ export default class App extends Vue {
     try {
       await Auth.signOut()
     } catch (error) {
-      console.log('error signing out: ', error)
+      console.error('error signing out: ', error)
     }
   }
 }

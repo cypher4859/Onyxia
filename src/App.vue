@@ -7,6 +7,10 @@
     </div>
     <amplify-auth-container>
       <amplify-authenticator>
+        <amplify-sign-in
+          slot="sign-in"
+          header-text="Welcome to Obsidia"
+        />
         <div v-if="signedIn">
           <v-main
             class="fill-height"
@@ -119,3 +123,14 @@ export default class App extends Mixins(RouteMixin) {
   }
 }
 </script>
+<style lang="scss">
+  @import './styles/scss/colors.scss';
+
+  amplify-authenticator {
+    --amplify-primary-color: #00C853;
+    --amplify-background-color: #1e1e1e;
+    --amplify-secondary-color: var(--amplify-grey);
+    --amplify-primary-tint: #188d95;
+    --amplify-primary-shade: #15828a;
+  }
+</style>

@@ -3,4 +3,5 @@ export default interface IVuexCaseFileService {
   getCachedAuthState () : string
   getCachedUserData () : object
   getCachedUsername () : string
+  clearCache () : void
 }

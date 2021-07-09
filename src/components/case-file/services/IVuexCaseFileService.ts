@@ -6,4 +6,5 @@ export default interface IVuexCaseFileService {
   saveCaseFiles (newCaseFiles: ICaseFileInfoModel[]) : ICaseFileInfoModel[]
   updateCaseFile (caseFile: ICaseFileInfoModel) : void
   removeCaseFile (caseFileToRemove: ICaseFileInfoModel) : void
+  clearCache () : void
 }

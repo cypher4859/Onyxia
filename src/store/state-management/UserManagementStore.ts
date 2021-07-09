@@ -30,6 +30,18 @@ export default class UserManagementStore extends VuexModule {
     return newAuthData
   }
 
+  @Action({ commit: 'clearUserStore' })
+  public clearStore () {
+    return {}
+  }
+
+  @Mutation
+  public clearUserStore () {
+    this.currentAuthState = ''
+    this.currentUsername = ''
+    this.currentUser = {}
+  }
+
   @Mutation
   public loadAuthState (newAuthState: string) {
     this.currentAuthState = newAuthState

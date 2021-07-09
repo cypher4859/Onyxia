@@ -25,4 +25,8 @@ export default class VuexUserManagementService implements IVuexUserManagementSer
   getCachedUsername () : string {
     return userManagementStore.getCurrentUsername
   }
+
+  clearCache () {
+    return userManagementStore.clearStore()
+  }
 }

@@ -32,7 +32,7 @@ export default class extends MenuItemService implements ICaseFileService {
   }
 
   public async getAllCaseFiles (filter: object = {}) : Promise<ICaseFileInfoModel[]> {
-    Object.assign(filter, { _deleted: { eq: false }, _user: { eq: 'cypher' } })
+    Object.assign(filter, { _deleted: { eq: false }, _user: { eq: this.userManagementService.getUser() } })
     const caseFiles = this.vuexCaseFileService.getMultipleCaseFiles(filter)
     if (caseFiles.length < 1) {
       let caseFilesToReturn: ICaseFileInfoModel[] = []
@@ -129,6 +129,10 @@ export default class extends MenuItemService implements ICaseFileService {
       this.vuexCaseFileService.removeCaseFile(resultCaseFile)
       results.push(resultCaseFile)
     }
+  }
+
+  public clearCaseFilesFromCache () {
+    this.vuexCaseFileService.clearCache()
   }
 
   private getDefaultCaseFileModel () : ICaseFileInfoModel {

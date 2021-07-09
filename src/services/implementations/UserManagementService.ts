@@ -26,4 +26,8 @@ export default class UserManagementService implements IUserManagementService {
   getUser () : string {
     return this.vuexUserManagementService.getCachedUsername()
   }
+
+  clearCache () : void {
+    this.vuexUserManagementService.clearCache()
+  }
 }

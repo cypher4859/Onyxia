@@ -118,7 +118,7 @@ export default class App extends Mixins(RouteMixin) {
     try {
       await Auth.signOut()
     } catch (error) {
-      console.error('error signing out: ', error)
+      const e = error
     }
   }
 }

@@ -6,6 +6,7 @@ import vuetify from '@/plugins/vuetify'
 import registerContainerServices from './app.container'
 import 'reflect-metadata'
 import Amplify from 'aws-amplify'
+import '@aws-amplify/ui-vue'
 import config from './aws-exports'
 import Toasted from 'vue-toasted'
 

@@ -8,4 +8,5 @@ export default interface ICaseFileService extends IService {
   save (caseFile: ICaseFileInfoModel) : Promise<ICaseFileInfoModel>
   saveAll (caseFiles: ICaseFileInfoModel[]) : Promise<ICaseFileInfoModel[]>
   destroyCaseFiles (caseFiles: ICaseFileInfoModel[]) : Promise<void>
+  clearCaseFilesFromCache () : void
 }

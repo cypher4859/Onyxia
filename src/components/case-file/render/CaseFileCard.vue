@@ -174,8 +174,13 @@ export default class CaseFileCard extends Vue {
   private showDeleteWarning: boolean = false
   private searchText: string = ''
 
-  async mounted () {
+  async created () {
+    await this.caseFileService.clearCaseFilesFromCache()
     this.loadCaseFiles()
+  }
+
+  async beforeDestroy () {
+    await this.caseFileService.clearCaseFilesFromCache()
   }
 
   private async loadCaseFiles () {

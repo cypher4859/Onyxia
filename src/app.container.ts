@@ -19,8 +19,12 @@ import ISettingsGlobalService from '@/components/settings-global/services/ISetti
 import SettingsGlobalService from '@/components/settings-global/services/SettingsGlobalService'
 import IVuexCaseFileService from '@/components/case-file/services/IVuexCaseFileService'
 import VuexCaseFileService from '@/components/case-file/services/VuexCaseFileService'
+import IVuexUserManagementService from '@/services/interfaces/IVuexUserManagementService'
+import VuexUserManagementService from '@/services/implementations/VuexUserManagementService'
 import IBaseService from './services/interfaces/IBaseService'
 import BaseService from './services/implementations/BaseService'
+import IUserManagementService from './services/interfaces/IUserManagementService'
+import UserManagementService from './services/implementations/UserManagementService'
 
 export default function registerContainerServices () {
   container.options.skipBaseClassChecks = true
@@ -34,4 +38,6 @@ export default function registerContainerServices () {
   container.bind<ISettingsGlobalService>(TYPES.ISettingsGlobalService).to(SettingsGlobalService)
   container.bind<IVuexCaseFileService>(TYPES.IVuexCaseFileService).to(VuexCaseFileService)
   container.bind<IBaseService>(TYPES.IBaseService).to(BaseService)
+  container.bind<IVuexUserManagementService>(TYPES.IVuexUserManagementService).to(VuexUserManagementService)
+  container.bind<IUserManagementService>(TYPES.IUserManagementService).to(UserManagementService)
 }

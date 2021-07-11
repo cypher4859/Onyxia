@@ -61,4 +61,14 @@ export default class CaseFileStore extends VuexModule {
       return caseFile.id !== caseFileToRemove.id
     })
   }
+
+  @Action({ commit: 'clearCache' })
+  public clearCasefilesFromStore () {
+    return {}
+  }
+
+  @Mutation
+  public clearCache () {
+    this.caseFiles = []
+  }
 }

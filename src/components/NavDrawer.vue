@@ -42,6 +42,27 @@
               <span>{{ item.title }}</span>
             </v-tooltip>
           </v-list-item>
+          <v-list-item
+            @click="logout()"
+          >
+            <v-tooltip
+              right
+              color="black"
+              close-delay="0"
+            >
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon
+                  v-on="on"
+                >
+                  <v-icon>
+                    mdi-logout
+                  </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content />
+              </template>
+              <span>Logout</span>
+            </v-tooltip>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
       <v-main>
@@ -102,6 +123,10 @@ export default class NavDrawer extends Mixins(RouteMixin) {
 
   get enabledAddons () : IMenuItem[] {
     return this.addonService.getEnabledAddonsMenuItemForRender
+  }
+
+  private logout () {
+    this.$emit('logout')
   }
 }
 </script>

@@ -11,11 +11,15 @@ import IVuexCaseFileService from './IVuexCaseFileService'
 import { isEqual, omit, uniqueId } from 'lodash'
 import { createICaseFileInfoModel, deleteICaseFileInfoModel, updateICaseFileInfoModel } from '@/graphql/mutations'
 import IBaseService from '@/services/interfaces/IBaseService'
+import IUserManagementService from '@/services/interfaces/IUserManagementService'
 
 @injectable()
 export default class extends MenuItemService implements ICaseFileService {
   @inject(TYPES.IVuexCaseFileService)
   private vuexCaseFileService!: IVuexCaseFileService
+
+  @inject(TYPES.IUserManagementService)
+  private userManagementService!: IUserManagementService
 
   public defaultModel () : IMenuItem {
     const properties : IMenuItem = {
@@ -28,7 +32,7 @@ export default class extends MenuItemService implements ICaseFileService {
   }
 
   public async getAllCaseFiles (filter: object = {}) : Promise<ICaseFileInfoModel[]> {
-    Object.assign(filter, { _deleted: { eq: false }, _user: { eq: 'cypher' } })
+    Object.assign(filter, { _deleted: { eq: false }, _user: { eq: this.userManagementService.getUser() } })
     const caseFiles = this.vuexCaseFileService.getMultipleCaseFiles(filter)
     if (caseFiles.length < 1) {
       let caseFilesToReturn: ICaseFileInfoModel[] = []
@@ -127,10 +131,14 @@ export default class extends MenuItemService implements ICaseFileService {
     }
   }
 
+  public clearCaseFilesFromCache () {
+    this.vuexCaseFileService.clearCache()
+  }
+
   private getDefaultCaseFileModel () : ICaseFileInfoModel {
     return {
       _deleted: false,
-      _user: 'cypher',
+      _user: this.userManagementService.getUser(),
       id: '',
       obsId: uniqueId(),
       fullName: '',

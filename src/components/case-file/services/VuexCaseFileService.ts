@@ -34,4 +34,8 @@ export default class VuexCaseFileService implements IVuexCaseFileService {
   public removeCaseFile (caseFileToRemove: ICaseFileInfoModel) : void {
     caseFileStore.removeCaseFile(caseFileToRemove)
   }
+
+  public clearCache () : void {
+    caseFileStore.clearCasefilesFromStore()
+  }
 }

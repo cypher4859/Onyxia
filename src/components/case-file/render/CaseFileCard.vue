@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-row>
+    <v-row justify="start">
       <v-col
-        cols="8"
-        offset="2"
+        :cols="$vuetify.breakpoint.mobile ? 6 : 8"
+        :offset="$vuetify.breakpoint.mobile ? 3 : 2"
       >
         <v-text-field
           v-model="searchText"
@@ -15,31 +15,29 @@
     </v-row>
     <v-row>
       <v-col>
-        <div class="d-flex justify-end">
+        <div class="d-flex justify-end mx-4">
           <v-btn
-            class="mx-2"
+            class="d-flex mx-2"
             @click="enableSelectMode"
           >
             Select
           </v-btn>
           <v-btn
-            class="mx-2"
+            class="d-flex mx-2"
             @click="$router.push({ name: 'Case File Report', params: { model: caseFileService.createNew() } })"
           >
             Create
           </v-btn>
-        </div>
-      </v-col>
-      <v-col
-        v-if="showDeleteButton"
-        cols="2"
-      >
-        <div class="d-flex justify-end">
-          <v-btn
-            @click="showDeleteWarning = true"
+          <div
+            v-if="showDeleteButton"
+            class="d-flex justify-end mx-2"
           >
-            Delete
-          </v-btn>
+            <v-btn
+              @click="showDeleteWarning = true"
+            >
+              Delete
+            </v-btn>
+          </div>
         </div>
       </v-col>
     </v-row>

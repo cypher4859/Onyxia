@@ -39,7 +39,7 @@
         >
           <v-form>
             <v-container>
-              <div>
+              <div class="mr-8">
                 <v-row>
                   <v-col class="mx-4">
                     <v-text-field
@@ -52,7 +52,7 @@
                       :readonly="!isEditable"
                     />
                   </v-col>
-                  <v-col class="mx-4">
+                  <v-col class="mx-8">
                     <v-text-field
                       v-model="workingCopy.socialSecurityNumber"
                       label="Social Security Number"

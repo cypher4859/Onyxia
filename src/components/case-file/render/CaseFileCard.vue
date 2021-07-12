@@ -7,7 +7,7 @@
       >
         <v-text-field
           v-model="searchText"
-          class="mx-auto"
+          class="d-flex justify-center mx-auto"
           label="Search"
           color="success"
         />
@@ -17,11 +17,13 @@
       <v-col>
         <div class="d-flex justify-end">
           <v-btn
+            class="mx-2"
             @click="enableSelectMode"
           >
             Select
           </v-btn>
           <v-btn
+            class="mx-2"
             @click="$router.push({ name: 'Case File Report', params: { model: caseFileService.createNew() } })"
           >
             Create

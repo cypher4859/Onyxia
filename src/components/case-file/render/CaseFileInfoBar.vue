@@ -2,7 +2,6 @@
   <v-container>
     <v-row
       dense
-      no-gutters
     >
       <slot
         name="caseFileSelection"

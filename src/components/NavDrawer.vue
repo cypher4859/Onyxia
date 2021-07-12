@@ -1,79 +1,81 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-navigation-drawer
-        v-model="drawer"
-        permanent
-        app
-        left
-        class="radial-gradient-background-nav"
-        mini-variant
-        mini-variant-width="80"
-      >
-        <v-list
-          nav
+  <div>
+    <v-container>
+      <v-card>
+        <v-navigation-drawer
+          v-model="drawer"
+          permanent
+          app
+          left
+          class="radial-gradient-background-nav"
+          mini-variant
+          mini-variant-width="80"
         >
-          <v-list-item>
-            <v-list-item-avatar>
-              <img src="@/assets/blackmesa_logo.png">
-            </v-list-item-avatar>
-          </v-list-item>
+          <v-list
+            nav
+          >
+            <v-list-item>
+              <v-list-item-avatar>
+                <img src="@/assets/blackmesa_logo.png">
+              </v-list-item-avatar>
+            </v-list-item>
 
-          <v-list-item
-            v-for="(item, key) in menuItems"
-            :key="key"
-            @click="gotoPath(item.path)"
-          >
-            <v-tooltip
-              right
-              color="black"
-              close-delay="0"
+            <v-list-item
+              v-for="(item, key) in menuItems"
+              :key="key"
+              @click="gotoPath(item.path)"
             >
-              <template v-slot:activator="{ on }">
-                <v-list-item-icon
-                  v-on="on"
-                >
-                  <v-icon>
-                    {{ item.icon }}
-                  </v-icon>
-                </v-list-item-icon>
-                <v-list-item-content />
-              </template>
-              <span>{{ item.title }}</span>
-            </v-tooltip>
-          </v-list-item>
-          <v-list-item
-            @click="logout()"
-          >
-            <v-tooltip
-              right
-              color="black"
-              close-delay="0"
+              <v-tooltip
+                right
+                color="black"
+                close-delay="0"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-list-item-icon
+                    v-on="on"
+                  >
+                    <v-icon>
+                      {{ item.icon }}
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content />
+                </template>
+                <span>{{ item.title }}</span>
+              </v-tooltip>
+            </v-list-item>
+            <v-list-item
+              @click="logout()"
             >
-              <template v-slot:activator="{ on }">
-                <v-list-item-icon
-                  v-on="on"
-                >
-                  <v-icon>
-                    mdi-logout
-                  </v-icon>
-                </v-list-item-icon>
-                <v-list-item-content />
-              </template>
-              <span>Logout</span>
-            </v-tooltip>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-      <v-main>
-        <v-container>
+              <v-tooltip
+                right
+                color="black"
+                close-delay="0"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-list-item-icon
+                    v-on="on"
+                  >
+                    <v-icon>
+                      mdi-logout
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content />
+                </template>
+                <span>Logout</span>
+              </v-tooltip>
+            </v-list-item>
+          </v-list>
+        </v-navigation-drawer>
+        <v-main>
           <v-fade-transition mode="out-in">
-            <router-view :key="$route.fullPath" />
+            <div>
+              <router-view :key="$route.fullPath" />
+            </div>
           </v-fade-transition>
-        </v-container>
-      </v-main>
-    </v-card>
-  </v-container>
+        </v-main>
+      </v-card>
+    </v-container>
+  </div>
 </template>
 
 <script lang="ts">

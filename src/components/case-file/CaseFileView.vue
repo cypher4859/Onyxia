@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex align-self justify-center">
     <case-file-card />
   </div>
 </template>

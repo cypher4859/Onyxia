@@ -14,7 +14,6 @@
         <div v-if="signedIn">
           <v-main
             class="fill-height"
-            fluid
           >
             <nav-drawer
               @logout="showLogoutWarningDialog()"

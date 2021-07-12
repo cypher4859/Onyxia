@@ -4,7 +4,7 @@
       <v-card>
         <v-navigation-drawer
           v-model="drawer"
-          permanent
+          :permanent="!$vuetify.breakpoint.mobile"
           app
           left
           class="radial-gradient-background-nav"
@@ -66,6 +66,14 @@
             </v-list-item>
           </v-list>
         </v-navigation-drawer>
+        <v-app-bar
+          v-if="$vuetify.breakpoint.mobile"
+          class="radial-gradient-background-nav"
+        >
+          <v-app-bar-nav-icon
+            @click="drawer = !drawer"
+          />
+        </v-app-bar>
         <v-main>
           <v-fade-transition mode="out-in">
             <div>
@@ -109,6 +117,12 @@ export default class NavDrawer extends Mixins(RouteMixin) {
 
   @inject(TYPES.ISettingsGlobalService)
   private settingsGlobalService!: ISettingsGlobalService
+
+  created () {
+    if (this.$vuetify.breakpoint.mobile) {
+      this.drawer = false
+    }
+  }
 
   mounted () {
     this.settingsGlobalService.initializeSettings()

@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <div>
     <addon-manager />
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">

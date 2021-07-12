@@ -12,9 +12,7 @@
           header-text="Welcome to Obsidia"
         />
         <div v-if="signedIn">
-          <v-main
-            class="fill-height"
-          >
+          <v-main>
             <nav-drawer
               @logout="showLogoutWarningDialog()"
             />

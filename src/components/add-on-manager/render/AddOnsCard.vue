@@ -1,52 +1,54 @@
 <template>
   <div>
-    <v-container>
-      <v-card
-        class="ml-n12 mx-auto"
-        height="200"
-        elevation="18"
+    <v-card
+      class="ma-6"
+      elevation="18"
+    >
+      <v-row
+        justify="center"
+        class="mx-auto"
       >
-        <v-col
-          cols="12"
-          sm="12"
-        >
-          <v-subheader>Add Ons</v-subheader>
-          <v-row>
-            <v-col
-              v-for="(index, key) in registeredAddons"
-              :key="key"
-            >
-              <v-checkbox
-                v-model="index.enabled"
-                :label="index.model.title"
-                color="success"
-              />
-            </v-col>
-          </v-row>
-          <div>
-            <v-btn
-              @click="saveAddons()"
-            >
-              <div class="primary-content-button-text">
-                Save
-              </div>
-            </v-btn>
-            &nbsp;
-            <v-btn
-              @click="clearAllAddons()"
-            >
-              <div class="primary-content-button-text">
-                Clear
-              </div>
-            </v-btn>
-          </div>
+        <v-col>
+          <v-container>
+            <v-subheader>Add Ons</v-subheader>
+            <v-row>
+              <v-col
+                v-for="(index, key) in registeredAddons"
+                :key="key"
+                :cols="$vuetify.breakpoint.mobile ? 12 : 2"
+              >
+                <v-checkbox
+                  v-model="index.enabled"
+                  :label="index.model.title"
+                  color="success"
+                />
+              </v-col>
+            </v-row>
+            <div>
+              <v-btn
+                @click="saveAddons()"
+              >
+                <div class="primary-content-button-text">
+                  Save
+                </div>
+              </v-btn>
+              &nbsp;
+              <v-btn
+                @click="clearAllAddons()"
+              >
+                <div class="primary-content-button-text">
+                  Clear
+                </div>
+              </v-btn>
+            </div>
+          </v-container>
         </v-col>
-      </v-card>
-      <addons-saved-alert
-        :snack-bar-message="addonsSavedToStorageAlert"
-        :show-snackbar="addonsSavedAlert"
-      />
-    </v-container>
+      </v-row>
+    </v-card>
+    <addons-saved-alert
+      :snack-bar-message="addonsSavedToStorageAlert"
+      :show-snackbar="addonsSavedAlert"
+    />
   </div>
 </template>
 
